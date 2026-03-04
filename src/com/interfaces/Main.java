@@ -60,14 +60,19 @@ class RoundedBorder implements Border {
     }
 }
 
-public class dashboard extends javax.swing.JFrame {
+public class Main extends javax.swing.JFrame {
 
     /**
      * Creates new form dashboard
      */
-    public dashboard() {
+    public Main() {
         initComponents();
-
+        
+        Dashboard m1 = new Dashboard();
+        border_layout_panel.removeAll();
+        border_layout_panel.add(m1);
+        border_layout_panel.revalidate();
+        
         // 1. SVG file path eka denna (Meka 'src' folder eke thiyenna ona)
         FlatSVGIcon myIcon = new FlatSVGIcon("com/images/man-user-circle-icon.svg", 128, 128);
 
@@ -76,6 +81,7 @@ public class dashboard extends javax.swing.JFrame {
 
 // 3. Text eka epa nam eka remove karන්න
         jLabel1.setText("");
+       
     }
 
     /**
@@ -90,13 +96,15 @@ public class dashboard extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
+        home_button = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
+        student_button = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        border_layout_panel = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Student Management System");
@@ -105,37 +113,39 @@ public class dashboard extends javax.swing.JFrame {
 
         jPanel3.setBackground(new java.awt.Color(53, 88, 114));
 
-        jButton1.setBackground(new java.awt.Color(255, 255, 255));
-        jButton1.setForeground(new java.awt.Color(0, 0, 0));
-        jButton1.setText("Manage Students");
-        jButton1.setBorder(new RoundedBorder(20));
-        jButton1.setContentAreaFilled(false);
-        jButton1.setOpaque(false);
-        jButton1.addFocusListener(new java.awt.event.FocusAdapter() {
+        home_button.setBackground(new java.awt.Color(255, 255, 255));
+        home_button.setForeground(new java.awt.Color(0, 0, 0));
+        home_button.setText("Home");
+        home_button.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        home_button.setBorder(new RoundedBorder(20));
+        home_button.setContentAreaFilled(false);
+        home_button.setOpaque(false);
+        home_button.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
-                jButton1FocusGained(evt);
+                home_buttonFocusGained(evt);
             }
         });
-        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+        home_button.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                jButton1MouseEntered(evt);
+                home_buttonMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                jButton1MouseExited(evt);
+                home_buttonMouseExited(evt);
             }
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                jButton1MousePressed(evt);
+                home_buttonMousePressed(evt);
             }
         });
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        home_button.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                home_buttonActionPerformed(evt);
             }
         });
 
         jButton2.setBackground(new java.awt.Color(255, 255, 255));
         jButton2.setForeground(new java.awt.Color(0, 0, 0));
         jButton2.setText("Users");
+        jButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButton2.setBorder(new RoundedBorder(20));
         jButton2.setContentAreaFilled(false);
         jButton2.setOpaque(false);
@@ -156,6 +166,7 @@ public class dashboard extends javax.swing.JFrame {
         jButton3.setBackground(new java.awt.Color(255, 255, 255));
         jButton3.setForeground(new java.awt.Color(0, 0, 0));
         jButton3.setText("Classes");
+        jButton3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButton3.setBorder(new RoundedBorder(20));
         jButton3.setOpaque(false);
         jButton3.setContentAreaFilled(false);
@@ -185,6 +196,35 @@ public class dashboard extends javax.swing.JFrame {
             }
         });
 
+        student_button.setBackground(new java.awt.Color(255, 255, 255));
+        student_button.setForeground(new java.awt.Color(0, 0, 0));
+        student_button.setText("Manage Students");
+        student_button.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        student_button.setBorder(new RoundedBorder(20));
+        student_button.setContentAreaFilled(false);
+        student_button.setOpaque(false);
+        student_button.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                student_buttonFocusGained(evt);
+            }
+        });
+        student_button.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                student_buttonMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                student_buttonMouseExited(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                student_buttonMousePressed(evt);
+            }
+        });
+        student_button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                student_buttonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -197,21 +237,24 @@ public class dashboard extends javax.swing.JFrame {
                         .addGap(76, 76, 76))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(home_button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(student_button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(17, 17, 17))))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(home_button, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(student_button, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 180, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton5)
                 .addContainerGap())
         );
@@ -238,7 +281,7 @@ public class dashboard extends javax.swing.JFrame {
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel2)
-                .addContainerGap())
+                .addContainerGap(19, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -251,10 +294,12 @@ public class dashboard extends javax.swing.JFrame {
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+
+        border_layout_panel.setLayout(new java.awt.BorderLayout());
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -262,34 +307,30 @@ public class dashboard extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 610, Short.MAX_VALUE))
+                .addGap(0, 0, 0)
+                .addComponent(border_layout_panel, javax.swing.GroupLayout.DEFAULT_SIZE, 573, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(border_layout_panel, javax.swing.GroupLayout.DEFAULT_SIZE, 574, Short.MAX_VALUE)
         );
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
+        getContentPane().add(jPanel1, java.awt.BorderLayout.CENTER);
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void home_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_home_buttonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_home_buttonActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
+        Users m1 = new Users();
+        border_layout_panel.removeAll();
+        border_layout_panel.add(m1);
+        border_layout_panel.revalidate();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -300,29 +341,29 @@ public class dashboard extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton5ActionPerformed
 
-    private void jButton1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jButton1FocusGained
+    private void home_buttonFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_home_buttonFocusGained
 
-    }//GEN-LAST:event_jButton1FocusGained
+    }//GEN-LAST:event_home_buttonFocusGained
 
-    private void jButton1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MousePressed
+    private void home_buttonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_home_buttonMousePressed
 
-    }//GEN-LAST:event_jButton1MousePressed
+    }//GEN-LAST:event_home_buttonMousePressed
 
-    private void jButton1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseEntered
-        jButton1.setBackground(new Color(101, 148, 177));
-        jButton1.setForeground(Color.WHITE);
-        jButton1.setText("Manage Students");
-        jButton1.setOpaque(false);
-        jButton1.setContentAreaFilled(false);
-        jButton1.setBorder(new RoundedBorder(20));
-    }//GEN-LAST:event_jButton1MouseEntered
+    private void home_buttonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_home_buttonMouseEntered
+        home_button.setBackground(new Color(101, 148, 177));
+        home_button.setForeground(Color.WHITE);
+        home_button.setText("Home");
+        home_button.setOpaque(false);
+        home_button.setContentAreaFilled(false);
+        home_button.setBorder(new RoundedBorder(20));
+    }//GEN-LAST:event_home_buttonMouseEntered
 
-    private void jButton1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseExited
-        jButton1.setContentAreaFilled(false);
-        jButton1.setOpaque(false);
-        jButton1.setBackground(Color.WHITE);
-        jButton1.setForeground(Color.BLACK);
-    }//GEN-LAST:event_jButton1MouseExited
+    private void home_buttonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_home_buttonMouseExited
+        home_button.setContentAreaFilled(false);
+        home_button.setOpaque(false);
+        home_button.setBackground(Color.WHITE);
+        home_button.setForeground(Color.BLACK);
+    }//GEN-LAST:event_home_buttonMouseExited
 
     private void jButton2MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseEntered
         jButton2.setBackground(new Color(101, 148, 177));
@@ -355,6 +396,34 @@ public class dashboard extends javax.swing.JFrame {
         jButton3.setBackground(Color.WHITE);
         jButton3.setForeground(Color.BLACK);
     }//GEN-LAST:event_jButton3MouseExited
+
+    private void student_buttonFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_student_buttonFocusGained
+        // TODO add your handling code here:
+    }//GEN-LAST:event_student_buttonFocusGained
+
+    private void student_buttonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_student_buttonMouseEntered
+        student_button.setBackground(new Color(101, 148, 177));
+        student_button.setForeground(Color.WHITE);
+        student_button.setText("Manage Student");
+        student_button.setOpaque(false);
+        student_button.setContentAreaFilled(false);
+        student_button.setBorder(new RoundedBorder(20));
+    }//GEN-LAST:event_student_buttonMouseEntered
+
+    private void student_buttonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_student_buttonMouseExited
+        student_button.setContentAreaFilled(false);
+        student_button.setOpaque(false);
+        student_button.setBackground(Color.WHITE);
+        student_button.setForeground(Color.BLACK);
+    }//GEN-LAST:event_student_buttonMouseExited
+
+    private void student_buttonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_student_buttonMousePressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_student_buttonMousePressed
+
+    private void student_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_student_buttonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_student_buttonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -391,13 +460,14 @@ public class dashboard extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new dashboard().setVisible(true);
+                new Main().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JPanel border_layout_panel;
+    private javax.swing.JButton home_button;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton5;
@@ -407,5 +477,6 @@ public class dashboard extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JButton student_button;
     // End of variables declaration//GEN-END:variables
 }
