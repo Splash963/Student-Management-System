@@ -4,7 +4,12 @@
  */
 package com.interfaces;
 
+import com.connection.DbConnection;
 import com.formdev.flatlaf.extras.FlatSVGIcon;
+import javax.swing.ComboBoxModel;
+import java.sql.*;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -12,10 +17,15 @@ import com.formdev.flatlaf.extras.FlatSVGIcon;
  */
 public class Add_Teachers extends javax.swing.JFrame {
 
-    /**
-     * Creates new form Add_Teachers
-     */
+    Connection conn = null;
+    PreparedStatement pst = null;
+
+    ArrayList<String> selectedSubjects = new ArrayList<>();
+
     public Add_Teachers() {
+
+        conn = DbConnection.connect();
+
         initComponents();
         FlatSVGIcon myIcon = new FlatSVGIcon("com/images/user-3296.svg", 128, 128);
 
@@ -45,21 +55,21 @@ public class Add_Teachers extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
-        jTextField5 = new javax.swing.JTextField();
-        jTextField6 = new javax.swing.JTextField();
+        name_box = new javax.swing.JTextField();
+        age_box = new javax.swing.JTextField();
+        nic_box = new javax.swing.JTextField();
+        address_box = new javax.swing.JTextField();
+        email_box = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
-        jRadioButton1 = new javax.swing.JRadioButton();
-        jRadioButton2 = new javax.swing.JRadioButton();
-        jRadioButton3 = new javax.swing.JRadioButton();
-        jRadioButton4 = new javax.swing.JRadioButton();
-        jRadioButton5 = new javax.swing.JRadioButton();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        maths = new javax.swing.JRadioButton();
+        bio = new javax.swing.JRadioButton();
+        commerce = new javax.swing.JRadioButton();
+        arts = new javax.swing.JRadioButton();
+        tec = new javax.swing.JRadioButton();
+        subject_box = new javax.swing.JComboBox<>();
         jButton2 = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
-        jTextField7 = new javax.swing.JTextField();
+        contact_no_box = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
 
@@ -89,28 +99,91 @@ public class Add_Teachers extends javax.swing.JFrame {
 
         jLabel7.setText("Email");
 
+        name_box.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                name_boxActionPerformed(evt);
+            }
+        });
+
+        age_box.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                age_boxActionPerformed(evt);
+            }
+        });
+
+        nic_box.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                nic_boxActionPerformed(evt);
+            }
+        });
+
+        address_box.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                address_boxActionPerformed(evt);
+            }
+        });
+
+        email_box.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                email_boxActionPerformed(evt);
+            }
+        });
+
         jLabel10.setText("Subject Streams");
 
-        buttonGroup1.add(jRadioButton1);
-        jRadioButton1.setText("Maths");
+        buttonGroup1.add(maths);
+        maths.setText("Maths");
+        maths.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mathsActionPerformed(evt);
+            }
+        });
 
-        buttonGroup1.add(jRadioButton2);
-        jRadioButton2.setText("Bio");
+        buttonGroup1.add(bio);
+        bio.setText("Bio");
+        bio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bioActionPerformed(evt);
+            }
+        });
 
-        buttonGroup1.add(jRadioButton3);
-        jRadioButton3.setText("Commerce");
+        buttonGroup1.add(commerce);
+        commerce.setText("Commerce");
+        commerce.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                commerceActionPerformed(evt);
+            }
+        });
 
-        buttonGroup1.add(jRadioButton4);
-        jRadioButton4.setText("Arts ");
+        buttonGroup1.add(arts);
+        arts.setText("Arts ");
+        arts.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                artsActionPerformed(evt);
+            }
+        });
 
-        buttonGroup1.add(jRadioButton5);
-        jRadioButton5.setText("Technology ");
-
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        buttonGroup1.add(tec);
+        tec.setText("Technology ");
+        tec.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tecActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("Add");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jButton1.setText("Add Teacher");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jLabel8.setText("Contact Number");
 
@@ -135,24 +208,24 @@ public class Add_Teachers extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jRadioButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(maths, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jRadioButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(bio, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jRadioButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(commerce, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jRadioButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(arts, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jRadioButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(tec, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jTextField6)
-                        .addComponent(jTextField5)
-                        .addComponent(jTextField4)
-                        .addComponent(jTextField2)
-                        .addComponent(jTextField1)
-                        .addComponent(jTextField7, javax.swing.GroupLayout.DEFAULT_SIZE, 524, Short.MAX_VALUE))
+                        .addComponent(email_box)
+                        .addComponent(address_box)
+                        .addComponent(nic_box)
+                        .addComponent(age_box)
+                        .addComponent(name_box)
+                        .addComponent(contact_no_box, javax.swing.GroupLayout.DEFAULT_SIZE, 524, Short.MAX_VALUE))
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 392, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(subject_box, javax.swing.GroupLayout.PREFERRED_SIZE, 392, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(5, 5, 5)
                         .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 136, Short.MAX_VALUE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -167,38 +240,38 @@ public class Add_Teachers extends javax.swing.JFrame {
                 .addGap(51, 51, 51)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(name_box, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(age_box, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(nic_box, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
-                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(address_box, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
-                    .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(email_box, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
-                    .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(contact_no_box, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jRadioButton1)
-                    .addComponent(jRadioButton2)
-                    .addComponent(jRadioButton3)
-                    .addComponent(jRadioButton4)
-                    .addComponent(jRadioButton5)
+                    .addComponent(maths)
+                    .addComponent(bio)
+                    .addComponent(commerce)
+                    .addComponent(arts)
+                    .addComponent(tec)
                     .addComponent(jLabel10))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(subject_box, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel11))
                 .addGap(52, 52, 52)
@@ -236,6 +309,129 @@ public class Add_Teachers extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    private void mathsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mathsActionPerformed
+        String[] items = {"Combined Mathematics", "Physics", "Chemistry", "Information & Communication Technology (ICT)"};
+        subject_box.setModel(new javax.swing.DefaultComboBoxModel<>(items));
+    }//GEN-LAST:event_mathsActionPerformed
+
+    private void bioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bioActionPerformed
+        String[] items = {"Biology", "Chemistry", "Physics", "Agricultural Science"};
+        subject_box.setModel(new javax.swing.DefaultComboBoxModel<>(items));
+    }//GEN-LAST:event_bioActionPerformed
+
+    private void commerceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_commerceActionPerformed
+        String[] items = {"Accounting", "Business Studies", "Economics", "Information & Communication Technology (ICT)", "Business Statistics"};
+        subject_box.setModel(new javax.swing.DefaultComboBoxModel<>(items));
+    }//GEN-LAST:event_commerceActionPerformed
+
+    private void artsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_artsActionPerformed
+        String[] items = {"Sinhala", "Tamil", "English", "Japanese", "Economics", "Geography", "History (Sri Lankan, Indian, European or Modern)", "Political Science", "Logic and Scientific Method",
+            "Home Economics", "Buddhist Civilization", "Hindu Civilization", "Islam Civilization", "Christian Civilization", "Greek and Roman Civilization",
+            "Mass Media and Communication Studies", "Dancing (Eastern/Western)", "Music (Eastern/Western)", "Drama and Theatre", "Art"};
+        subject_box.setModel(new javax.swing.DefaultComboBoxModel<>(items));
+    }//GEN-LAST:event_artsActionPerformed
+
+    private void tecActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tecActionPerformed
+        String[] items = {"Engineering Technology (ET)", "Bio-System Technology (BST)", "Science for Technology (SFT)", "Information & Communication Technology (ICT)",
+            "Agricultural Science"};
+        subject_box.setModel(new javax.swing.DefaultComboBoxModel<>(items));
+    }//GEN-LAST:event_tecActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        insert_teacher();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void age_boxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_age_boxActionPerformed
+        nic_box.grabFocus();
+    }//GEN-LAST:event_age_boxActionPerformed
+
+    private void nic_boxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nic_boxActionPerformed
+        address_box.grabFocus();
+    }//GEN-LAST:event_nic_boxActionPerformed
+
+    private void name_boxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_name_boxActionPerformed
+        age_box.grabFocus();
+    }//GEN-LAST:event_name_boxActionPerformed
+
+    private void address_boxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_address_boxActionPerformed
+        email_box.grabFocus();
+    }//GEN-LAST:event_address_boxActionPerformed
+
+    private void email_boxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_email_boxActionPerformed
+        contact_no_box.grabFocus();
+    }//GEN-LAST:event_email_boxActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        String subject = subject_box.getSelectedItem().toString();
+
+        if (!selectedSubjects.contains(subject)) {
+            selectedSubjects.add(subject);
+            JOptionPane.showMessageDialog(this, subject + " added to the list!");
+        } else {
+            JOptionPane.showMessageDialog(this, "Subject already added.");
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    public void insert_teacher() {
+
+        String name = name_box.getText();
+        int age = Integer.parseInt(age_box.getText());
+        String nic_no = nic_box.getText();
+        String address = address_box.getText();
+        String email = email_box.getText();
+        String contact_no = contact_no_box.getText();
+        String subject_stream = "";
+        String subjectsToStore = String.join(", ", selectedSubjects);
+
+        if (maths.isSelected()) {
+            subject_stream = "Maths";
+        } else if (bio.isSelected()) {
+            subject_stream = "Bio";
+        } else if (commerce.isSelected()) {
+            subject_stream = "Commerce";
+        } else if (arts.isSelected()) {
+            subject_stream = "Arts";
+        } else if (tec.isSelected()) {
+            subject_stream = "Technology";
+        }
+
+        try {
+
+            String query = "INSERT INTO teachers (name, age, nic_no, address, email, contact_no, subject_stream, subjects) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+            pst = conn.prepareStatement(query);
+
+            pst.setString(1, name);
+            pst.setInt(2, age);
+            pst.setString(3, nic_no);
+            pst.setString(4, address);
+            pst.setString(5, email);
+            pst.setString(6, contact_no);
+            pst.setString(7, subject_stream);
+            pst.setString(8, subjectsToStore);
+
+            pst.execute();
+
+            JOptionPane.showMessageDialog(null, "Teacher Added Successcull!");
+
+            clear();
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+
+    }
+
+    public void clear() {
+        name_box.setText("");
+        age_box.setText("");
+        nic_box.setText("");
+        address_box.setText("");
+        email_box.setText("");
+        contact_no_box.setText("");
+        buttonGroup1.clearSelection();
+        subject_box.setSelectedIndex(0);
+    }
+
     /**
      * @param args the command line arguments
      */
@@ -272,10 +468,16 @@ public class Add_Teachers extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField address_box;
+    private javax.swing.JTextField age_box;
+    private javax.swing.JRadioButton arts;
+    private javax.swing.JRadioButton bio;
     private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.JRadioButton commerce;
+    private javax.swing.JTextField contact_no_box;
+    private javax.swing.JTextField email_box;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -288,16 +490,10 @@ public class Add_Teachers extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton2;
-    private javax.swing.JRadioButton jRadioButton3;
-    private javax.swing.JRadioButton jRadioButton4;
-    private javax.swing.JRadioButton jRadioButton5;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
-    private javax.swing.JTextField jTextField7;
+    private javax.swing.JRadioButton maths;
+    private javax.swing.JTextField name_box;
+    private javax.swing.JTextField nic_box;
+    private javax.swing.JComboBox<String> subject_box;
+    private javax.swing.JRadioButton tec;
     // End of variables declaration//GEN-END:variables
 }
