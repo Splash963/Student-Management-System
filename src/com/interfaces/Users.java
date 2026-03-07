@@ -49,6 +49,11 @@ public class Users extends javax.swing.JPanel {
         jScrollPane1.setViewportView(jTable1);
 
         add_button.setText("Add User");
+        add_button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                add_buttonActionPerformed(evt);
+            }
+        });
 
         view_button.setText("View User");
 
@@ -93,6 +98,11 @@ public class Users extends javax.swing.JPanel {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 329, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void add_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_add_buttonActionPerformed
+        Add_User m1 = new Add_User();
+        m1.setVisible(true);
+    }//GEN-LAST:event_add_buttonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
