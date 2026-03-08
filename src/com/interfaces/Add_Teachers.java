@@ -22,7 +22,9 @@ public class Add_Teachers extends javax.swing.JFrame {
 
     ArrayList<String> selectedSubjects = new ArrayList<>();
 
-    public Add_Teachers() {
+    Teachers parentPanel;
+
+    public Add_Teachers(Teachers aThis) {
 
         conn = DbConnection.connect();
 
@@ -34,6 +36,8 @@ public class Add_Teachers extends javax.swing.JFrame {
 
 // 3. Text eka epa nam eka remove karන්න
         jLabel1.setText("");
+        this.parentPanel = aThis;
+
     }
 
     /**
@@ -415,6 +419,10 @@ public class Add_Teachers extends javax.swing.JFrame {
 
             clear();
 
+            if (parentPanel != null) {
+                parentPanel.view_data(); // Methanadi main panel eka refresh wenawa!
+            }
+
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
         }
@@ -462,7 +470,7 @@ public class Add_Teachers extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Add_Teachers().setVisible(true);
+
             }
         });
     }

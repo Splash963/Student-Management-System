@@ -101,6 +101,7 @@ public class Main extends javax.swing.JFrame {
         jButton3 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
         student_button = new javax.swing.JButton();
+        teacher_button = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -225,6 +226,35 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
+        teacher_button.setBackground(new java.awt.Color(255, 255, 255));
+        teacher_button.setForeground(new java.awt.Color(0, 0, 0));
+        teacher_button.setText("Manage Teachers");
+        teacher_button.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        teacher_button.setBorder(new RoundedBorder(20));
+        teacher_button.setContentAreaFilled(false);
+        teacher_button.setOpaque(false);
+        teacher_button.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                teacher_buttonFocusGained(evt);
+            }
+        });
+        teacher_button.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                teacher_buttonMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                teacher_buttonMouseExited(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                teacher_buttonMousePressed(evt);
+            }
+        });
+        teacher_button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                teacher_buttonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -240,7 +270,8 @@ public class Main extends javax.swing.JFrame {
                             .addComponent(home_button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(student_button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(student_button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(teacher_button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(17, 17, 17))))
         );
         jPanel3Layout.setVerticalGroup(
@@ -250,9 +281,11 @@ public class Main extends javax.swing.JFrame {
                 .addComponent(home_button, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(student_button, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(teacher_button, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton5)
@@ -425,6 +458,37 @@ public class Main extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_student_buttonActionPerformed
 
+    private void teacher_buttonFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_teacher_buttonFocusGained
+        // TODO add your handling code here:
+    }//GEN-LAST:event_teacher_buttonFocusGained
+
+    private void teacher_buttonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_teacher_buttonMouseEntered
+        teacher_button.setBackground(new Color(101, 148, 177));
+        teacher_button.setForeground(Color.WHITE);
+        teacher_button.setText("Manage Teachers");
+        teacher_button.setOpaque(false);
+        teacher_button.setContentAreaFilled(false);
+        teacher_button.setBorder(new RoundedBorder(20));
+    }//GEN-LAST:event_teacher_buttonMouseEntered
+
+    private void teacher_buttonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_teacher_buttonMouseExited
+        teacher_button.setContentAreaFilled(false);
+        teacher_button.setOpaque(false);
+        teacher_button.setBackground(Color.WHITE);
+        teacher_button.setForeground(Color.BLACK);
+    }//GEN-LAST:event_teacher_buttonMouseExited
+
+    private void teacher_buttonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_teacher_buttonMousePressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_teacher_buttonMousePressed
+
+    private void teacher_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_teacher_buttonActionPerformed
+        Teachers m1 = new Teachers();
+        border_layout_panel.removeAll();
+        border_layout_panel.add(m1);
+        border_layout_panel.revalidate();
+    }//GEN-LAST:event_teacher_buttonActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -478,5 +542,6 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JButton student_button;
+    private javax.swing.JButton teacher_button;
     // End of variables declaration//GEN-END:variables
 }
