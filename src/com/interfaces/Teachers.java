@@ -35,8 +35,6 @@ public class Teachers extends javax.swing.JPanel {
         mainPanel = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
 
-        jTextField1.setText("jTextField1");
-
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);

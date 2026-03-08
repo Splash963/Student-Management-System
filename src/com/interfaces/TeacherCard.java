@@ -21,13 +21,13 @@ public class TeacherCard extends javax.swing.JPanel {
 
     FlatSVGIcon update_icon = new FlatSVGIcon("com/images/Update.svg", 30, 30);
     FlatSVGIcon delete_icon = new FlatSVGIcon("com/images/Delete.svg", 30, 30);
-    
+
     public TeacherCard(String epf_no, String name, String age, String nic_no, String address, String email, String contact_no, String subject_stream, String subjects, Teachers aThis) {
         initComponents();
-        
+
         conn = DbConnection.connect();
-        
-        FlatSVGIcon myIcon = new FlatSVGIcon("com/images/user-3296.svg", 128, 128);
+
+        FlatSVGIcon myIcon = new FlatSVGIcon("com/images/Teacher.svg", 128, 128);
 
 // 2. Label ekata icon eka set karanna
         jLabel1.setIcon(myIcon);
@@ -46,7 +46,7 @@ public class TeacherCard extends javax.swing.JPanel {
 
         this.parentPanel = aThis;
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -155,6 +155,11 @@ public class TeacherCard extends javax.swing.JPanel {
         jButton2.setForeground(new java.awt.Color(0, 0, 0));
         jButton2.setText("Update");
         jButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         epf_no_box.setForeground(new java.awt.Color(255, 255, 255));
         epf_no_box.setText("jLabel2");
@@ -300,6 +305,22 @@ public class TeacherCard extends javax.swing.JPanel {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         delete_data();
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        String epf_no = epf_no_box.getText();
+        String name = name_box.getText();
+        String age = age_box.getText();
+        String nic_no = nic_box.getText();
+        String address = address_box.getText();
+        String email = email_box.getText();
+        String contact_no = contact_no_box.getText();
+        String subject_stream = subject_stream_box.getText();
+        String subjects = subjects_box.getText();
+
+        // Update frame eka create karala data tika pass karanna
+        Update_Teachers m1 = new Update_Teachers(epf_no, name, age, nic_no, address, email, contact_no, subject_stream, subjects, parentPanel);
+        m1.setVisible(true);
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     public void delete_data() {
 
