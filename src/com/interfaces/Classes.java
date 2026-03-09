@@ -4,17 +4,27 @@
  */
 package com.interfaces;
 
+import com.connection.DbConnection;
+import java.awt.Dimension;
+import javax.swing.Box;
+import java.sql.*;
+
 /**
  *
  * @author Theekshana
  */
 public class Classes extends javax.swing.JPanel {
 
-    /**
-     * Creates new form Classes
-     */
+    Connection conn = null;
+    PreparedStatement pst = null;
+    ResultSet rs = null;
+
     public Classes() {
         initComponents();
+        
+        conn = DbConnection.connect();
+        
+        view_data();
     }
 
     /**
@@ -127,10 +137,51 @@ public class Classes extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-       Add_Classes m1 = new Add_Classes();
-       m1.setVisible(true);
+        Add_Classes m1 = new Add_Classes(this);
+        m1.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    public void view_data() {
+        try {
+            // SQL Query eka wenas kara table dekama join karanna
+            String sql = "SELECT c.*, t.name "
+                    + "FROM classes c "
+                    + "JOIN teachers t ON c.epf_no = t.epf_no";
+
+            pst = conn.prepareStatement(sql);
+            rs = pst.executeQuery();
+
+            mainPanel.removeAll();
+
+            while (rs.next()) {
+                // Data rs eken ganna (dan teacher_name ekath ganna puluwan)
+                String class_id = rs.getString("class_id");
+                String epf_no = rs.getString("epf_no");
+                String subject = rs.getString("subject");
+                String batch = rs.getString("batch");
+                String day_time = rs.getString("day_time");
+                String teacher_name = rs.getString("name"); // Aluth field eka
+
+                // ClassCard constructor ekata teacher_name ekath pass karanna
+                // Mathaka athuwa ClassCard class eke constructor ekath update karanna me data eka ganna
+                ClassCard card = new ClassCard(class_id, epf_no, teacher_name, subject, batch, day_time, this);
+
+                // Main panel ekata card eka add karanna
+                mainPanel.add(card);
+
+                // Spacing add karanna
+                mainPanel.add(Box.createRigidArea(new Dimension(0, 10)));
+            }
+
+            mainPanel.revalidate();
+            mainPanel.repaint();
+
+            jScrollPane1.getVerticalScrollBar().setUnitIncrement(20);
+
+        } catch (Exception e) {
+            e.printStackTrace(); // Error ekak awoth hoyaganna lesi wenna meka damma
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
