@@ -2,6 +2,11 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/D:/Projects/Student%20Management%20System/Project/student-management-system/src/com/interfaces/Classes.java</file>
+            <file>file:/D:/Projects/Student%20Management%20System/Project/student-management-system/src/com/interfaces/Add_Classes.java</file>
+            <file>file:/D:/Projects/Student%20Management%20System/Project/student-management-system/src/com/interfaces/Teachers.java</file>
+            <file>file:/D:/Projects/Student%20Management%20System/Project/student-management-system/src/com/interfaces/Update_Teachers.java</file>
+        </group>
     </open-files>
 </project-private>
