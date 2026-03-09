@@ -4,8 +4,10 @@
  */
 package com.interfaces;
 
+import com.connection.DbConnection;
 import com.formdev.flatlaf.extras.FlatSVGIcon;
-
+import java.sql.*;
+import javax.swing.JOptionPane;
 /**
  *
  * @author Theekshana
@@ -14,11 +16,16 @@ public class ClassCard extends javax.swing.JPanel {
 
     Classes parentPanel;
     
+    Connection conn = null;
+    PreparedStatement pst = null;
+    
     FlatSVGIcon update_icon = new FlatSVGIcon("com/images/Update.svg", 30, 30);
     FlatSVGIcon delete_icon = new FlatSVGIcon("com/images/Delete.svg", 30, 30);
     
     public ClassCard(String class_id, String epf_no, String teacher_name, String subject, String batch, String day_time, Classes aThis) {
         initComponents();
+        
+        conn = DbConnection.connect();
         
         FlatSVGIcon myIcon = new FlatSVGIcon("com/images/Class.svg", 128, 90);
 
@@ -264,7 +271,7 @@ public class ClassCard extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        
+        delete_class();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -283,6 +290,34 @@ public class ClassCard extends javax.swing.JPanel {
 //        m1.setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    public void delete_class(){
+    
+        String class_id = class_id_box.getText();
+        int confirm = JOptionPane.showConfirmDialog(null, "Are you sure want to Delete?", "Delete", JOptionPane.YES_NO_OPTION);
+
+        if (confirm == JOptionPane.YES_OPTION) {
+            try {
+
+                String query = "DELETE FROM classes WHERE class_id = ?";
+
+                pst = conn.prepareStatement(query);
+                pst.setString(1, class_id);
+                int result = pst.executeUpdate();
+
+                if (result > 0) {
+                    JOptionPane.showMessageDialog(null, "Class Deleted Successfully!");
+                }
+
+                if (parentPanel != null) {
+                    parentPanel.view_data(); // Methanadi main panel eka refresh wenawa!
+                }
+
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, e);
+            }
+        }
+        
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel batch_box;
