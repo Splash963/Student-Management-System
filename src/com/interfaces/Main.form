@@ -191,7 +191,7 @@
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton3ActionPerformed"/>
                   </Events>
                   <AuxValues>
-                    <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="jButton3.setBorder(new RoundedBorder(20));&#xa;jButton3.setOpaque(false);&#xa;jButton3.setContentAreaFilled(false);"/>
+                    <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="jButton3.setBorder(new RoundedBorder(20));&#xa;        jButton3.setOpaque(false);&#xa;        jButton3.setContentAreaFilled(false);"/>
                   </AuxValues>
                 </Component>
                 <Component class="javax.swing.JButton" name="jButton5">

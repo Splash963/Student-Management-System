@@ -62,17 +62,15 @@ class RoundedBorder implements Border {
 
 public class Main extends javax.swing.JFrame {
 
-    /**
-     * Creates new form dashboard
-     */
+   
     public Main() {
         initComponents();
-        
+
         Dashboard m1 = new Dashboard();
         border_layout_panel.removeAll();
         border_layout_panel.add(m1);
         border_layout_panel.revalidate();
-        
+
         // 1. SVG file path eka denna (Meka 'src' folder eke thiyenna ona)
         FlatSVGIcon myIcon = new FlatSVGIcon("com/images/man-user-circle-icon.svg", 128, 128);
 
@@ -81,7 +79,7 @@ public class Main extends javax.swing.JFrame {
 
 // 3. Text eka epa nam eka remove karන්න
         jLabel1.setText("");
-       
+
     }
 
     /**
@@ -367,7 +365,12 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
+        Classes m1 = new Classes();
+        border_layout_panel.removeAll();
+        border_layout_panel.add(m1);
+        border_layout_panel.revalidate();
+        border_layout_panel.repaint();
+
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
