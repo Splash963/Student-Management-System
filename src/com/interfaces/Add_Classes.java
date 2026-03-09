@@ -25,8 +25,10 @@ public class Add_Classes extends javax.swing.JFrame {
 
     ArrayList<String> date_time = new ArrayList<>();
     DefaultListModel<String> classes = new DefaultListModel<>();
+    
+    Classes parentPanel;
 
-    public Add_Classes() {
+    public Add_Classes(Classes aThis) {
         initComponents();
 
         conn = DbConnection.connect();
@@ -38,9 +40,10 @@ public class Add_Classes extends javax.swing.JFrame {
 
 // 3. Text eka epa nam eka remove karන්න
         jLabel1.setText("");
-        
-        
+
         day_time_box.setModel(classes);
+        
+        this.parentPanel = aThis;
     }
 
     /**
@@ -319,7 +322,7 @@ public class Add_Classes extends javax.swing.JFrame {
     }//GEN-LAST:event_name_boxKeyReleased
 
     private void name_boxKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_name_boxKeyPressed
-       get_teacher();
+        get_teacher();
     }//GEN-LAST:event_name_boxKeyPressed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
@@ -328,9 +331,9 @@ public class Add_Classes extends javax.swing.JFrame {
         String time_1 = time_1_box.getSelectedItem().toString();
         String finish_time = finish_time_box.getText();
         String time_2 = time_2_box.getSelectedItem().toString();
-        
+
         String all_values = day + " " + start_time + " " + time_1 + " " + " TO " + " " + finish_time + " " + time_2;
-        
+
         if (!date_time.contains(all_values)) {
             date_time.add(all_values);
             classes.addElement(all_values);
@@ -400,36 +403,40 @@ public class Add_Classes extends javax.swing.JFrame {
             e.printStackTrace(); // Error ekak awoth bala ganna
         }
     }
-    
-    public void insert_class(){
-    
+
+    public void insert_class() {
+
         String epf_no = epf_no_box.getText();
         String subject = subject_box.getSelectedItem().toString();
         String batch = batch_box.getText();
         String date_and_time = date_time.toString();
-        
+
         try {
-            
+
             String query = "INSERT INTO classes (epf_no, subject, batch, day_time) VALUES (?,?,?,?)";
             pst = conn.prepareStatement(query);
             pst.setString(1, epf_no);
             pst.setString(2, subject);
             pst.setString(3, batch);
             pst.setString(4, date_and_time);
-            
+
             pst.execute();
-            
+
             JOptionPane.showMessageDialog(null, "Class Added Successfull!");
-            
+
             clear();
-            
+
+            if (parentPanel != null) {
+                parentPanel.view_data(); // Methanadi main panel eka refresh wenawa!
+            }
+
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
         }
     }
 
-    public void clear(){
-    
+    public void clear() {
+
         epf_no_box.setText("");
         name_box.setText("");
         subject_box.removeAllItems();
@@ -442,7 +449,7 @@ public class Add_Classes extends javax.swing.JFrame {
         classes.removeAllElements();
         date_time.clear();
     }
-    
+
     /**
      * @param args the command line arguments
      */
@@ -479,7 +486,6 @@ public class Add_Classes extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Add_Classes().setVisible(true);
             }
         });
     }
