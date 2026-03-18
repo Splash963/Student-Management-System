@@ -7,58 +7,11 @@ package com.interfaces;
 import com.connection.DbConnection;
 import com.formdev.flatlaf.FlatLightLaf;
 import com.formdev.flatlaf.extras.FlatSVGIcon;
-import java.awt.Component;
-import java.awt.FontMetrics;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.Insets;
-import java.awt.RenderingHints;
-import javax.swing.ComboBoxModel;
 import java.sql.*;
 import java.util.ArrayList;
 import javax.swing.DefaultListModel;
-import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
-import javax.swing.border.Border;
-
-class RoundedBorder implements Border {
-
-    private int radius;
-
-    RoundedBorder(int radius) {
-        this.radius = radius;
-    }
-
-    public Insets getBorderInsets(Component c) {
-        return new Insets(this.radius + 1, this.radius + 1, this.radius + 2, this.radius);
-    }
-
-    public boolean isBorderOpaque() {
-        return true;
-    }
-
-    public void paintBorder(Component c, Graphics g, int x, int y, int width, int height) {
-        Graphics2D g2d = (Graphics2D) g;
-        g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-
-        // 1. Background eka fill karanna
-        g2d.setColor(c.getBackground());
-        g2d.fillRoundRect(x, y, width - 1, height - 1, radius, radius);
-
-        // 2. Text eka ayeth penna ganna meka danna
-        if (c instanceof JButton) {
-            JButton b = (JButton) c;
-            String text = b.getText();
-            FontMetrics fm = g2d.getFontMetrics();
-            int textX = (width - fm.stringWidth(text)) / 2;
-            int textY = (height + fm.getAscent() - fm.getDescent()) / 2;
-
-            g2d.setColor(b.getForeground()); // Text color eka gannawa
-            g2d.drawString(text, textX, textY);
-        }
-    }
-}
 
 public class Add_Teachers extends javax.swing.JFrame {
 
