@@ -275,19 +275,16 @@ public class ClassCard extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-//        String epf_no = class_id_box.getText();
-//        String name = epf_no_box.getText();
-//        String age = name_box.getText();
-//        String nic_no = subject_box.getText();
-//        String address = batch_box.getText();
-//        String email = dat_time_box.getText();
-//        String contact_no = contact_no_box.getText();
-//        String subject_stream = subject_stream_box.getText();
-//        String subjects = subjects_box.getText();
-//
-//        // Update frame eka create karala data tika pass karanna
-//        Update_Teachers m1 = new Update_Teachers(epf_no, name, age, nic_no, address, email, contact_no, subject_stream, subjects, parentPanel);
-//        m1.setVisible(true);
+
+          String epf_no = epf_no_box.getText();
+          String class_id = class_id_box.getText();
+          String teacher_name = name_box.getText();
+          String subject = subject_box.getText();
+          String batch = batch_box.getText();
+          String day_time = dat_time_box.getText();
+          
+          Update_Classes m1 = new Update_Classes(epf_no, class_id, teacher_name, subject, batch, day_time, parentPanel);
+          m1.setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     public void delete_class(){

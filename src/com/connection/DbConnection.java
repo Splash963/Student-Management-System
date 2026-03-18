@@ -14,7 +14,7 @@ public class DbConnection {
             Class.forName("com.mysql.cj.jdbc.Driver");
 
             // Establish the connection
-            conn = DriverManager.getConnection("jdbc:mysql://localhost/student_management_system", "root", "");
+            conn = DriverManager.getConnection("jdbc:mysql://localhost/student_management_system", "root", "root");
             System.out.println("Connection successful!");
         } catch (ClassNotFoundException e) {
             System.out.println("JDBC Driver not found: " + e.getMessage());
