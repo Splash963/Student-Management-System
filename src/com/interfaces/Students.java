@@ -8,17 +8,19 @@ import com.connection.DbConnection;
 import java.awt.Dimension;
 import java.sql.*;
 import javax.swing.Box;
+import javax.swing.ImageIcon;
+
 /**
  *
  * @author Theekshana
  */
-public class Teachers extends javax.swing.JPanel {
+public class Students extends javax.swing.JPanel {
 
     Connection conn = null;
     PreparedStatement pst = null;
     ResultSet rs = null;
 
-    public Teachers() {
+    public Students() {
         initComponents();
         conn = DbConnection.connect();
         view_data();
@@ -40,11 +42,11 @@ public class Teachers extends javax.swing.JPanel {
 
         jLabel1.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 24)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Manage Teachers");
+        jLabel1.setText("Manage Students");
 
         jButton1.setBackground(new java.awt.Color(72, 161, 17));
         jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setText("Add Teacher");
+        jButton1.setText("Add Student");
         jButton1.setBorder(new RoundedBorder(20));
         jButton1.setContentAreaFilled(false);
         jButton1.setOpaque(false);
@@ -108,33 +110,41 @@ public class Teachers extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        Add_Teachers m1 = new Add_Teachers(this);
+        Add_Student m1 = new Add_Student(this);
         m1.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     public void view_data() {
 
         try {
-            String sql = "SELECT * FROM teachers";
+            String sql = "SELECT * FROM students";
             pst = conn.prepareStatement(sql);
             rs = pst.executeQuery();
 
             mainPanel.removeAll();
-            
+
             while (rs.next()) {
                 // Teacher ge details rs eken ganna
-                String efp_no = rs.getString("epf_no");
+                String student_id = rs.getString("student_id");
+                String class_id = rs.getString("class_id");
                 String name = rs.getString("name");
-                String age = rs.getString("age");
+                String birthday = rs.getString("birthday");
+                String school = rs.getString("school");
                 String nic_no = rs.getString("nic_no");
+                String gender = rs.getString("gender");
                 String address = rs.getString("address");
+                String student_contact_no = rs.getString("student_contact_no");
                 String email = rs.getString("email");
-                String contact_no = rs.getString("contact_no");
+                String parent_name = rs.getString("parent_name");
+                String parent_contact_no = rs.getString("parent_contact_no");
                 String subject_stream = rs.getString("subject_stream");
                 String subjects = rs.getString("subjects");
+                String classes = rs.getString("classes");
+                String profile_picture = rs.getString("profile_picture");
+                byte[] qr_code = rs.getBytes("qr_code");
 
-                // Aluth TeacherCard object ekak hadanna (Constructor ekata data yawanna)
-                TeacherCard card = new TeacherCard(efp_no, name, age, nic_no, address, email, contact_no, subject_stream, subjects, this);
+                
+                StudentCard card = new StudentCard(student_id, class_id, name, birthday, school, nic_no, gender, address, student_contact_no, email, parent_name, parent_contact_no, subject_stream, subjects, classes, profile_picture, qr_code, this);
 
                 // Main panel ekata card eka add karanna
                 mainPanel.add(card);
@@ -145,7 +155,7 @@ public class Teachers extends javax.swing.JPanel {
 
             mainPanel.revalidate();
             mainPanel.repaint();
-            
+
             jScrollPane1.getVerticalScrollBar().setUnitIncrement(20);
 
         } catch (Exception e) {
