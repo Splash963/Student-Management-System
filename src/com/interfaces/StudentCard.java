@@ -6,6 +6,25 @@ package com.interfaces;
 
 import com.connection.DbConnection;
 import com.formdev.flatlaf.extras.FlatSVGIcon;
+import com.google.zxing.BarcodeFormat;
+import com.google.zxing.client.j2se.MatrixToImageWriter;
+import com.google.zxing.common.BitMatrix;
+import com.google.zxing.qrcode.QRCodeWriter;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.BaseColor;
+import com.itextpdf.text.Element;
+import com.itextpdf.text.Font;
+import com.itextpdf.text.FontFactory;
+import com.itextpdf.text.Image;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.Phrase;
+import com.itextpdf.text.Rectangle;
+import com.itextpdf.text.pdf.PdfPCell;
+import com.itextpdf.text.pdf.PdfPTable;
+import com.itextpdf.text.pdf.PdfWriter;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
+import java.io.FileOutputStream;
 import java.sql.*;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
@@ -57,6 +76,125 @@ public class StudentCard extends javax.swing.JPanel {
 
         this.parentPanel = aThis;
 
+    }
+
+    public BufferedImage generateQRCode(String text, int width, int height) throws Exception {
+        QRCodeWriter qrCodeWriter = new QRCodeWriter();
+        BitMatrix bitMatrix = qrCodeWriter.encode(text, BarcodeFormat.QR_CODE, width, height);
+
+        return MatrixToImageWriter.toBufferedImage(bitMatrix);
+    }
+
+    public void Print_Card() {
+        try {
+            String home = System.getProperty("user.home");
+            String filePath = home + "/Downloads/Student_Card_" + nic_no_box.getText() + ".pdf";
+
+            Rectangle pageSize = new Rectangle(242, 153);
+            Document document = new Document(pageSize, 0, 0, 0, 0); // Margins 0 kala
+            PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream(filePath));
+            document.open();
+
+            // **1. HEADER SECTION**
+            PdfPTable headerTable = new PdfPTable(1);
+            headerTable.setWidthPercentage(100);
+            PdfPCell titleCell = new PdfPCell(new Phrase("Student ID Card",
+                    FontFactory.getFont(FontFactory.HELVETICA_BOLD, 11, Font.NORMAL, BaseColor.WHITE)));
+            titleCell.setBackgroundColor(new BaseColor(34, 49, 63));
+            titleCell.setBorder(Rectangle.NO_BORDER);
+            titleCell.setHorizontalAlignment(Element.ALIGN_LEFT);
+            titleCell.setVerticalAlignment(Element.ALIGN_MIDDLE);
+            titleCell.setPadding(8);
+            headerTable.addCell(titleCell);
+            document.add(headerTable);
+
+            // **2. BODY SECTION (Layout Table)**
+            PdfPTable bodyTable = new PdfPTable(2);
+            bodyTable.setWidthPercentage(90);
+            bodyTable.setWidths(new float[]{1.2f, 2.5f});
+            bodyTable.setSpacingBefore(10f);
+            bodyTable.getDefaultCell().setBorder(Rectangle.NO_BORDER);
+            // --- Left Side: Profile Photo ---
+            // TODO: Meka 'male.png' widiyata convert karala project eke images folder ekata danna
+            try {
+                String photoPath = "/com/images/male.png"; // SVG wenuwata PNG danna
+                Image profileImg = Image.getInstance(getClass().getResource(photoPath));
+                profileImg.scaleToFit(65, 75);
+                PdfPCell photoCell = new PdfPCell(profileImg, false);
+                photoCell.setBorder(Rectangle.NO_BORDER); // Border ain kala
+                photoCell.setVerticalAlignment(Element.ALIGN_MIDDLE);
+                bodyTable.addCell(photoCell);
+            } catch (Exception e) {
+                PdfPCell empty = new PdfPCell(new Phrase("No Photo"));
+                empty.setBorder(Rectangle.NO_BORDER);
+                bodyTable.addCell(empty);
+            }
+
+            // --- Right Side: QR & Details ---
+            PdfPTable rightSideTable = new PdfPTable(1);
+
+            // QR Code - Quality wadi karanna 300x300 generate karamu
+            BufferedImage qrImage = generateQRCode(nic_no_box.getText(), 500, 500);
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            javax.imageio.ImageIO.write(qrImage, "png", baos);
+            Image pdfQrImage = Image.getInstance(baos.toByteArray());
+            pdfQrImage.scaleToFit(40, 40); // Habai display size eka podi kala
+
+            PdfPCell qrCell = new PdfPCell(pdfQrImage, false);
+            qrCell.setBorder(Rectangle.NO_BORDER);
+            qrCell.setHorizontalAlignment(Element.ALIGN_CENTER); // Center kala
+            qrCell.setPaddingBottom(5);
+            rightSideTable.addCell(qrCell);
+
+            // Details Table
+            PdfPTable detailsTable = new PdfPTable(2);
+            detailsTable.setWidths(new float[]{0.7f, 2.0f});
+            Font fBold = FontFactory.getFont(FontFactory.HELVETICA_BOLD, 6);
+            Font fNorm = FontFactory.getFont(FontFactory.HELVETICA, 6);
+
+            addDetailRow(detailsTable, "Name", ": " + student_name_box.getText(), fBold, fNorm);
+            addDetailRow(detailsTable, "NIC", ": " + nic_no_box.getText(), fBold, fNorm);
+            addDetailRow(detailsTable, "Subject Stream", ":" + subject_stream_box.getText(), fBold, fNorm);
+
+            PdfPCell detailsCellContainer = new PdfPCell(detailsTable);
+            detailsCellContainer.setBorder(Rectangle.NO_BORDER);
+            rightSideTable.addCell(detailsCellContainer);
+
+            bodyTable.addCell(rightSideTable);
+            document.add(bodyTable);
+
+            // **3. FOOTER SECTION**
+            PdfPTable footerTable = new PdfPTable(1);
+            footerTable.setWidthPercentage(100);
+            footerTable.setSpacingBefore(15f); // Space eka poddak wadi kala
+
+            String footerText = "www.gurumandala.lk | 077 775 8004 | 076 747 3738";
+            PdfPCell footerCell = new PdfPCell(new Phrase(footerText,
+                    FontFactory.getFont(FontFactory.HELVETICA, 6, Font.NORMAL, BaseColor.WHITE)));
+            footerCell.setBackgroundColor(new BaseColor(214, 48, 49));
+            footerCell.setBorder(Rectangle.NO_BORDER);
+            footerCell.setHorizontalAlignment(Element.ALIGN_CENTER);
+            footerCell.setPadding(4);
+            footerTable.addCell(footerCell);
+
+            document.add(footerTable);
+
+            document.close();
+            JOptionPane.showMessageDialog(null, "ID Card PDF Updated Successfully!");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void addDetailRow(PdfPTable table, String label, String value, Font labelFont, Font valueFont) {
+        PdfPCell labelCell = new PdfPCell(new Phrase(label, labelFont));
+        labelCell.setBorder(Rectangle.NO_BORDER);
+        table.addCell(labelCell);
+
+        PdfPCell valueCell = new PdfPCell(new Phrase(value, valueFont));
+        valueCell.setBorder(Rectangle.NO_BORDER);
+        table.addCell(valueCell);
     }
 
     /**
@@ -431,7 +569,7 @@ public class StudentCard extends javax.swing.JPanel {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
 
-
+        Print_Card();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
