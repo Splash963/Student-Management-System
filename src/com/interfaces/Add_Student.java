@@ -10,16 +10,15 @@ import com.google.zxing.BarcodeFormat;
 import com.google.zxing.client.j2se.MatrixToImageWriter;
 import com.google.zxing.common.BitMatrix;
 import com.google.zxing.qrcode.QRCodeWriter;
-import com.mysql.cj.protocol.Resultset;
 import java.awt.image.BufferedImage;
-import java.io.ByteArrayOutputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
-import javax.imageio.ImageIO;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
+import javax.imageio.ImageIO;
+import java.io.ByteArrayOutputStream;
 
 /**
  *
@@ -738,7 +737,6 @@ public class Add_Student extends javax.swing.JFrame {
         } else if (tec.isSelected()) {
             subject_stream = "Tec";
         }
-
 
         try {
             // 1. QR eka generate karagannawa
