@@ -48,11 +48,18 @@ public class StudentCard extends javax.swing.JPanel {
 
         conn = DbConnection.connect();
 
-        FlatSVGIcon myIcon = new FlatSVGIcon(profile_picture, 128, 110);
+//        FlatSVGIcon myIcon = new FlatSVGIcon(profile_picture, 128, 110);
+        if (profile_picture != null && !profile_picture.isEmpty()) {
+            // String path එක ImageIcon එකක් බවට හරවනවා
+            javax.swing.ImageIcon imgIcon = new javax.swing.ImageIcon(profile_picture);
+            jLabel1.setIcon(imgIcon);
+        } else {
+            // පින්තූරයක් නැතිනම් default icon එකක් සෙට් කරන්න පුළුවන්
+            jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/images/user-3296.svg")));
+        }
 
 // 2. Label ekata icon eka set karanna
-        jLabel1.setIcon(myIcon);
-
+        profile_image_path.setText(profile_picture);
         student_id_box.setText(student_id);
         class_id_box.setText(class_id);
         student_name_box.setText(name);
@@ -91,7 +98,7 @@ public class StudentCard extends javax.swing.JPanel {
             String filePath = home + "/Downloads/Student_Card_" + nic_no_box.getText() + ".pdf";
 
             Rectangle pageSize = new Rectangle(242, 153);
-            Document document = new Document(pageSize, 0, 0, 0, 0); // Margins 0 kala
+            Document document = new Document(pageSize, 0, 0, 0, 0);
             PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream(filePath));
             document.open();
 
@@ -102,7 +109,7 @@ public class StudentCard extends javax.swing.JPanel {
                     FontFactory.getFont(FontFactory.HELVETICA_BOLD, 11, Font.NORMAL, BaseColor.WHITE)));
             titleCell.setBackgroundColor(new BaseColor(34, 49, 63));
             titleCell.setBorder(Rectangle.NO_BORDER);
-            titleCell.setHorizontalAlignment(Element.ALIGN_LEFT);
+            titleCell.setHorizontalAlignment(Element.ALIGN_CENTER);
             titleCell.setVerticalAlignment(Element.ALIGN_MIDDLE);
             titleCell.setPadding(8);
             headerTable.addCell(titleCell);
@@ -110,51 +117,61 @@ public class StudentCard extends javax.swing.JPanel {
 
             // **2. BODY SECTION (Layout Table)**
             PdfPTable bodyTable = new PdfPTable(2);
-            bodyTable.setWidthPercentage(90);
+            bodyTable.setWidthPercentage(95);
             bodyTable.setWidths(new float[]{1.2f, 2.5f});
             bodyTable.setSpacingBefore(10f);
             bodyTable.getDefaultCell().setBorder(Rectangle.NO_BORDER);
-            // --- Left Side: Profile Photo ---
-            // TODO: Meka 'male.png' widiyata convert karala project eke images folder ekata danna
+
+            // --- Left Side: Profile Photo (Supports JPG, PNG, JPEG) ---
             try {
-                String photoPath = "/com/images/male.png"; // SVG wenuwata PNG danna
-                Image profileImg = Image.getInstance(getClass().getResource(photoPath));
-                profileImg.scaleToFit(65, 75);
-                PdfPCell photoCell = new PdfPCell(profileImg, false);
-                photoCell.setBorder(Rectangle.NO_BORDER); // Border ain kala
-                photoCell.setVerticalAlignment(Element.ALIGN_MIDDLE);
-                bodyTable.addCell(photoCell);
+                String photoPath = profile_image_path.getText();
+
+                if (photoPath != null && !photoPath.isEmpty()) {
+                    // Direct file path eken image eka load kireema
+                    Image profileImg = Image.getInstance(photoPath);
+                    profileImg.scaleToFit(65, 75);
+
+                    PdfPCell photoCell = new PdfPCell(profileImg, false);
+                    photoCell.setBorder(Rectangle.NO_BORDER);
+                    photoCell.setVerticalAlignment(Element.ALIGN_MIDDLE);
+                    bodyTable.addCell(photoCell);
+                } else {
+                    throw new Exception("Path is empty");
+                }
             } catch (Exception e) {
-                PdfPCell empty = new PdfPCell(new Phrase("No Photo"));
+                PdfPCell empty = new PdfPCell(new Phrase("No Photo", FontFactory.getFont(FontFactory.HELVETICA, 7)));
                 empty.setBorder(Rectangle.NO_BORDER);
+                empty.setVerticalAlignment(Element.ALIGN_MIDDLE);
                 bodyTable.addCell(empty);
             }
 
             // --- Right Side: QR & Details ---
             PdfPTable rightSideTable = new PdfPTable(1);
 
-            // QR Code - Quality wadi karanna 300x300 generate karamu
+            // QR Code - High Quality (500x500)
             BufferedImage qrImage = generateQRCode(nic_no_box.getText(), 500, 500);
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
             javax.imageio.ImageIO.write(qrImage, "png", baos);
             Image pdfQrImage = Image.getInstance(baos.toByteArray());
-            pdfQrImage.scaleToFit(40, 40); // Habai display size eka podi kala
+            pdfQrImage.scaleToFit(40, 40);
 
             PdfPCell qrCell = new PdfPCell(pdfQrImage, false);
             qrCell.setBorder(Rectangle.NO_BORDER);
-            qrCell.setHorizontalAlignment(Element.ALIGN_CENTER); // Center kala
+            qrCell.setHorizontalAlignment(Element.ALIGN_CENTER);
             qrCell.setPaddingBottom(5);
             rightSideTable.addCell(qrCell);
 
-            // Details Table
+            // Details Table (Border-less)
             PdfPTable detailsTable = new PdfPTable(2);
-            detailsTable.setWidths(new float[]{0.7f, 2.0f});
+            detailsTable.setWidths(new float[]{0.9f, 2.0f});
+            detailsTable.getDefaultCell().setBorder(Rectangle.NO_BORDER); // Hama cell ekakama border ain kala
+
             Font fBold = FontFactory.getFont(FontFactory.HELVETICA_BOLD, 6);
             Font fNorm = FontFactory.getFont(FontFactory.HELVETICA, 6);
 
             addDetailRow(detailsTable, "Name", ": " + student_name_box.getText(), fBold, fNorm);
             addDetailRow(detailsTable, "NIC", ": " + nic_no_box.getText(), fBold, fNorm);
-            addDetailRow(detailsTable, "Subject Stream", ":" + subject_stream_box.getText(), fBold, fNorm);
+            addDetailRow(detailsTable, "Subject", ": " + subject_stream_box.getText(), fBold, fNorm);
 
             PdfPCell detailsCellContainer = new PdfPCell(detailsTable);
             detailsCellContainer.setBorder(Rectangle.NO_BORDER);
@@ -166,7 +183,7 @@ public class StudentCard extends javax.swing.JPanel {
             // **3. FOOTER SECTION**
             PdfPTable footerTable = new PdfPTable(1);
             footerTable.setWidthPercentage(100);
-            footerTable.setSpacingBefore(15f); // Space eka poddak wadi kala
+            footerTable.setSpacingBefore(15f);
 
             String footerText = "www.gurumandala.lk | 077 775 8004 | 076 747 3738";
             PdfPCell footerCell = new PdfPCell(new Phrase(footerText,
@@ -180,10 +197,11 @@ public class StudentCard extends javax.swing.JPanel {
             document.add(footerTable);
 
             document.close();
-            JOptionPane.showMessageDialog(null, "ID Card PDF Updated Successfully!");
+            JOptionPane.showMessageDialog(null, "ID Card PDF Downloaded Successfully!");
 
         } catch (Exception e) {
             e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Printing Error: " + e.getMessage());
         }
     }
 
@@ -244,6 +262,7 @@ public class StudentCard extends javax.swing.JPanel {
         student_id_box = new javax.swing.JLabel();
         qr_code_box = new javax.swing.JLabel();
         jButton3 = new javax.swing.JButton();
+        profile_image_path = new javax.swing.JLabel();
 
         jPanel1.setBackground(new java.awt.Color(191, 201, 209));
         jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -289,7 +308,6 @@ public class StudentCard extends javax.swing.JPanel {
             }
         });
 
-        jButton2.setIcon(update_icon);
         jButton2.setBackground(new java.awt.Color(168, 223, 142));
         jButton2.setForeground(new java.awt.Color(0, 0, 0));
         jButton2.setText("Print");
@@ -396,16 +414,19 @@ public class StudentCard extends javax.swing.JPanel {
         qr_code_box.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         qr_code_box.setText("jLabel2");
 
-        jButton2.setIcon(update_icon);
         jButton3.setBackground(new java.awt.Color(255, 179, 63));
         jButton3.setForeground(new java.awt.Color(0, 0, 0));
         jButton3.setText("Update");
+        jButton3.setIcon(update_icon);
         jButton3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
             }
         });
+
+        profile_image_path.setText("jLabel2");
+        profile_image_path.setVisible(false);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -448,17 +469,22 @@ public class StudentCard extends javax.swing.JPanel {
                     .addComponent(student_id_box, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(0, 0, 0)
                 .addComponent(qr_code_box, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(profile_image_path)))
                 .addGap(16, 16, 16))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(264, 264, 264)
+                .addGap(131, 131, 131)
+                .addComponent(profile_image_path)
+                .addGap(115, 115, 115)
                 .addComponent(jButton2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton3)
@@ -542,9 +568,7 @@ public class StudentCard extends javax.swing.JPanel {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(0, 0, 0)
-                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -637,6 +661,7 @@ public class StudentCard extends javax.swing.JPanel {
     private javax.swing.JLabel nic_no_box;
     private javax.swing.JLabel parent_contact_no_box;
     private javax.swing.JLabel parent_name_box;
+    private javax.swing.JLabel profile_image_path;
     private javax.swing.JLabel qr_code_box;
     private javax.swing.JLabel school_box;
     private javax.swing.JLabel student_contact_no_box;
