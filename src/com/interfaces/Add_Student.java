@@ -36,6 +36,8 @@ public class Add_Student extends javax.swing.JFrame {
     DefaultListModel<String> subject_listModel = new DefaultListModel<>();
     DefaultListModel<String> class_listModel = new DefaultListModel<>();
 
+    String uploaded_profile_picture_path = "";
+
     Students parentPanel;
 
     public Add_Student(Students aThis) {
@@ -130,6 +132,8 @@ public class Add_Student extends javax.swing.JFrame {
         jButton6 = new javax.swing.JButton();
         jButton7 = new javax.swing.JButton();
         jLabel14 = new javax.swing.JLabel();
+        jLabel15 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
@@ -325,6 +329,15 @@ public class Add_Student extends javax.swing.JFrame {
 
         jLabel14.setText("Classes");
 
+        jLabel15.setText("Student Profile Picture");
+
+        jButton1.setText("Upload Profile Picture");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -351,7 +364,8 @@ public class Add_Student extends javax.swing.JFrame {
                                         .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jLabel13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                        .addComponent(jLabel13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jLabel15, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                     .addGap(18, 18, 18)
                                     .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                         .addGroup(jPanel3Layout.createSequentialGroup()
@@ -376,7 +390,8 @@ public class Add_Student extends javax.swing.JFrame {
                                         .addComponent(name_box)
                                         .addComponent(student_contact_no_box)
                                         .addComponent(parent_contact_no_box)
-                                        .addComponent(email_box))))
+                                        .addComponent(email_box)
+                                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE))))
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addGap(179, 179, 179)
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -437,6 +452,10 @@ public class Add_Student extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel10)
                     .addComponent(address_box, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel15)
+                    .addComponent(jButton1))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
@@ -656,6 +675,44 @@ public class Add_Student extends javax.swing.JFrame {
         parent_contact_no_box.grabFocus();
     }//GEN-LAST:event_parent_name_boxActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        javax.swing.JFileChooser chooser = new javax.swing.JFileChooser();
+        chooser.setFileFilter(new javax.swing.filechooser.FileNameExtensionFilter("Image Files", "jpg", "png", "jpeg"));
+
+        if (chooser.showOpenDialog(this) == javax.swing.JFileChooser.APPROVE_OPTION) {
+            java.io.File file = chooser.getSelectedFile();
+
+            try {
+                // 1. Image eka read kirima
+                java.awt.Image img = javax.imageio.ImageIO.read(file);
+
+                // 2. Resize kirima (128x128)
+                java.awt.Image resizedImg = img.getScaledInstance(128, 128, java.awt.Image.SCALE_SMOOTH);
+
+                // 3. Label ekata image eka set kirima (Preview)
+                jLabel1.setIcon(new javax.swing.ImageIcon(resizedImg));
+
+                // 4. Save karanna ona path eka hadaganna
+                // 'com/images' kiyana folder ekata aluth namakin save karanawa (System time eka use kala mix nowenna)
+                String fileName = System.currentTimeMillis() + "_" + file.getName();
+                String destinationPath = "src/com/images/" + fileName;
+
+                // 5. Image eka project folder ekata save kirima
+                java.io.File outputFile = new java.io.File(destinationPath);
+                javax.imageio.ImageIO.write(toBufferedImage(resizedImg), "png", outputFile);
+
+                // 6. Me variable eka thama Database ekata danna oni (Path eka)
+                uploaded_profile_picture_path = destinationPath;
+
+                System.out.println("Saved to: " + uploaded_profile_picture_path);
+
+            } catch (Exception ex) {
+                ex.printStackTrace();
+                javax.swing.JOptionPane.showMessageDialog(this, "Error processing image", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+            }
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     public void get_classes() {
 
         String selected_subject = subject_box.getSelectedItem().toString();
@@ -715,15 +772,16 @@ public class Add_Student extends javax.swing.JFrame {
         String data = nic_box.getText();
 
         //Profile Pictures
-        FlatSVGIcon male_img = new FlatSVGIcon("com/images/male.svg", 128, 90);
-        FlatSVGIcon female_img = new FlatSVGIcon("com/images/female.svg", 128, 90);
-
+//        FlatSVGIcon male_img = new FlatSVGIcon("com/images/male.svg", 128, 90);
+//        FlatSVGIcon female_img = new FlatSVGIcon("com/images/female.svg", 128, 90);
         if (male.isSelected()) {
             gender = "Male";
-            profile_picture = "com/images/male.svg";
         } else if (female.isSelected()) {
             gender = "Female";
-            profile_picture = "com/images/female.svg";
+        }
+
+        if (!uploaded_profile_picture_path.isEmpty()) {
+            profile_picture = uploaded_profile_picture_path;
         }
 
         if (maths.isSelected()) {
@@ -786,6 +844,8 @@ public class Add_Student extends javax.swing.JFrame {
     }
 
     public void clear() {
+        uploaded_profile_picture_path = "";
+        jLabel1.setIcon(new com.formdev.flatlaf.extras.FlatSVGIcon("com/images/user-3296.svg", 128, 128));
 
         name_box.setText("");
         birthday_box.setText("");
@@ -805,6 +865,18 @@ public class Add_Student extends javax.swing.JFrame {
         class_listModel.removeAllElements();
         class_box.removeAll();
 
+    }
+
+    public static java.awt.image.BufferedImage toBufferedImage(java.awt.Image img) {
+        if (img instanceof java.awt.image.BufferedImage) {
+            return (java.awt.image.BufferedImage) img;
+        }
+        java.awt.image.BufferedImage bimage = new java.awt.image.BufferedImage(
+                img.getWidth(null), img.getHeight(null), java.awt.image.BufferedImage.TYPE_INT_ARGB);
+        java.awt.Graphics2D bGr = bimage.createGraphics();
+        bGr.drawImage(img, 0, 0, null);
+        bGr.dispose();
+        return bimage;
     }
 
     /**
@@ -855,6 +927,7 @@ public class Add_Student extends javax.swing.JFrame {
     private javax.swing.JRadioButton commerce;
     private javax.swing.JTextField email_box;
     private javax.swing.JRadioButton female;
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
@@ -867,6 +940,7 @@ public class Add_Student extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
