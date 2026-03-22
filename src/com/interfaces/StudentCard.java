@@ -7,40 +7,56 @@ package com.interfaces;
 import com.connection.DbConnection;
 import com.formdev.flatlaf.extras.FlatSVGIcon;
 import java.sql.*;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+
 /**
  *
  * @author Theekshana
  */
-public class ClassCard extends javax.swing.JPanel {
+public class StudentCard extends javax.swing.JPanel {
 
-    Classes parentPanel;
-    
     Connection conn = null;
     PreparedStatement pst = null;
-    
+
+    Students parentPanel;
+
     FlatSVGIcon update_icon = new FlatSVGIcon("com/images/Update.svg", 30, 30);
     FlatSVGIcon delete_icon = new FlatSVGIcon("com/images/Delete.svg", 30, 30);
-    
-    public ClassCard(String class_id, String epf_no, String teacher_name, String subject, String batch, String day_time, Classes aThis) {
+
+    public StudentCard(String student_id, String class_id, String name, String birthday, String school, String nic_no, String gender, String address, String student_contact_no, String email, String parent_name, String parent_contact_no, String subject_stream, String subjects, String classes, String profile_picture, byte[] qr_code, Students aThis) {
         initComponents();
-        
+
         conn = DbConnection.connect();
-        
-        FlatSVGIcon myIcon = new FlatSVGIcon("com/images/Class.svg", 128, 90);
+
+        FlatSVGIcon myIcon = new FlatSVGIcon(profile_picture, 128, 110);
 
 // 2. Label ekata icon eka set karanna
         jLabel1.setIcon(myIcon);
-        
+
+        student_id_box.setText(student_id);
         class_id_box.setText(class_id);
-        epf_no_box.setText(epf_no);
-        name_box.setText(teacher_name);
-        subject_box.setText(subject);
-        batch_box.setText(batch);
-        dat_time_box.setText(day_time);
-        
+        student_name_box.setText(name);
+        birthday_box.setText(birthday);
+        school_box.setText(school);
+        nic_no_box.setText(nic_no);
+        gender_box.setText(gender);
+        address_box.setText(address);
+        student_contact_no_box.setText(student_contact_no);
+        email_box.setText(email);
+        parent_name_box.setText(parent_name);
+        parent_contact_no_box.setText(parent_contact_no);
+        subject_stream_box.setText(subject_stream);
+        subjects_box.setText(subjects);
+        classes_box.setText(classes);
+
+        if (qr_code != null) {
+            ImageIcon qr_image = new ImageIcon(qr_code);
+            qr_code_box.setIcon(qr_image);
+        }
+
         this.parentPanel = aThis;
-        
+
     }
 
     /**
@@ -59,17 +75,37 @@ public class ClassCard extends javax.swing.JPanel {
         label1 = new javax.swing.JLabel();
         label2 = new javax.swing.JLabel();
         label3 = new javax.swing.JLabel();
-        label4 = new javax.swing.JLabel();
-        label5 = new javax.swing.JLabel();
-        label6 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         class_id_box = new javax.swing.JLabel();
-        epf_no_box = new javax.swing.JLabel();
-        name_box = new javax.swing.JLabel();
-        subject_box = new javax.swing.JLabel();
-        batch_box = new javax.swing.JLabel();
-        dat_time_box = new javax.swing.JLabel();
+        student_name_box = new javax.swing.JLabel();
+        label16 = new javax.swing.JLabel();
+        birthday_box = new javax.swing.JLabel();
+        school_box = new javax.swing.JLabel();
+        label17 = new javax.swing.JLabel();
+        nic_no_box = new javax.swing.JLabel();
+        label18 = new javax.swing.JLabel();
+        gender_box = new javax.swing.JLabel();
+        label19 = new javax.swing.JLabel();
+        address_box = new javax.swing.JLabel();
+        label20 = new javax.swing.JLabel();
+        student_contact_no_box = new javax.swing.JLabel();
+        label21 = new javax.swing.JLabel();
+        email_box = new javax.swing.JLabel();
+        label22 = new javax.swing.JLabel();
+        parent_name_box = new javax.swing.JLabel();
+        label23 = new javax.swing.JLabel();
+        parent_contact_no_box = new javax.swing.JLabel();
+        label24 = new javax.swing.JLabel();
+        subject_stream_box = new javax.swing.JLabel();
+        label25 = new javax.swing.JLabel();
+        subjects_box = new javax.swing.JLabel();
+        label26 = new javax.swing.JLabel();
+        classes_box = new javax.swing.JLabel();
+        label27 = new javax.swing.JLabel();
+        student_id_box = new javax.swing.JLabel();
+        qr_code_box = new javax.swing.JLabel();
+        jButton3 = new javax.swing.JButton();
 
         jPanel1.setBackground(new java.awt.Color(191, 201, 209));
         jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -87,36 +123,22 @@ public class ClassCard extends javax.swing.JPanel {
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 341, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 613, Short.MAX_VALUE)
         );
 
         jPanel3.setBackground(new java.awt.Color(28, 77, 141));
 
         label1.setForeground(new java.awt.Color(255, 255, 255));
         label1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        label1.setText("Class ID");
+        label1.setText("Student ID");
 
         label2.setForeground(new java.awt.Color(255, 255, 255));
         label2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        label2.setText("EPF No");
+        label2.setText("Class ID");
 
         label3.setForeground(new java.awt.Color(255, 255, 255));
         label3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        label3.setText("Teacher Name");
-
-        label4.setForeground(new java.awt.Color(255, 255, 255));
-        label4.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        label4.setText("Subject");
-
-        label5.setForeground(new java.awt.Color(255, 255, 255));
-        label5.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        label5.setText("Batch");
-
-        label6.setForeground(new java.awt.Color(255, 255, 255));
-        label6.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        label6.setText("Day/Time");
+        label3.setText("Full Name");
 
         jButton1.setBackground(new java.awt.Color(246, 48, 73));
         jButton1.setForeground(new java.awt.Color(255, 255, 255));
@@ -130,9 +152,9 @@ public class ClassCard extends javax.swing.JPanel {
         });
 
         jButton2.setIcon(update_icon);
-        jButton2.setBackground(new java.awt.Color(255, 179, 63));
+        jButton2.setBackground(new java.awt.Color(168, 223, 142));
         jButton2.setForeground(new java.awt.Color(0, 0, 0));
-        jButton2.setText("Update");
+        jButton2.setText("Print");
         jButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -143,20 +165,109 @@ public class ClassCard extends javax.swing.JPanel {
         class_id_box.setForeground(new java.awt.Color(255, 255, 255));
         class_id_box.setText("jLabel2");
 
-        epf_no_box.setForeground(new java.awt.Color(255, 255, 255));
-        epf_no_box.setText("jLabel2");
+        student_name_box.setForeground(new java.awt.Color(255, 255, 255));
+        student_name_box.setText("jLabel2");
 
-        name_box.setForeground(new java.awt.Color(255, 255, 255));
-        name_box.setText("jLabel2");
+        label16.setForeground(new java.awt.Color(255, 255, 255));
+        label16.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        label16.setText("Birth Date");
 
-        subject_box.setForeground(new java.awt.Color(255, 255, 255));
-        subject_box.setText("jLabel2");
+        birthday_box.setForeground(new java.awt.Color(255, 255, 255));
+        birthday_box.setText("jLabel2");
 
-        batch_box.setForeground(new java.awt.Color(255, 255, 255));
-        batch_box.setText("jLabel2");
+        school_box.setForeground(new java.awt.Color(255, 255, 255));
+        school_box.setText("jLabel2");
 
-        dat_time_box.setForeground(new java.awt.Color(255, 255, 255));
-        dat_time_box.setText("jLabel2");
+        label17.setForeground(new java.awt.Color(255, 255, 255));
+        label17.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        label17.setText("School");
+
+        nic_no_box.setForeground(new java.awt.Color(255, 255, 255));
+        nic_no_box.setText("jLabel2");
+
+        label18.setForeground(new java.awt.Color(255, 255, 255));
+        label18.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        label18.setText("NIC No");
+
+        gender_box.setForeground(new java.awt.Color(255, 255, 255));
+        gender_box.setText("jLabel2");
+
+        label19.setForeground(new java.awt.Color(255, 255, 255));
+        label19.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        label19.setText("Gender");
+
+        address_box.setForeground(new java.awt.Color(255, 255, 255));
+        address_box.setText("jLabel2");
+
+        label20.setForeground(new java.awt.Color(255, 255, 255));
+        label20.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        label20.setText("Address");
+
+        student_contact_no_box.setForeground(new java.awt.Color(255, 255, 255));
+        student_contact_no_box.setText("jLabel2");
+
+        label21.setForeground(new java.awt.Color(255, 255, 255));
+        label21.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        label21.setText("Student Contact No");
+
+        email_box.setForeground(new java.awt.Color(255, 255, 255));
+        email_box.setText("jLabel2");
+
+        label22.setForeground(new java.awt.Color(255, 255, 255));
+        label22.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        label22.setText("Email");
+
+        parent_name_box.setForeground(new java.awt.Color(255, 255, 255));
+        parent_name_box.setText("jLabel2");
+
+        label23.setForeground(new java.awt.Color(255, 255, 255));
+        label23.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        label23.setText("Parent Name");
+
+        parent_contact_no_box.setForeground(new java.awt.Color(255, 255, 255));
+        parent_contact_no_box.setText("jLabel2");
+
+        label24.setForeground(new java.awt.Color(255, 255, 255));
+        label24.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        label24.setText("Parent Contact No");
+
+        subject_stream_box.setForeground(new java.awt.Color(255, 255, 255));
+        subject_stream_box.setText("jLabel2");
+
+        label25.setForeground(new java.awt.Color(255, 255, 255));
+        label25.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        label25.setText("Subject Stream");
+
+        subjects_box.setForeground(new java.awt.Color(255, 255, 255));
+        subjects_box.setText("jLabel2");
+
+        label26.setForeground(new java.awt.Color(255, 255, 255));
+        label26.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        label26.setText("Subjects");
+
+        classes_box.setForeground(new java.awt.Color(255, 255, 255));
+        classes_box.setText("jLabel2");
+
+        label27.setForeground(new java.awt.Color(255, 255, 255));
+        label27.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        label27.setText("Classes");
+
+        student_id_box.setForeground(new java.awt.Color(255, 255, 255));
+        student_id_box.setText("jLabel2");
+
+        qr_code_box.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        qr_code_box.setText("jLabel2");
+
+        jButton2.setIcon(update_icon);
+        jButton3.setBackground(new java.awt.Color(255, 179, 63));
+        jButton3.setForeground(new java.awt.Color(0, 0, 0));
+        jButton3.setText("Update");
+        jButton3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -164,79 +275,121 @@ public class ClassCard extends javax.swing.JPanel {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(label5, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(batch_box, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(91, 91, 91))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel3Layout.createSequentialGroup()
-                                        .addComponent(label4, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(subject_box, javax.swing.GroupLayout.DEFAULT_SIZE, 277, Short.MAX_VALUE))
-                                    .addGroup(jPanel3Layout.createSequentialGroup()
-                                        .addComponent(label6, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(dat_time_box, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                                .addGap(5, 5, 5))
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(class_id_box, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addComponent(label2, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(epf_no_box, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addComponent(label3, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(name_box, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton1)
-                            .addComponent(jButton2))
-                        .addGap(10, 10, 10))))
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(label2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(label1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(label3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(label16, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(label17, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(label18, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(label19, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(label20, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(label21, javax.swing.GroupLayout.DEFAULT_SIZE, 198, Short.MAX_VALUE)
+                    .addComponent(label22, javax.swing.GroupLayout.DEFAULT_SIZE, 198, Short.MAX_VALUE)
+                    .addComponent(label23, javax.swing.GroupLayout.DEFAULT_SIZE, 198, Short.MAX_VALUE)
+                    .addComponent(label24, javax.swing.GroupLayout.DEFAULT_SIZE, 198, Short.MAX_VALUE)
+                    .addComponent(label25, javax.swing.GroupLayout.DEFAULT_SIZE, 198, Short.MAX_VALUE)
+                    .addComponent(label26, javax.swing.GroupLayout.DEFAULT_SIZE, 198, Short.MAX_VALUE)
+                    .addComponent(label27, javax.swing.GroupLayout.DEFAULT_SIZE, 198, Short.MAX_VALUE))
+                .addGap(40, 40, 40)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(birthday_box, javax.swing.GroupLayout.DEFAULT_SIZE, 409, Short.MAX_VALUE)
+                    .addComponent(school_box, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(nic_no_box, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(gender_box, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(address_box, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(student_contact_no_box, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(email_box, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(parent_name_box, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(parent_contact_no_box, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(subject_stream_box, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(subjects_box, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(classes_box, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(class_id_box, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(student_name_box, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(student_id_box, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(0, 0, 0)
+                .addComponent(qr_code_box, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(16, 16, 16))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(21, 21, 21)
+                .addGap(264, 264, 264)
+                .addComponent(jButton2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton3)
+                .addGap(10, 10, 10)
+                .addComponent(jButton1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(qr_code_box, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(label1)
-                    .addComponent(class_id_box))
+                    .addComponent(student_id_box))
                 .addGap(21, 21, 21)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(label2)
-                    .addComponent(epf_no_box))
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(21, 21, 21)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(label3)
-                            .addComponent(name_box))
-                        .addGap(21, 21, 21)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(label4)
-                            .addComponent(subject_box))
-                        .addGap(16, 16, 16))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton2)
-                        .addGap(10, 10, 10)
-                        .addComponent(jButton1)
-                        .addGap(18, 18, 18)))
+                    .addComponent(class_id_box))
+                .addGap(21, 21, 21)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(label5)
-                    .addComponent(batch_box))
-                .addGap(15, 15, 15)
+                    .addComponent(label3)
+                    .addComponent(student_name_box))
+                .addGap(21, 21, 21)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(label6)
-                    .addComponent(dat_time_box))
-                .addContainerGap(32, Short.MAX_VALUE))
+                    .addComponent(label16)
+                    .addComponent(birthday_box))
+                .addGap(21, 21, 21)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(label17)
+                    .addComponent(school_box))
+                .addGap(21, 21, 21)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(label18)
+                    .addComponent(nic_no_box))
+                .addGap(21, 21, 21)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(label19)
+                    .addComponent(gender_box))
+                .addGap(21, 21, 21)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(label20)
+                    .addComponent(address_box))
+                .addGap(21, 21, 21)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(label21)
+                    .addComponent(student_contact_no_box))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(label22)
+                    .addComponent(email_box))
+                .addGap(21, 21, 21)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(label23)
+                    .addComponent(parent_name_box))
+                .addGap(21, 21, 21)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(label24)
+                    .addComponent(parent_contact_no_box))
+                .addGap(21, 21, 21)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(label25)
+                    .addComponent(subject_stream_box))
+                .addGap(21, 21, 21)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(label26)
+                    .addComponent(subjects_box))
+                .addGap(21, 21, 21)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(label27)
+                    .addComponent(classes_box))
+                .addGap(19, 19, 19))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -250,21 +403,23 @@ public class ClassCard extends javax.swing.JPanel {
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(0, 0, 0)
+                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 704, Short.MAX_VALUE)
+            .addGap(0, 1193, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 247, Short.MAX_VALUE)
+            .addGap(0, 617, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -276,33 +431,29 @@ public class ClassCard extends javax.swing.JPanel {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
 
-          String epf_no = epf_no_box.getText();
-          String class_id = class_id_box.getText();
-          String teacher_name = name_box.getText();
-          String subject = subject_box.getText();
-          String batch = batch_box.getText();
-          String day_time = dat_time_box.getText();
-          
-          Update_Classes m1 = new Update_Classes(epf_no, class_id, teacher_name, subject, batch, day_time, parentPanel);
-          m1.setVisible(true);
+
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    public void delete_class(){
-    
-        String class_id = class_id_box.getText();
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    public void delete_class() {
+
+        String student_id = student_id_box.getText();
         int confirm = JOptionPane.showConfirmDialog(null, "Are you sure want to Delete?", "Delete", JOptionPane.YES_NO_OPTION);
 
         if (confirm == JOptionPane.YES_OPTION) {
             try {
 
-                String query = "DELETE FROM classes WHERE class_id = ?";
+                String query = "DELETE FROM students WHERE student_id = ?";
 
                 pst = conn.prepareStatement(query);
-                pst.setString(1, class_id);
+                pst.setString(1, student_id);
                 int result = pst.executeUpdate();
 
                 if (result > 0) {
-                    JOptionPane.showMessageDialog(null, "Class Deleted Successfully!");
+                    JOptionPane.showMessageDialog(null, "Student Deleted Successfully!");
                 }
 
                 if (parentPanel != null) {
@@ -313,27 +464,47 @@ public class ClassCard extends javax.swing.JPanel {
                 JOptionPane.showMessageDialog(null, e);
             }
         }
-        
+
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel batch_box;
+    private javax.swing.JLabel address_box;
+    private javax.swing.JLabel birthday_box;
     private javax.swing.JLabel class_id_box;
-    private javax.swing.JLabel dat_time_box;
-    private javax.swing.JLabel epf_no_box;
+    private javax.swing.JLabel classes_box;
+    private javax.swing.JLabel email_box;
+    private javax.swing.JLabel gender_box;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JLabel label1;
+    private javax.swing.JLabel label16;
+    private javax.swing.JLabel label17;
+    private javax.swing.JLabel label18;
+    private javax.swing.JLabel label19;
     private javax.swing.JLabel label2;
+    private javax.swing.JLabel label20;
+    private javax.swing.JLabel label21;
+    private javax.swing.JLabel label22;
+    private javax.swing.JLabel label23;
+    private javax.swing.JLabel label24;
+    private javax.swing.JLabel label25;
+    private javax.swing.JLabel label26;
+    private javax.swing.JLabel label27;
     private javax.swing.JLabel label3;
-    private javax.swing.JLabel label4;
-    private javax.swing.JLabel label5;
-    private javax.swing.JLabel label6;
-    private javax.swing.JLabel name_box;
-    private javax.swing.JLabel subject_box;
+    private javax.swing.JLabel nic_no_box;
+    private javax.swing.JLabel parent_contact_no_box;
+    private javax.swing.JLabel parent_name_box;
+    private javax.swing.JLabel qr_code_box;
+    private javax.swing.JLabel school_box;
+    private javax.swing.JLabel student_contact_no_box;
+    private javax.swing.JLabel student_id_box;
+    private javax.swing.JLabel student_name_box;
+    private javax.swing.JLabel subject_stream_box;
+    private javax.swing.JLabel subjects_box;
     // End of variables declaration//GEN-END:variables
 }
