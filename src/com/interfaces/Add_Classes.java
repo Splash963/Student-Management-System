@@ -71,13 +71,13 @@ public class Add_Classes extends javax.swing.JFrame {
         day_time_box = new javax.swing.JList<>();
         subject_box = new javax.swing.JComboBox<>();
         day_box = new javax.swing.JComboBox<>();
-        start_time_box = new javax.swing.JTextField();
-        finish_time_box = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
         jButton4 = new javax.swing.JButton();
         epf_no_box = new javax.swing.JLabel();
         time_1_box = new javax.swing.JComboBox<>();
         time_2_box = new javax.swing.JComboBox<>();
+        jSpinner1 = new javax.swing.JSpinner();
+        jSpinner2 = new javax.swing.JSpinner();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
@@ -192,19 +192,19 @@ public class Add_Classes extends javax.swing.JFrame {
                             .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 124, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                                 .addComponent(day_box, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(start_time_box, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(13, 13, 13)
+                                .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(time_1_box, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jLabel9)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(finish_time_box, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jSpinner2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(time_2_box, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -213,7 +213,7 @@ public class Add_Classes extends javax.swing.JFrame {
                             .addComponent(batch_box)
                             .addComponent(name_box)
                             .addComponent(jScrollPane1))
-                        .addGap(0, 11, Short.MAX_VALUE)))
+                        .addGap(0, 15, Short.MAX_VALUE)))
                 .addGap(18, 18, 18))
         );
         jPanel3Layout.setVerticalGroup(
@@ -242,12 +242,12 @@ public class Add_Classes extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(day_box)
-                        .addComponent(start_time_box, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(finish_time_box, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel9)
                         .addComponent(jButton4)
                         .addComponent(time_1_box, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(time_2_box, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(time_2_box, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jSpinner2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGap(5, 5, 5)))
@@ -326,27 +326,27 @@ public class Add_Classes extends javax.swing.JFrame {
     }//GEN-LAST:event_name_boxKeyPressed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        String day = day_box.getSelectedItem().toString();
-        String start_time = start_time_box.getText();
-        String time_1 = time_1_box.getSelectedItem().toString();
-        String finish_time = finish_time_box.getText();
-        String time_2 = time_2_box.getSelectedItem().toString();
-
-        String all_values = day + " " + start_time + " " + time_1 + " TO " + finish_time + " " + time_2;
-
-        if (!date_time.contains(all_values)) {
-            date_time.add(all_values);
-            
-            classes.addElement(all_values);
-
-            JOptionPane.showMessageDialog(this, all_values + " added to the list!");
-
-            start_time_box.setText("");
-            finish_time_box.setText("");
-
-        } else {
-            JOptionPane.showMessageDialog(this, "Date/Time already added.");
-        }
+//        String day = day_box.getSelectedItem().toString();
+//        String start_time = start_time_box.getText();
+//        String time_1 = time_1_box.getSelectedItem().toString();
+//        String finish_time = finish_time_box.getText();
+//        String time_2 = time_2_box.getSelectedItem().toString();
+//
+//        String all_values = day + " " + start_time + " " + time_1 + " TO " + finish_time + " " + time_2;
+//
+//        if (!date_time.contains(all_values)) {
+//            date_time.add(all_values);
+//            
+//            classes.addElement(all_values);
+//
+//            JOptionPane.showMessageDialog(this, all_values + " added to the list!");
+//
+//            start_time_box.setText("");
+//            finish_time_box.setText("");
+//
+//        } else {
+//            JOptionPane.showMessageDialog(this, "Date/Time already added.");
+//        }
     }//GEN-LAST:event_jButton4ActionPerformed
 
     public void get_teacher() {
@@ -441,9 +441,9 @@ public class Add_Classes extends javax.swing.JFrame {
         subject_box.removeAllItems();
         batch_box.setText("");
         day_box.removeAllItems();
-        start_time_box.setText("");
+        //start_time_box.setText("");
         time_1_box.removeAllItems();
-        finish_time_box.setText("");
+        //finish_time_box.setText("");
         time_2_box.removeAllItems();
         classes.removeAllElements();
         date_time.clear();
@@ -494,7 +494,6 @@ public class Add_Classes extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> day_box;
     private javax.swing.JList<String> day_time_box;
     private javax.swing.JLabel epf_no_box;
-    private javax.swing.JTextField finish_time_box;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
@@ -508,8 +507,9 @@ public class Add_Classes extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JSpinner jSpinner1;
+    private javax.swing.JSpinner jSpinner2;
     private javax.swing.JTextField name_box;
-    private javax.swing.JTextField start_time_box;
     private javax.swing.JComboBox<String> subject_box;
     private javax.swing.JComboBox<String> time_1_box;
     private javax.swing.JComboBox<String> time_2_box;
