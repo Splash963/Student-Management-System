@@ -130,11 +130,10 @@ public class Teachers extends javax.swing.JPanel {
                 String address = rs.getString("address");
                 String email = rs.getString("email");
                 String contact_no = rs.getString("contact_no");
-                String subject_stream = rs.getString("subject_stream");
                 String subjects = rs.getString("subjects");
 
                 // Aluth TeacherCard object ekak hadanna (Constructor ekata data yawanna)
-                TeacherCard card = new TeacherCard(efp_no, name, age, nic_no, address, email, contact_no, subject_stream, subjects, this);
+                TeacherCard card = new TeacherCard(efp_no, name, age, nic_no, address, email, contact_no, subjects, this);
 
                 // Main panel ekata card eka add karanna
                 mainPanel.add(card);

@@ -22,7 +22,7 @@ public class TeacherCard extends javax.swing.JPanel {
     FlatSVGIcon update_icon = new FlatSVGIcon("com/images/Update.svg", 30, 30);
     FlatSVGIcon delete_icon = new FlatSVGIcon("com/images/Delete.svg", 30, 30);
 
-    public TeacherCard(String epf_no, String name, String age, String nic_no, String address, String email, String contact_no, String subject_stream, String subjects, Teachers aThis) {
+    public TeacherCard(String epf_no, String name, String age, String nic_no, String address, String email, String contact_no, String subjects, Teachers aThis) {
         initComponents();
 
         conn = DbConnection.connect();
@@ -41,7 +41,6 @@ public class TeacherCard extends javax.swing.JPanel {
         address_box.setText(address);
         email_box.setText(email);
         contact_no_box.setText(contact_no);
-        subject_stream_box.setText(subject_stream);
         subjects_box.setText(subjects);
 
         this.parentPanel = aThis;
@@ -66,7 +65,6 @@ public class TeacherCard extends javax.swing.JPanel {
         label5 = new javax.swing.JLabel();
         label6 = new javax.swing.JLabel();
         label7 = new javax.swing.JLabel();
-        label8 = new javax.swing.JLabel();
         label9 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
@@ -77,7 +75,6 @@ public class TeacherCard extends javax.swing.JPanel {
         address_box = new javax.swing.JLabel();
         email_box = new javax.swing.JLabel();
         contact_no_box = new javax.swing.JLabel();
-        subject_stream_box = new javax.swing.JLabel();
         subjects_box = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(191, 201, 209));
@@ -131,10 +128,6 @@ public class TeacherCard extends javax.swing.JPanel {
         label7.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         label7.setText("Contact No");
 
-        label8.setForeground(new java.awt.Color(255, 255, 255));
-        label8.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        label8.setText("Subject Stream");
-
         label9.setForeground(new java.awt.Color(255, 255, 255));
         label9.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         label9.setText("Subjects");
@@ -182,9 +175,6 @@ public class TeacherCard extends javax.swing.JPanel {
         contact_no_box.setForeground(new java.awt.Color(255, 255, 255));
         contact_no_box.setText("jLabel2");
 
-        subject_stream_box.setForeground(new java.awt.Color(255, 255, 255));
-        subject_stream_box.setText("jLabel2");
-
         subjects_box.setForeground(new java.awt.Color(255, 255, 255));
         subjects_box.setText("jLabel2");
 
@@ -215,10 +205,6 @@ public class TeacherCard extends javax.swing.JPanel {
                                 .addComponent(label7, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(contact_no_box, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(label8, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(subject_stream_box, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(label9, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
@@ -275,11 +261,7 @@ public class TeacherCard extends javax.swing.JPanel {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(label7)
                     .addComponent(contact_no_box))
-                .addGap(21, 21, 21)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(label8)
-                    .addComponent(subject_stream_box))
-                .addGap(21, 21, 21)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(label9)
                     .addComponent(subjects_box))
@@ -314,11 +296,10 @@ public class TeacherCard extends javax.swing.JPanel {
         String address = address_box.getText();
         String email = email_box.getText();
         String contact_no = contact_no_box.getText();
-        String subject_stream = subject_stream_box.getText();
         String subjects = subjects_box.getText();
 
         // Update frame eka create karala data tika pass karanna
-        Update_Teachers m1 = new Update_Teachers(epf_no, name, age, nic_no, address, email, contact_no, subject_stream, subjects, parentPanel);
+        Update_Teachers m1 = new Update_Teachers(epf_no, name, age, nic_no, address, email, contact_no, subjects, parentPanel);
         m1.setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
 
@@ -369,11 +350,9 @@ public class TeacherCard extends javax.swing.JPanel {
     private javax.swing.JLabel label5;
     private javax.swing.JLabel label6;
     private javax.swing.JLabel label7;
-    private javax.swing.JLabel label8;
     private javax.swing.JLabel label9;
     private javax.swing.JLabel name_box;
     private javax.swing.JLabel nic_box;
-    private javax.swing.JLabel subject_stream_box;
     private javax.swing.JLabel subjects_box;
     // End of variables declaration//GEN-END:variables
 }

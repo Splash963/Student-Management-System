@@ -7,7 +7,13 @@ package com.interfaces;
 import com.connection.DbConnection;
 import com.formdev.flatlaf.extras.FlatSVGIcon;
 import java.sql.*;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import javax.swing.JOptionPane;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author Theekshana
@@ -15,32 +21,35 @@ import javax.swing.JOptionPane;
 public class ClassCard extends javax.swing.JPanel {
 
     Classes parentPanel;
-    
+
     Connection conn = null;
     PreparedStatement pst = null;
-    
+
     FlatSVGIcon update_icon = new FlatSVGIcon("com/images/Update.svg", 30, 30);
     FlatSVGIcon delete_icon = new FlatSVGIcon("com/images/Delete.svg", 30, 30);
-    
-    public ClassCard(String class_id, String epf_no, String teacher_name, String subject, String batch, String day_time, Classes aThis) {
+
+    public ClassCard(String class_id, String epf_no, String teacher_name, String subject, String batch, String day, String start_time, String end_time, Classes aThis) {
         initComponents();
-        
+
         conn = DbConnection.connect();
-        
+
         FlatSVGIcon myIcon = new FlatSVGIcon("com/images/Class.svg", 128, 90);
 
 // 2. Label ekata icon eka set karanna
         jLabel1.setIcon(myIcon);
-        
+
         class_id_box.setText(class_id);
         epf_no_box.setText(epf_no);
         name_box.setText(teacher_name);
         subject_box.setText(subject);
         batch_box.setText(batch);
-        dat_time_box.setText(day_time);
-        
+        dat_time_box.setText(day + " | " + "  " + start_time + "  " + "TO" + "  " + end_time);
+        day_box.setText(day);
+        start_time_box.setText(start_time);
+        end_time_box.setText(end_time);
+
         this.parentPanel = aThis;
-        
+
     }
 
     /**
@@ -70,6 +79,9 @@ public class ClassCard extends javax.swing.JPanel {
         subject_box = new javax.swing.JLabel();
         batch_box = new javax.swing.JLabel();
         dat_time_box = new javax.swing.JLabel();
+        day_box = new javax.swing.JLabel();
+        start_time_box = new javax.swing.JLabel();
+        end_time_box = new javax.swing.JLabel();
 
         jPanel1.setBackground(new java.awt.Color(191, 201, 209));
         jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -158,6 +170,15 @@ public class ClassCard extends javax.swing.JPanel {
         dat_time_box.setForeground(new java.awt.Color(255, 255, 255));
         dat_time_box.setText("jLabel2");
 
+        day_box.setText("jLabel2");
+        day_box.setVisible(false);
+
+        start_time_box.setText("jLabel2");
+        start_time_box.setVisible(false);
+
+        end_time_box.setText("jLabel2");
+        end_time_box.setVisible(false);
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -196,10 +217,17 @@ public class ClassCard extends javax.swing.JPanel {
                                 .addGap(18, 18, 18)
                                 .addComponent(name_box, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton1)
-                            .addComponent(jButton2))
-                        .addGap(10, 10, 10))))
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(10, 10, 10))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(day_box)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(start_time_box)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(end_time_box)
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -236,7 +264,12 @@ public class ClassCard extends javax.swing.JPanel {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(label6)
                     .addComponent(dat_time_box))
-                .addContainerGap(32, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(day_box)
+                    .addComponent(start_time_box)
+                    .addComponent(end_time_box))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -250,7 +283,7 @@ public class ClassCard extends javax.swing.JPanel {
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 291, Short.MAX_VALUE)
             .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
@@ -264,7 +297,7 @@ public class ClassCard extends javax.swing.JPanel {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 247, Short.MAX_VALUE)
+            .addGap(0, 295, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -276,19 +309,38 @@ public class ClassCard extends javax.swing.JPanel {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
 
-          String epf_no = epf_no_box.getText();
-          String class_id = class_id_box.getText();
-          String teacher_name = name_box.getText();
-          String subject = subject_box.getText();
-          String batch = batch_box.getText();
-          String day_time = dat_time_box.getText();
-          
-          Update_Classes m1 = new Update_Classes(epf_no, class_id, teacher_name, subject, batch, day_time, parentPanel);
-          m1.setVisible(true);
+        try {
+
+            String epf_no = epf_no_box.getText();
+            String class_id = class_id_box.getText();
+            String teacher_name = name_box.getText();
+            String subject = subject_box.getText();
+            String batch = batch_box.getText();
+            String day = day_box.getText();
+
+            Date startTime = null;
+            Date endTime = null;
+
+            SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
+
+            String start_time = start_time_box.getText();
+            String end_time = end_time_box.getText();
+
+            try {
+                startTime = sdf.parse(start_time);
+                endTime = sdf.parse(end_time);
+            } catch (Exception e) {
+            }
+
+            Update_Classes m1 = new Update_Classes(epf_no, class_id, teacher_name, subject, batch, day, startTime, endTime, parentPanel);
+            m1.setVisible(true);
+        } catch (ParseException ex) {
+            Logger.getLogger(ClassCard.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    public void delete_class(){
-    
+    public void delete_class() {
+
         String class_id = class_id_box.getText();
         int confirm = JOptionPane.showConfirmDialog(null, "Are you sure want to Delete?", "Delete", JOptionPane.YES_NO_OPTION);
 
@@ -313,13 +365,15 @@ public class ClassCard extends javax.swing.JPanel {
                 JOptionPane.showMessageDialog(null, e);
             }
         }
-        
+
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel batch_box;
     private javax.swing.JLabel class_id_box;
     private javax.swing.JLabel dat_time_box;
+    private javax.swing.JLabel day_box;
+    private javax.swing.JLabel end_time_box;
     private javax.swing.JLabel epf_no_box;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
@@ -334,6 +388,7 @@ public class ClassCard extends javax.swing.JPanel {
     private javax.swing.JLabel label5;
     private javax.swing.JLabel label6;
     private javax.swing.JLabel name_box;
+    private javax.swing.JLabel start_time_box;
     private javax.swing.JLabel subject_box;
     // End of variables declaration//GEN-END:variables
 }
