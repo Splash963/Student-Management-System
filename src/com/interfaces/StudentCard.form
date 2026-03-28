@@ -24,7 +24,7 @@
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <EmptySpace min="0" pref="617" max="32767" attributes="0"/>
+          <EmptySpace min="0" pref="630" max="32767" attributes="0"/>
           <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
               <Component id="jPanel1" alignment="0" max="32767" attributes="0"/>
           </Group>
@@ -68,14 +68,14 @@
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <Component id="jLabel1" min="-2" pref="198" max="-2" attributes="0"/>
+                      <Component id="jLabel1" min="-2" pref="264" max="-2" attributes="0"/>
                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jLabel1" alignment="0" pref="613" max="32767" attributes="0"/>
+                  <Component id="jLabel1" alignment="0" pref="626" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
           </Layout>
@@ -103,7 +103,6 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                          <Component id="label2" alignment="0" max="32767" attributes="0"/>
                           <Component id="label1" alignment="0" max="32767" attributes="0"/>
                           <Component id="label3" max="32767" attributes="0"/>
                           <Component id="label16" max="32767" attributes="0"/>
@@ -117,11 +116,10 @@
                           <Component id="label24" pref="198" max="32767" attributes="0"/>
                           <Component id="label25" pref="198" max="32767" attributes="0"/>
                           <Component id="label26" pref="198" max="32767" attributes="0"/>
-                          <Component id="label27" pref="198" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="1" attributes="0">
-                          <Component id="birthday_box" alignment="1" pref="409" max="32767" attributes="0"/>
+                          <Component id="birthday_box" alignment="1" pref="303" max="32767" attributes="0"/>
                           <Component id="school_box" alignment="1" max="32767" attributes="0"/>
                           <Component id="nic_no_box" alignment="1" max="32767" attributes="0"/>
                           <Component id="gender_box" alignment="1" max="32767" attributes="0"/>
@@ -132,8 +130,6 @@
                           <Component id="parent_contact_no_box" alignment="1" max="32767" attributes="0"/>
                           <Component id="subject_stream_box" alignment="1" max="32767" attributes="0"/>
                           <Component id="subjects_box" alignment="1" max="32767" attributes="0"/>
-                          <Component id="classes_box" alignment="1" max="32767" attributes="0"/>
-                          <Component id="class_id_box" alignment="1" max="32767" attributes="0"/>
                           <Component id="student_name_box" alignment="1" max="32767" attributes="0"/>
                           <Component id="student_id_box" alignment="0" max="32767" attributes="0"/>
                       </Group>
@@ -142,8 +138,9 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
                               <Component id="jButton3" alignment="0" max="32767" attributes="0"/>
-                              <Component id="jButton2" alignment="0" max="32767" attributes="0"/>
                               <Component id="jButton1" alignment="0" max="32767" attributes="0"/>
+                              <Component id="jButton4" alignment="0" max="32767" attributes="0"/>
+                              <Component id="jButton2" alignment="0" max="32767" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -156,30 +153,13 @@
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
-                      <EmptySpace min="-2" pref="131" max="-2" attributes="0"/>
-                      <Component id="profile_image_path" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="115" max="-2" attributes="0"/>
-                      <Component id="jButton2" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jButton3" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
-                      <Component id="jButton1" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="32767" attributes="0"/>
-                  </Group>
-                  <Component id="qr_code_box" alignment="0" max="32767" attributes="0"/>
                   <Group type="102" alignment="1" attributes="0">
-                      <EmptySpace max="32767" attributes="0"/>
+                      <EmptySpace pref="46" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="label1" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="student_id_box" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="label2" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="class_id_box" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="label3" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="student_name_box" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -239,13 +219,22 @@
                           <Component id="label26" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="subjects_box" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="label27" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="classes_box" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="100" max="-2" attributes="0"/>
                   </Group>
+                  <Group type="102" attributes="0">
+                      <EmptySpace min="-2" pref="131" max="-2" attributes="0"/>
+                      <Component id="profile_image_path" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="103" max="-2" attributes="0"/>
+                      <Component id="jButton3" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="jButton2" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="jButton4" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
+                      <Component id="jButton1" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
+                  </Group>
+                  <Component id="qr_code_box" alignment="0" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
           </Layout>
@@ -257,15 +246,6 @@
                 </Property>
                 <Property name="horizontalAlignment" type="int" value="4"/>
                 <Property name="text" type="java.lang.String" value="Student ID"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JLabel" name="label2">
-              <Properties>
-                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
-                </Property>
-                <Property name="horizontalAlignment" type="int" value="4"/>
-                <Property name="text" type="java.lang.String" value="Class ID"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="label3">
@@ -305,7 +285,7 @@
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="0" green="0" red="0" type="rgb"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Print"/>
+                <Property name="text" type="java.lang.String" value="Print" postCode="jButton2.setIcon(print_icon);"/>
                 <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
                   <Color id="Hand Cursor"/>
                 </Property>
@@ -313,14 +293,6 @@
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton2ActionPerformed"/>
               </Events>
-            </Component>
-            <Component class="javax.swing.JLabel" name="class_id_box">
-              <Properties>
-                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
-                </Property>
-                <Property name="text" type="java.lang.String" value="jLabel2"/>
-              </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="student_name_box">
               <Properties>
@@ -517,23 +489,6 @@
                 <Property name="text" type="java.lang.String" value="Subjects"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="classes_box">
-              <Properties>
-                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
-                </Property>
-                <Property name="text" type="java.lang.String" value="jLabel2"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JLabel" name="label27">
-              <Properties>
-                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
-                </Property>
-                <Property name="horizontalAlignment" type="int" value="4"/>
-                <Property name="text" type="java.lang.String" value="Classes"/>
-              </Properties>
-            </Component>
             <Component class="javax.swing.JLabel" name="student_id_box">
               <Properties>
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
@@ -551,12 +506,12 @@
             <Component class="javax.swing.JButton" name="jButton3">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="3f" green="b3" red="ff" type="rgb"/>
+                  <Color blue="f2" green="f2" red="f5" type="rgb"/>
                 </Property>
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="0" green="0" red="0" type="rgb"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Update" postCode="jButton3.setIcon(update_icon);"/>
+                <Property name="text" type="java.lang.String" value="Add Subjects" postCode="jButton3.setIcon(add_icon);"/>
                 <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
                   <Color id="Hand Cursor"/>
                 </Property>
@@ -572,6 +527,23 @@
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="profile_image_path.setVisible(false);"/>
               </AuxValues>
+            </Component>
+            <Component class="javax.swing.JButton" name="jButton4">
+              <Properties>
+                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="3f" green="b3" red="ff" type="rgb"/>
+                </Property>
+                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="0" green="0" red="0" type="rgb"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="Update" postCode="jButton4.setIcon(update_icon);"/>
+                <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+                  <Color id="Hand Cursor"/>
+                </Property>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton4ActionPerformed"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>

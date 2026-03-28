@@ -26,6 +26,7 @@ import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 import java.io.FileOutputStream;
 import java.sql.*;
+import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
@@ -37,13 +38,14 @@ public class StudentCard extends javax.swing.JPanel {
 
     Connection conn = null;
     PreparedStatement pst = null;
-
     Students parentPanel;
 
     FlatSVGIcon update_icon = new FlatSVGIcon("com/images/Update.svg", 30, 30);
     FlatSVGIcon delete_icon = new FlatSVGIcon("com/images/Delete.svg", 30, 30);
+    FlatSVGIcon print_icon = new FlatSVGIcon("com/images/Print.svg", 30, 30);
+    FlatSVGIcon add_icon = new FlatSVGIcon("com/images/Add.svg", 30, 30);
 
-    public StudentCard(String student_id, String class_id, String name, String birthday, String school, String nic_no, String gender, String address, String student_contact_no, String email, String parent_name, String parent_contact_no, String subject_stream, String subjects, String classes, String profile_picture, byte[] qr_code, Students aThis) {
+    public StudentCard(String student_id, String name, String birthday, String school, String nic_no, String gender, String address, String student_contact_no, String email, String parent_name, String parent_contact_no, String subject_stream, String profile_picture, byte[] qr_code, ArrayList<String> subjectList, Students aThis) {
         initComponents();
 
         conn = DbConnection.connect();
@@ -61,7 +63,6 @@ public class StudentCard extends javax.swing.JPanel {
 // 2. Label ekata icon eka set karanna
         profile_image_path.setText(profile_picture);
         student_id_box.setText(student_id);
-        class_id_box.setText(class_id);
         student_name_box.setText(name);
         birthday_box.setText(birthday);
         school_box.setText(school);
@@ -73,8 +74,7 @@ public class StudentCard extends javax.swing.JPanel {
         parent_name_box.setText(parent_name);
         parent_contact_no_box.setText(parent_contact_no);
         subject_stream_box.setText(subject_stream);
-        subjects_box.setText(subjects);
-        classes_box.setText(classes);
+        subjects_box.setText("<html><body style='width: 300px;'>" + String.join("<br/>", subjectList) + "</body></html>");
 
         if (qr_code != null) {
             ImageIcon qr_image = new ImageIcon(qr_code);
@@ -92,6 +92,8 @@ public class StudentCard extends javax.swing.JPanel {
         return MatrixToImageWriter.toBufferedImage(bitMatrix);
     }
 
+    
+    //Print Student ID
     public void Print_Card() {
         try {
             String home = System.getProperty("user.home");
@@ -107,7 +109,7 @@ public class StudentCard extends javax.swing.JPanel {
             headerTable.setWidthPercentage(100);
             PdfPCell titleCell = new PdfPCell(new Phrase("Student ID Card",
                     FontFactory.getFont(FontFactory.HELVETICA_BOLD, 11, Font.NORMAL, BaseColor.WHITE)));
-            titleCell.setBackgroundColor(new BaseColor(34, 49, 63));
+            titleCell.setBackgroundColor(new BaseColor(11, 45, 114));
             titleCell.setBorder(Rectangle.NO_BORDER);
             titleCell.setHorizontalAlignment(Element.ALIGN_CENTER);
             titleCell.setVerticalAlignment(Element.ALIGN_MIDDLE);
@@ -148,8 +150,8 @@ public class StudentCard extends javax.swing.JPanel {
             // --- Right Side: QR & Details ---
             PdfPTable rightSideTable = new PdfPTable(1);
 
-            // QR Code - High Quality (500x500)
-            BufferedImage qrImage = generateQRCode(nic_no_box.getText(), 500, 500);
+            // QR Code - High Quality (600x600)
+            BufferedImage qrImage = generateQRCode(nic_no_box.getText(), 600, 600);
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
             javax.imageio.ImageIO.write(qrImage, "png", baos);
             Image pdfQrImage = Image.getInstance(baos.toByteArray());
@@ -170,8 +172,8 @@ public class StudentCard extends javax.swing.JPanel {
             Font fNorm = FontFactory.getFont(FontFactory.HELVETICA, 6);
 
             addDetailRow(detailsTable, "Name", ": " + student_name_box.getText(), fBold, fNorm);
-            addDetailRow(detailsTable, "NIC", ": " + nic_no_box.getText(), fBold, fNorm);
             addDetailRow(detailsTable, "Subject", ": " + subject_stream_box.getText(), fBold, fNorm);
+            addDetailRow(detailsTable, "Contact No", ": " + student_contact_no_box.getText(), fBold, fNorm);
 
             PdfPCell detailsCellContainer = new PdfPCell(detailsTable);
             detailsCellContainer.setBorder(Rectangle.NO_BORDER);
@@ -188,7 +190,7 @@ public class StudentCard extends javax.swing.JPanel {
             String footerText = "www.gurumandala.lk | 077 775 8004 | 076 747 3738";
             PdfPCell footerCell = new PdfPCell(new Phrase(footerText,
                     FontFactory.getFont(FontFactory.HELVETICA, 6, Font.NORMAL, BaseColor.WHITE)));
-            footerCell.setBackgroundColor(new BaseColor(214, 48, 49));
+            footerCell.setBackgroundColor(new BaseColor(11, 45, 114));
             footerCell.setBorder(Rectangle.NO_BORDER);
             footerCell.setHorizontalAlignment(Element.ALIGN_CENTER);
             footerCell.setPadding(4);
@@ -229,11 +231,9 @@ public class StudentCard extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         label1 = new javax.swing.JLabel();
-        label2 = new javax.swing.JLabel();
         label3 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        class_id_box = new javax.swing.JLabel();
         student_name_box = new javax.swing.JLabel();
         label16 = new javax.swing.JLabel();
         birthday_box = new javax.swing.JLabel();
@@ -257,12 +257,11 @@ public class StudentCard extends javax.swing.JPanel {
         label25 = new javax.swing.JLabel();
         subjects_box = new javax.swing.JLabel();
         label26 = new javax.swing.JLabel();
-        classes_box = new javax.swing.JLabel();
-        label27 = new javax.swing.JLabel();
         student_id_box = new javax.swing.JLabel();
         qr_code_box = new javax.swing.JLabel();
         jButton3 = new javax.swing.JButton();
         profile_image_path = new javax.swing.JLabel();
+        jButton4 = new javax.swing.JButton();
 
         jPanel1.setBackground(new java.awt.Color(191, 201, 209));
         jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -275,12 +274,12 @@ public class StudentCard extends javax.swing.JPanel {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 613, Short.MAX_VALUE)
+            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 626, Short.MAX_VALUE)
         );
 
         jPanel3.setBackground(new java.awt.Color(28, 77, 141));
@@ -288,10 +287,6 @@ public class StudentCard extends javax.swing.JPanel {
         label1.setForeground(new java.awt.Color(255, 255, 255));
         label1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         label1.setText("Student ID");
-
-        label2.setForeground(new java.awt.Color(255, 255, 255));
-        label2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        label2.setText("Class ID");
 
         label3.setForeground(new java.awt.Color(255, 255, 255));
         label3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
@@ -311,15 +306,13 @@ public class StudentCard extends javax.swing.JPanel {
         jButton2.setBackground(new java.awt.Color(168, 223, 142));
         jButton2.setForeground(new java.awt.Color(0, 0, 0));
         jButton2.setText("Print");
+        jButton2.setIcon(print_icon);
         jButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
             }
         });
-
-        class_id_box.setForeground(new java.awt.Color(255, 255, 255));
-        class_id_box.setText("jLabel2");
 
         student_name_box.setForeground(new java.awt.Color(255, 255, 255));
         student_name_box.setText("jLabel2");
@@ -401,23 +394,16 @@ public class StudentCard extends javax.swing.JPanel {
         label26.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         label26.setText("Subjects");
 
-        classes_box.setForeground(new java.awt.Color(255, 255, 255));
-        classes_box.setText("jLabel2");
-
-        label27.setForeground(new java.awt.Color(255, 255, 255));
-        label27.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        label27.setText("Classes");
-
         student_id_box.setForeground(new java.awt.Color(255, 255, 255));
         student_id_box.setText("jLabel2");
 
         qr_code_box.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         qr_code_box.setText("jLabel2");
 
-        jButton3.setBackground(new java.awt.Color(255, 179, 63));
+        jButton3.setBackground(new java.awt.Color(245, 242, 242));
         jButton3.setForeground(new java.awt.Color(0, 0, 0));
-        jButton3.setText("Update");
-        jButton3.setIcon(update_icon);
+        jButton3.setText("Add Subjects");
+        jButton3.setIcon(add_icon);
         jButton3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -428,6 +414,17 @@ public class StudentCard extends javax.swing.JPanel {
         profile_image_path.setText("jLabel2");
         profile_image_path.setVisible(false);
 
+        jButton4.setBackground(new java.awt.Color(255, 179, 63));
+        jButton4.setForeground(new java.awt.Color(0, 0, 0));
+        jButton4.setText("Update");
+        jButton4.setIcon(update_icon);
+        jButton4.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -435,7 +432,6 @@ public class StudentCard extends javax.swing.JPanel {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(label2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(label1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(label3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(label16, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -448,11 +444,10 @@ public class StudentCard extends javax.swing.JPanel {
                     .addComponent(label23, javax.swing.GroupLayout.DEFAULT_SIZE, 198, Short.MAX_VALUE)
                     .addComponent(label24, javax.swing.GroupLayout.DEFAULT_SIZE, 198, Short.MAX_VALUE)
                     .addComponent(label25, javax.swing.GroupLayout.DEFAULT_SIZE, 198, Short.MAX_VALUE)
-                    .addComponent(label26, javax.swing.GroupLayout.DEFAULT_SIZE, 198, Short.MAX_VALUE)
-                    .addComponent(label27, javax.swing.GroupLayout.DEFAULT_SIZE, 198, Short.MAX_VALUE))
+                    .addComponent(label26, javax.swing.GroupLayout.DEFAULT_SIZE, 198, Short.MAX_VALUE))
                 .addGap(40, 40, 40)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(birthday_box, javax.swing.GroupLayout.DEFAULT_SIZE, 409, Short.MAX_VALUE)
+                    .addComponent(birthday_box, javax.swing.GroupLayout.DEFAULT_SIZE, 303, Short.MAX_VALUE)
                     .addComponent(school_box, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(nic_no_box, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(gender_box, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -463,8 +458,6 @@ public class StudentCard extends javax.swing.JPanel {
                     .addComponent(parent_contact_no_box, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(subject_stream_box, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(subjects_box, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(classes_box, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(class_id_box, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(student_name_box, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(student_id_box, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(0, 0, 0)
@@ -472,8 +465,9 @@ public class StudentCard extends javax.swing.JPanel {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(18, 18, 18)
                         .addComponent(profile_image_path)))
@@ -481,27 +475,12 @@ public class StudentCard extends javax.swing.JPanel {
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(131, 131, 131)
-                .addComponent(profile_image_path)
-                .addGap(115, 115, 115)
-                .addComponent(jButton2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton3)
-                .addGap(10, 10, 10)
-                .addComponent(jButton1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addComponent(qr_code_box, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(46, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(label1)
                     .addComponent(student_id_box))
-                .addGap(21, 21, 21)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(label2)
-                    .addComponent(class_id_box))
-                .addGap(21, 21, 21)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(label3)
                     .addComponent(student_name_box))
@@ -549,11 +528,20 @@ public class StudentCard extends javax.swing.JPanel {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(label26)
                     .addComponent(subjects_box))
-                .addGap(21, 21, 21)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(label27)
-                    .addComponent(classes_box))
-                .addGap(19, 19, 19))
+                .addGap(100, 100, 100))
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(131, 131, 131)
+                .addComponent(profile_image_path)
+                .addGap(103, 103, 103)
+                .addComponent(jButton3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButton2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButton4)
+                .addGap(10, 10, 10)
+                .addComponent(jButton1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(qr_code_box, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -581,7 +569,7 @@ public class StudentCard extends javax.swing.JPanel {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 617, Short.MAX_VALUE)
+            .addGap(0, 630, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -597,8 +585,16 @@ public class StudentCard extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
+        String student_id = student_id_box.getText();
+        String subject_stream = subject_stream_box.getText();
+        
+        Add_Subjects m1 = new Add_Subjects(student_id, subject_stream, parentPanel);
+        m1.setVisible(true);
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton4ActionPerformed
 
     public void delete_class() {
 
@@ -632,13 +628,12 @@ public class StudentCard extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel address_box;
     private javax.swing.JLabel birthday_box;
-    private javax.swing.JLabel class_id_box;
-    private javax.swing.JLabel classes_box;
     private javax.swing.JLabel email_box;
     private javax.swing.JLabel gender_box;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
@@ -648,7 +643,6 @@ public class StudentCard extends javax.swing.JPanel {
     private javax.swing.JLabel label17;
     private javax.swing.JLabel label18;
     private javax.swing.JLabel label19;
-    private javax.swing.JLabel label2;
     private javax.swing.JLabel label20;
     private javax.swing.JLabel label21;
     private javax.swing.JLabel label22;
@@ -656,7 +650,6 @@ public class StudentCard extends javax.swing.JPanel {
     private javax.swing.JLabel label24;
     private javax.swing.JLabel label25;
     private javax.swing.JLabel label26;
-    private javax.swing.JLabel label27;
     private javax.swing.JLabel label3;
     private javax.swing.JLabel nic_no_box;
     private javax.swing.JLabel parent_contact_no_box;

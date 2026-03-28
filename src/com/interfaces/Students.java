@@ -7,6 +7,7 @@ package com.interfaces;
 import com.connection.DbConnection;
 import java.awt.Dimension;
 import java.sql.*;
+import java.util.ArrayList;
 import javax.swing.Box;
 import javax.swing.ImageIcon;
 
@@ -115,8 +116,8 @@ public class Students extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     public void view_data() {
-
         try {
+            // 1. Mulu student list ekama gannawa
             String sql = "SELECT * FROM students";
             pst = conn.prepareStatement(sql);
             rs = pst.executeQuery();
@@ -124,9 +125,8 @@ public class Students extends javax.swing.JPanel {
             mainPanel.removeAll();
 
             while (rs.next()) {
-                // Teacher ge details rs eken ganna
+                // Student details rs eken ganna
                 String student_id = rs.getString("student_id");
-                String class_id = rs.getString("class_id");
                 String name = rs.getString("name");
                 String birthday = rs.getString("birthday");
                 String school = rs.getString("school");
@@ -138,29 +138,52 @@ public class Students extends javax.swing.JPanel {
                 String parent_name = rs.getString("parent_name");
                 String parent_contact_no = rs.getString("parent_contact_no");
                 String subject_stream = rs.getString("subject_stream");
-                String subjects = rs.getString("subjects");
-                String classes = rs.getString("classes");
                 String profile_picture = rs.getString("profile_picture");
                 byte[] qr_code = rs.getBytes("qr_code");
 
-                
-                StudentCard card = new StudentCard(student_id, class_id, name, birthday, school, nic_no, gender, address, student_contact_no, email, parent_name, parent_contact_no, subject_stream, subjects, classes, profile_picture, qr_code, this);
+                // --- Aluth Classes details ganna kote ---
+                ArrayList<String> subjectList = new ArrayList<>();
 
-                // Main panel ekata card eka add karanna
+                // Me query eken students_classes saha classes table dekama join karanawa
+                String subjectSql = "SELECT c.subject, c.day, c.start_time, c.end_time "
+                        + "FROM students_classes sc "
+                        + "INNER JOIN classes c ON sc.class_id = c.class_id "
+                        + "WHERE sc.student_id = ?";
+
+                PreparedStatement pstSubjects = conn.prepareStatement(subjectSql);
+                pstSubjects.setString(1, student_id);
+                ResultSet rsSubjects = pstSubjects.executeQuery();
+
+                while (rsSubjects.next()) {
+                    // Subject eka saha welaawa ekata ekathu karala list ekata danawa
+                    String info = rsSubjects.getString("subject") + " (" + rsSubjects.getString("day") + " | " + " " + rsSubjects.getString("start_time") + " To " + rsSubjects.getString("end_time") +")";
+                    subjectList.add(info);
+                }
+
+                // Result sets close kirima (Memory management)
+                rsSubjects.close();
+                pstSubjects.close();
+                // ---------------------------------------
+
+                // Dan me 'subjectList' eka StudentCard ekata pass karanna
+                // Note: Oyage StudentCard class eke anthima parameter eka ArrayList<String> wenna ona
+                StudentCard card = new StudentCard(
+                        student_id, name, birthday, school, nic_no, gender, address,
+                        student_contact_no, email, parent_name, parent_contact_no,
+                        subject_stream, profile_picture, qr_code, subjectList, this
+                );
+
                 mainPanel.add(card);
-
-                // Cards athara ida thiyanna (Spacing)
                 mainPanel.add(Box.createRigidArea(new Dimension(0, 10)));
             }
 
             mainPanel.revalidate();
             mainPanel.repaint();
-
-            jScrollPane1.getVerticalScrollBar().setUnitIncrement(20);
+            jScrollPane1.getVerticalScrollBar().setUnitIncrement(30);
 
         } catch (Exception e) {
+            e.printStackTrace(); // Error ekak awoth console eke balaganna
         }
-
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
