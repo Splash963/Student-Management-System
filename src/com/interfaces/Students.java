@@ -145,7 +145,7 @@ public class Students extends javax.swing.JPanel {
                 ArrayList<String> subjectList = new ArrayList<>();
 
                 // Me query eken students_classes saha classes table dekama join karanawa
-                String subjectSql = "SELECT c.subject, c.day_time "
+                String subjectSql = "SELECT c.subject, c.day, c.start_time, c.end_time "
                         + "FROM students_classes sc "
                         + "INNER JOIN classes c ON sc.class_id = c.class_id "
                         + "WHERE sc.student_id = ?";
@@ -156,7 +156,7 @@ public class Students extends javax.swing.JPanel {
 
                 while (rsSubjects.next()) {
                     // Subject eka saha welaawa ekata ekathu karala list ekata danawa
-                    String info = rsSubjects.getString("subject") + " (" + rsSubjects.getString("day_time") + ")";
+                    String info = rsSubjects.getString("subject") + " (" + rsSubjects.getString("day") + " | " + " " + rsSubjects.getString("start_time") + " To " + rsSubjects.getString("end_time") +")";
                     subjectList.add(info);
                 }
 

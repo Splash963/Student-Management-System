@@ -25,7 +25,7 @@ public class Update_Teachers extends javax.swing.JFrame {
     Connection conn = null;
     PreparedStatement pst = null;
 
-    public Update_Teachers(String epf_no, String name, String age, String nic_no, String address, String email, String contact_no, String subject_stream, String subjects, Teachers aThis) {
+    public Update_Teachers(String epf_no, String name, String age, String nic_no, String address, String email, String contact_no, String subjects, Teachers aThis) {
         initComponents();
         conn = DbConnection.connect();
 
@@ -38,18 +38,6 @@ public class Update_Teachers extends javax.swing.JFrame {
         address_box.setText(address);
         email_box.setText(email);
         contact_no_box.setText(contact_no);
-
-        if (subject_stream.equals("Maths")) {
-            maths.setSelected(true);
-        } else if (subject_stream.equals("Bio")) {
-            bio.setSelected(true);
-        } else if (subject_stream.equals("Commerce")) {
-            commerce.setSelected(true);
-        } else if (subject_stream.equals("Arts")) {
-            arts.setSelected(true);
-        } else if (subject_stream.equals("Technology")) {
-            tec.setSelected(true);
-        }
 
         // Constructor eka athule subjects set karana thanata meka danna
         if (subjects != null && !subjects.isEmpty()) {
@@ -476,7 +464,7 @@ public class Update_Teachers extends javax.swing.JFrame {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         selectedSubjects.clear(); // ArrayList එක clear කරනවා
         listModel.removeAllElements(); // JList එක clear කරනවා
-        subject_box.setSelectedIndex(0); // Combo box එක reset කරනවා
+        //subject_box.setSelectedIndex(1); // Combo box එක reset කරනවා
         JOptionPane.showMessageDialog(this, "List has been reset.");
     }//GEN-LAST:event_jButton3ActionPerformed
 
@@ -489,24 +477,11 @@ public class Update_Teachers extends javax.swing.JFrame {
         String address = address_box.getText();
         String email = email_box.getText();
         String contact_no = contact_no_box.getText();
-        String subject_stream = "";
         String subjectsToStore = String.join(", ", selectedSubjects);
-
-        if (maths.isSelected()) {
-            subject_stream = "Maths";
-        } else if (bio.isSelected()) {
-            subject_stream = "Bio";
-        } else if (commerce.isSelected()) {
-            subject_stream = "Commerce";
-        } else if (arts.isSelected()) {
-            subject_stream = "Arts";
-        } else if (tec.isSelected()) {
-            subject_stream = "Technology";
-        }
 
         try {
 
-            String query = "UPDATE teachers SET name = ?, age = ?, nic_no = ?, address = ?, email = ?, contact_no = ?, subject_stream = ?, subjects = ? WHERE epf_no = ?";
+            String query = "UPDATE teachers SET name = ?, age = ?, nic_no = ?, address = ?, email = ?, contact_no = ?, subjects = ? WHERE epf_no = ?";
 
             pst = conn.prepareStatement(query);
 
@@ -516,9 +491,8 @@ public class Update_Teachers extends javax.swing.JFrame {
             pst.setString(4, address);
             pst.setString(5, email);
             pst.setString(6, contact_no);
-            pst.setString(7, subject_stream);
-            pst.setString(8, subjectsToStore);
-            pst.setInt(9, emp_no);
+            pst.setString(7, subjectsToStore);
+            pst.setInt(8, emp_no);
 
             pst.execute();
 
