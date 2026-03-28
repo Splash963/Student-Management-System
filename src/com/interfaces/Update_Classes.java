@@ -5,11 +5,14 @@
 package com.interfaces;
 
 import com.connection.DbConnection;
+import com.formdev.flatlaf.extras.FlatSVGIcon;
 import java.sql.*;
-import java.util.ArrayList;
-import javax.swing.DefaultListModel;
+import java.text.ParseException;
 import javax.swing.JOptionPane;
-
+import javax.swing.JSpinner;
+import javax.swing.SpinnerDateModel;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 /**
  *
  * @author theekshana
@@ -20,14 +23,21 @@ public class Update_Classes extends javax.swing.JFrame {
     PreparedStatement pst;
     ResultSet rs = null;
 
-    ArrayList<String> date_time = new ArrayList<>();
-    DefaultListModel<String> classes = new DefaultListModel<>();
-
     Classes parentPanel;
 
-    public Update_Classes(String epf_no, String class_id, String teacher_name, String subject, String batch, String day_time, Classes aThis) {
-        initComponents();
+    public Update_Classes(String epf_no, String class_id, String teacher_name, String subject, String batch, String day, Date startTime, Date endTime, Classes aThis) throws ParseException {
+        initComponents();        
 
+        SpinnerDateModel model1 = new SpinnerDateModel();
+        start_time_box.setModel(model1);
+        JSpinner.DateEditor editor1 = new JSpinner.DateEditor(start_time_box, "HH:mm:ss");
+        start_time_box.setEditor(editor1);
+
+        SpinnerDateModel model2 = new SpinnerDateModel();
+        end_time_box.setModel(model2);
+        JSpinner.DateEditor editor2 = new JSpinner.DateEditor(end_time_box, "HH:mm:ss");
+        end_time_box.setEditor(editor2);
+        
         conn = DbConnection.connect();
 
         epf_no_box.setText(epf_no);
@@ -35,13 +45,15 @@ public class Update_Classes extends javax.swing.JFrame {
         name_box.setText(teacher_name);
         subject_box.addItem(subject);
         batch_box.setText(batch);
-        date_time.add(day_time);
+        day_box.setSelectedItem(day);
+        
+        start_time_box.setValue(startTime);
+        end_time_box.setValue(endTime);
 
-        day_time_box.setModel(classes);
-
-        String day_time_value = String.join("", date_time);
-
-        classes.addElement(day_time_value);
+        
+        FlatSVGIcon myIcon = new FlatSVGIcon("com/images/Class.svg", 128, 90);
+        
+        jLabel1.setIcon(myIcon);
         
         this.parentPanel = aThis;
     }
@@ -66,20 +78,15 @@ public class Update_Classes extends javax.swing.JFrame {
         name_box = new javax.swing.JTextField();
         batch_box = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
-        jLabel4 = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        day_time_box = new javax.swing.JList<>();
         subject_box = new javax.swing.JComboBox<>();
         day_box = new javax.swing.JComboBox<>();
-        start_time_box = new javax.swing.JTextField();
-        finish_time_box = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
-        add_button = new javax.swing.JButton();
-        time_1_box = new javax.swing.JComboBox<>();
-        time_2_box = new javax.swing.JComboBox<>();
         class_id_box = new javax.swing.JLabel();
         epf_no_box = new javax.swing.JLabel();
-        remove_button = new javax.swing.JButton();
+        start_time_box = new javax.swing.JSpinner();
+        end_time_box = new javax.swing.JSpinner();
+        jPanel4 = new javax.swing.JPanel();
+        jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
@@ -96,9 +103,9 @@ public class Update_Classes extends javax.swing.JFrame {
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 574, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 574, Short.MAX_VALUE))
+                .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 406, Short.MAX_VALUE))
         );
 
         jPanel3.setBackground(new java.awt.Color(234, 239, 239));
@@ -151,28 +158,10 @@ public class Update_Classes extends javax.swing.JFrame {
             }
         });
 
-        jLabel4.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 24)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel4.setText("Update Classes");
-
-        jScrollPane1.setViewportView(day_time_box);
-
         day_box.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday" }));
 
         jLabel9.setForeground(new java.awt.Color(0, 0, 0));
         jLabel9.setText("To");
-
-        add_button.setText("+");
-        add_button.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                add_buttonActionPerformed(evt);
-            }
-        });
-
-        time_1_box.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "AM", "PM" }));
-
-        time_2_box.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "AM", "PM" }));
 
         class_id_box.setText("jLabel7");
         epf_no_box.setVisible(true);
@@ -180,70 +169,48 @@ public class Update_Classes extends javax.swing.JFrame {
         epf_no_box.setForeground(new java.awt.Color(0, 0, 0));
         epf_no_box.setText("jLabel7");
 
-        remove_button.setText("-");
-        remove_button.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                remove_buttonActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                        .addGap(0, 38, Short.MAX_VALUE)
+                .addGap(39, 39, 39)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(class_id_box, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(epf_no_box))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(12, 12, 12)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(12, 12, 12)
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(jPanel3Layout.createSequentialGroup()
-                                        .addComponent(day_box, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(start_time_box, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(time_1_box, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jLabel9)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(finish_time_box, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(time_2_box, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(add_button)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(remove_button))
-                                    .addComponent(subject_box, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(batch_box)
-                                    .addComponent(jScrollPane1)
-                                    .addComponent(name_box, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 537, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 532, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(class_id_box, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(epf_no_box)
-                                .addGap(18, 18, 18)))))
-                .addContainerGap())
+                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(batch_box)
+                                .addGroup(jPanel3Layout.createSequentialGroup()
+                                    .addComponent(day_box, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(24, 24, 24)
+                                    .addComponent(start_time_box, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jLabel9)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(end_time_box, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(subject_box, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(name_box, javax.swing.GroupLayout.PREFERRED_SIZE, 409, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap(83, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(18, 18, 18)
-                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(62, 62, 62)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(class_id_box)
                     .addComponent(epf_no_box))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(name_box, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -258,19 +225,31 @@ public class Update_Classes extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(day_box)
+                    .addComponent(jLabel6)
                     .addComponent(start_time_box, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(finish_time_box, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel9)
-                    .addComponent(add_button)
-                    .addComponent(time_1_box, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(time_2_box, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(remove_button)
-                    .addComponent(jLabel6))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(43, 43, 43)
+                    .addComponent(end_time_box, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel9))
+                .addGap(48, 48, 48)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGap(44, 44, 44))
+        );
+
+        jPanel4.setBackground(new java.awt.Color(11, 45, 114));
+
+        jLabel4.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 24)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel4.setText("Update Classes");
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -278,16 +257,23 @@ public class Update_Classes extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(0, 0, 0))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(0, 0, 0))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -336,39 +322,6 @@ public class Update_Classes extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         update_class();
     }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void add_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_add_buttonActionPerformed
-        String day = day_box.getSelectedItem().toString();
-        String start_time = start_time_box.getText();
-        String time_1 = time_1_box.getSelectedItem().toString();
-        String finish_time = finish_time_box.getText();
-        String time_2 = time_2_box.getSelectedItem().toString();
-
-        String all_values = day + " " + start_time + " " + time_1 + " " + " TO " + " " + finish_time + " " + time_2;
-
-        if (!date_time.contains(all_values)) {
-            date_time.add(all_values);
-            classes.addElement(all_values);
-
-            JOptionPane.showMessageDialog(this, all_values + " added to the list!");
-        } else {
-            JOptionPane.showMessageDialog(this, "Date/Time already added.");
-        }
-    }//GEN-LAST:event_add_buttonActionPerformed
-
-    private void remove_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_remove_buttonActionPerformed
-        if (!date_time.isEmpty()) {
-            date_time.removeLast();
-            classes.removeAllElements();
-            for (String val : date_time) {
-                classes.addElement(val);
-            }
-
-            System.out.println("Removed last item and updated UI.");
-        } else {
-            JOptionPane.showMessageDialog(this, "List is empty!");
-        }
-    }//GEN-LAST:event_remove_buttonActionPerformed
 
     public void get_teacher() {
 
@@ -429,17 +382,25 @@ public class Update_Classes extends javax.swing.JFrame {
         int epf_no = Integer.parseInt(epf_no_box.getText());
         String subject = subject_box.getSelectedItem().toString();
         String batch = batch_box.getText();
-        String date_and_time = String.join(",", date_time);
+        String day = day_box.getSelectedItem().toString();
+        
+        Date start = (Date) start_time_box.getValue();
+        Date end = (Date) end_time_box.getValue();
+
+        java.sql.Time start_time = new java.sql.Time(start.getTime());
+        java.sql.Time end_time = new java.sql.Time(end.getTime());
 
         try {
 
-            String query = "UPDATE classes SET epf_no = ?, subject = ?, batch = ?, day_time = ? WHERE class_id = ?";
+            String query = "UPDATE classes SET epf_no = ?, subject = ?, batch = ?, day = ?, start_time = ?, end_time = ? WHERE class_id = ?";
             pst = conn.prepareStatement(query);
             pst.setInt(1, epf_no);
             pst.setString(2, subject);
             pst.setString(3, batch);
-            pst.setString(4, date_and_time);
-            pst.setInt(5, class_id);
+            pst.setString(4, day);
+            pst.setTime(5, start_time);
+            pst.setTime(6, end_time);
+            pst.setInt(7, class_id);
 
             pst.execute();
             
@@ -493,13 +454,11 @@ public class Update_Classes extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton add_button;
     private javax.swing.JTextField batch_box;
     private javax.swing.JLabel class_id_box;
     private javax.swing.JComboBox<String> day_box;
-    private javax.swing.JList<String> day_time_box;
+    private javax.swing.JSpinner end_time_box;
     private javax.swing.JLabel epf_no_box;
-    private javax.swing.JTextField finish_time_box;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -511,12 +470,9 @@ public class Update_Classes extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JPanel jPanel4;
     private javax.swing.JTextField name_box;
-    private javax.swing.JButton remove_button;
-    private javax.swing.JTextField start_time_box;
+    private javax.swing.JSpinner start_time_box;
     private javax.swing.JComboBox<String> subject_box;
-    private javax.swing.JComboBox<String> time_1_box;
-    private javax.swing.JComboBox<String> time_2_box;
     // End of variables declaration//GEN-END:variables
 }
