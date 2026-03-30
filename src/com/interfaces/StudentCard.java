@@ -85,6 +85,15 @@ public class StudentCard extends javax.swing.JPanel {
 
     }
 
+    public StudentCard(){
+        initComponents();
+    }
+    
+    public void setStudentData(String string, String string1, String string2){
+    
+        
+    }
+
     public BufferedImage generateQRCode(String text, int width, int height) throws Exception {
         QRCodeWriter qrCodeWriter = new QRCodeWriter();
         BitMatrix bitMatrix = qrCodeWriter.encode(text, BarcodeFormat.QR_CODE, width, height);
