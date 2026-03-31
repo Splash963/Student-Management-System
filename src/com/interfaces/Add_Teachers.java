@@ -78,6 +78,13 @@ public class Add_Teachers extends javax.swing.JFrame {
         jButton3 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         subject_list = new javax.swing.JList<>();
+        name_validation_box = new javax.swing.JLabel();
+        age_validation_box = new javax.swing.JLabel();
+        nic_validation_box = new javax.swing.JLabel();
+        address_validation_box = new javax.swing.JLabel();
+        email_validation_box = new javax.swing.JLabel();
+        subjects_validation_box = new javax.swing.JLabel();
+        contact_no_validation_box = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
 
@@ -94,7 +101,7 @@ public class Add_Teachers extends javax.swing.JFrame {
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 644, Short.MAX_VALUE)
+            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 726, Short.MAX_VALUE)
         );
 
         jPanel3.setBackground(new java.awt.Color(234, 239, 239));
@@ -114,30 +121,55 @@ public class Add_Teachers extends javax.swing.JFrame {
         jLabel7.setForeground(new java.awt.Color(0, 0, 0));
         jLabel7.setText("Email");
 
+        name_box.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                name_boxFocusLost(evt);
+            }
+        });
         name_box.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 name_boxActionPerformed(evt);
             }
         });
 
+        age_box.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                age_boxFocusLost(evt);
+            }
+        });
         age_box.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 age_boxActionPerformed(evt);
             }
         });
 
+        nic_box.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                nic_boxFocusLost(evt);
+            }
+        });
         nic_box.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 nic_boxActionPerformed(evt);
             }
         });
 
+        address_box.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                address_boxFocusLost(evt);
+            }
+        });
         address_box.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 address_boxActionPerformed(evt);
             }
         });
 
+        email_box.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                email_boxFocusLost(evt);
+            }
+        });
         email_box.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 email_boxActionPerformed(evt);
@@ -210,6 +242,12 @@ public class Add_Teachers extends javax.swing.JFrame {
             }
         });
 
+        contact_no_box.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                contact_no_boxFocusLost(evt);
+            }
+        });
+
         jLabel8.setForeground(new java.awt.Color(0, 0, 0));
         jLabel8.setText("Contact Number");
 
@@ -224,6 +262,20 @@ public class Add_Teachers extends javax.swing.JFrame {
         });
 
         jScrollPane1.setViewportView(subject_list);
+
+        name_validation_box.setForeground(new java.awt.Color(204, 0, 0));
+
+        age_validation_box.setForeground(new java.awt.Color(204, 0, 0));
+
+        nic_validation_box.setForeground(new java.awt.Color(204, 0, 0));
+
+        address_validation_box.setForeground(new java.awt.Color(204, 0, 0));
+
+        email_validation_box.setForeground(new java.awt.Color(204, 0, 0));
+
+        subjects_validation_box.setForeground(new java.awt.Color(204, 0, 0));
+
+        contact_no_validation_box.setForeground(new java.awt.Color(204, 0, 0));
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -243,35 +295,39 @@ public class Add_Teachers extends javax.swing.JFrame {
                     .addComponent(jLabel11, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(email_box)
-                            .addComponent(address_box)
-                            .addComponent(nic_box)
-                            .addComponent(age_box)
-                            .addComponent(name_box)
-                            .addComponent(contact_no_box)
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addComponent(maths, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(bio, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(commerce, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(arts, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(tec, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jScrollPane1)
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addComponent(subject_box, javax.swing.GroupLayout.PREFERRED_SIZE, 344, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addContainerGap(21, Short.MAX_VALUE))))
+                    .addComponent(subjects_validation_box)
+                    .addComponent(email_validation_box)
+                    .addComponent(address_validation_box)
+                    .addComponent(nic_validation_box)
+                    .addComponent(age_validation_box)
+                    .addComponent(name_validation_box)
+                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(email_box)
+                        .addComponent(address_box)
+                        .addComponent(nic_box)
+                        .addComponent(age_box)
+                        .addComponent(name_box)
+                        .addComponent(contact_no_box)
+                        .addGroup(jPanel3Layout.createSequentialGroup()
+                            .addComponent(maths, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(bio, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(commerce, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(arts, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(tec, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jScrollPane1)
+                        .addGroup(jPanel3Layout.createSequentialGroup()
+                            .addComponent(subject_box, javax.swing.GroupLayout.PREFERRED_SIZE, 344, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(contact_no_validation_box))
+                .addContainerGap(21, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -280,27 +336,39 @@ public class Add_Teachers extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(name_box, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(name_validation_box)
+                .addGap(1, 1, 1)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(age_box, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(age_validation_box)
+                .addGap(1, 1, 1)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(nic_box, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(nic_validation_box)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
                     .addComponent(address_box, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(address_validation_box)
+                .addGap(1, 1, 1)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
                     .addComponent(email_box, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(email_validation_box)
+                .addGap(5, 5, 5)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
                     .addComponent(contact_no_box, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(contact_no_validation_box)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(maths)
                     .addComponent(bio)
@@ -317,6 +385,8 @@ public class Add_Teachers extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(subjects_validation_box)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(16, 16, 16))
         );
@@ -354,12 +424,11 @@ public class Add_Teachers extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -370,7 +439,9 @@ public class Add_Teachers extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
@@ -406,7 +477,7 @@ public class Add_Teachers extends javax.swing.JFrame {
     }//GEN-LAST:event_tecActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        insert_teacher();
+        check_validations();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void age_boxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_age_boxActionPerformed
@@ -448,6 +519,30 @@ public class Add_Teachers extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Subject already added.");
         }
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void name_boxFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_name_boxFocusLost
+        valid_name();
+    }//GEN-LAST:event_name_boxFocusLost
+
+    private void age_boxFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_age_boxFocusLost
+        valid_age();
+    }//GEN-LAST:event_age_boxFocusLost
+
+    private void nic_boxFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_nic_boxFocusLost
+        valid_nic();
+    }//GEN-LAST:event_nic_boxFocusLost
+
+    private void address_boxFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_address_boxFocusLost
+        valid_address();
+    }//GEN-LAST:event_address_boxFocusLost
+
+    private void email_boxFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_email_boxFocusLost
+        valid_mail();
+    }//GEN-LAST:event_email_boxFocusLost
+
+    private void contact_no_boxFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_contact_no_boxFocusLost
+        valid_contact_no();
+    }//GEN-LAST:event_contact_no_boxFocusLost
 
     public void insert_teacher() {
 
@@ -500,6 +595,117 @@ public class Add_Teachers extends javax.swing.JFrame {
         subject_box.setSelectedIndex(0);
     }
 
+    
+    //Validations
+    public void check_validations(){
+    
+        if(valid_name() && valid_age() && valid_nic() && valid_address() && valid_mail() && valid_contact_no() && valid_subjects()){
+        
+            insert_teacher();
+        
+        }else{
+        
+            JOptionPane.showMessageDialog(null, "Check the Validations Please!");
+        }
+    
+    }
+    
+    
+    public boolean valid_name(){
+    
+        String data = name_box.getText();
+        String method = "^[A-Z][a-z.]*\\s[A-Z][a-z.]*(\\s[A-Z][a-z.]*)*$";
+    
+        if(!data.matches(method)){
+            name_validation_box.setText("Validation Failed!");
+            return false;
+        }else{
+            name_validation_box.setText("");
+            return true;
+        }
+        
+    }
+    public boolean valid_age(){
+    
+        String data = age_box.getText();
+        String method = "^[0-9]{2}$";
+    
+        if(!data.matches(method)){
+            age_validation_box.setText("Validation Failed!");
+            return false;
+        }else{
+            age_validation_box.setText("");
+            return true;
+        }
+    }
+    public boolean valid_nic(){
+    
+        String data = nic_box.getText();
+        String method = "^([0-9]{9}[vVxX]|[0-9]{12})$";
+    
+        if(!data.matches(method)){
+            nic_validation_box.setText("Validation Failed!");
+            return false;
+        }else{
+            nic_validation_box.setText("");
+            return true;
+        }
+        
+    }
+    public boolean valid_address(){
+    
+        String data = address_box.getText();
+        String method = "^[a-zA-Z0-9\\s.,\\-\\/]+$";
+    
+        if(!data.matches(method)){
+            address_validation_box.setText("Validation Failed!");
+            return false;
+        }else{
+            address_validation_box.setText("");
+            return true;
+        }
+        
+    }
+    public boolean valid_mail(){
+    
+        String data = email_box.getText();
+        String method = "^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,6}$";
+    
+        if(!data.matches(method)){
+            email_validation_box.setText("Validation Failed!");
+            return false;
+        }else{
+            email_validation_box.setText("");
+            return true;
+        }
+        
+    }
+    public boolean valid_contact_no(){
+    
+        String data = contact_no_box.getText();
+        String method = "^(0|\\\\+94)[0-9]{9}$";
+    
+        if(!data.matches(method)){
+            contact_no_validation_box.setText("Validation Failed!");
+            return false;
+        }else{
+            contact_no_validation_box.setText("");
+            return true;
+        }
+        
+    }
+    public boolean valid_subjects(){
+
+        if(selectedSubjects.isEmpty()){
+            subjects_validation_box.setText("Validation Failed!");
+            return false;
+        }else{
+            subjects_validation_box.setText("");
+            return true;
+        }
+    }
+    
+    
     /**
      * @param args the command line arguments
      */
@@ -543,13 +749,17 @@ public class Add_Teachers extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField address_box;
+    private javax.swing.JLabel address_validation_box;
     private javax.swing.JTextField age_box;
+    private javax.swing.JLabel age_validation_box;
     private javax.swing.JRadioButton arts;
     private javax.swing.JRadioButton bio;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JRadioButton commerce;
     private javax.swing.JTextField contact_no_box;
+    private javax.swing.JLabel contact_no_validation_box;
     private javax.swing.JTextField email_box;
+    private javax.swing.JLabel email_validation_box;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
@@ -570,9 +780,12 @@ public class Add_Teachers extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JRadioButton maths;
     private javax.swing.JTextField name_box;
+    private javax.swing.JLabel name_validation_box;
     private javax.swing.JTextField nic_box;
+    private javax.swing.JLabel nic_validation_box;
     private javax.swing.JComboBox<String> subject_box;
     private javax.swing.JList<String> subject_list;
+    private javax.swing.JLabel subjects_validation_box;
     private javax.swing.JRadioButton tec;
     // End of variables declaration//GEN-END:variables
 }
