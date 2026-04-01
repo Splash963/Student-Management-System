@@ -115,7 +115,7 @@ public class Teachers extends javax.swing.JPanel {
     public void view_data() {
 
         try {
-            String sql = "SELECT * FROM teachers";
+            String sql = "SELECT * FROM teachers ORDER BY epf_no DESC";
             pst = conn.prepareStatement(sql);
             rs = pst.executeQuery();
 
