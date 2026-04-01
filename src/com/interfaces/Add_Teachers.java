@@ -295,7 +295,6 @@ public class Add_Teachers extends javax.swing.JFrame {
                     .addComponent(jLabel11, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(subjects_validation_box)
                     .addComponent(email_validation_box)
                     .addComponent(address_validation_box)
                     .addComponent(nic_validation_box)
@@ -318,7 +317,7 @@ public class Add_Teachers extends javax.swing.JFrame {
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addComponent(arts, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(tec, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(tec, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addComponent(jScrollPane1)
                         .addGroup(jPanel3Layout.createSequentialGroup()
                             .addComponent(subject_box, javax.swing.GroupLayout.PREFERRED_SIZE, 344, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -326,7 +325,8 @@ public class Add_Teachers extends javax.swing.JFrame {
                             .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(contact_no_validation_box))
+                    .addComponent(contact_no_validation_box)
+                    .addComponent(subjects_validation_box))
                 .addContainerGap(21, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
@@ -384,9 +384,9 @@ public class Add_Teachers extends javax.swing.JFrame {
                     .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(subjects_validation_box)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(subjects_validation_box)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(16, 16, 16))
         );
@@ -464,7 +464,7 @@ public class Add_Teachers extends javax.swing.JFrame {
     }//GEN-LAST:event_commerceActionPerformed
 
     private void artsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_artsActionPerformed
-        String[] items = {"Sinhala", "Tamil", "English", "Japanese", "Economics", "Geography", "History (Sri Lankan, Indian, European or Modern)", "Political Science", "Logic and Scientific Method",
+        String[] items = {"Sinhala", "Tamil", "English", "Japanese", "Economics", "Information & Communication Technology (ICT)", "Geography", "History (Sri Lankan, Indian, European or Modern)", "Political Science", "Logic and Scientific Method",
             "Home Economics", "Buddhist Civilization", "Hindu Civilization", "Islam Civilization", "Christian Civilization", "Greek and Roman Civilization",
             "Mass Media and Communication Studies", "Dancing (Eastern/Western)", "Music (Eastern/Western)", "Drama and Theatre", "Art"};
         subject_box.setModel(new javax.swing.DefaultComboBoxModel<>(items));
