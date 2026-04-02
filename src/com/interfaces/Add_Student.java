@@ -26,7 +26,6 @@ public class Add_Student extends javax.swing.JFrame {
     Connection conn = null;
     PreparedStatement pst = null;
 
-
     String uploaded_profile_picture_path = "";
 
     Students parentPanel;
@@ -43,6 +42,8 @@ public class Add_Student extends javax.swing.JFrame {
 
 // 3. Text eka epa nam eka remove karන්න
         jLabel1.setText("");
+        
+        jScrollPane1.getVerticalScrollBar().setUnitIncrement(16);
 
         this.parentPanel = aThis;
     }
@@ -75,6 +76,9 @@ public class Add_Student extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
+        jPanel4 = new javax.swing.JPanel();
+        jLabel17 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
         jPanel3 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -106,8 +110,17 @@ public class Add_Student extends javax.swing.JFrame {
         jLabel13 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
-        jPanel4 = new javax.swing.JPanel();
-        jLabel17 = new javax.swing.JLabel();
+        student_name_validation_box = new javax.swing.JLabel();
+        birthday_validation_box = new javax.swing.JLabel();
+        school_validation_box = new javax.swing.JLabel();
+        nic_no_validation_box = new javax.swing.JLabel();
+        gender_validation_box = new javax.swing.JLabel();
+        address_validation_box = new javax.swing.JLabel();
+        student_contact_no_validation_box = new javax.swing.JLabel();
+        email_validation_box = new javax.swing.JLabel();
+        parent_name_validation_box = new javax.swing.JLabel();
+        parent_contact_no_validation_box = new javax.swing.JLabel();
+        subject_stream_validation_box = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
@@ -127,6 +140,26 @@ public class Add_Student extends javax.swing.JFrame {
                 .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        jPanel4.setBackground(new java.awt.Color(11, 45, 114));
+
+        jLabel17.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 24)); // NOI18N
+        jLabel17.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel17.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel17.setText("Add Student");
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel17, javax.swing.GroupLayout.DEFAULT_SIZE, 1029, Short.MAX_VALUE)
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
+
+        jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+
         jLabel2.setText("Full Name");
 
         jLabel3.setText("Date of Birth");
@@ -143,33 +176,70 @@ public class Add_Student extends javax.swing.JFrame {
 
         jLabel9.setText("Parent Contact Number");
 
+        name_box.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                name_boxFocusLost(evt);
+            }
+        });
         name_box.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 name_boxActionPerformed(evt);
             }
         });
 
+        birthday_box.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                birthday_boxFocusLost(evt);
+            }
+        });
         birthday_box.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 birthday_boxActionPerformed(evt);
             }
         });
 
+        school_box.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                school_boxFocusLost(evt);
+            }
+        });
         school_box.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 school_boxActionPerformed(evt);
             }
         });
 
+        nic_box.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                nic_boxFocusLost(evt);
+            }
+        });
+
+        student_contact_no_box.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                student_contact_no_boxFocusLost(evt);
+            }
+        });
         student_contact_no_box.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 student_contact_no_boxActionPerformed(evt);
             }
         });
 
+        parent_name_box.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                parent_name_boxFocusLost(evt);
+            }
+        });
         parent_name_box.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 parent_name_boxActionPerformed(evt);
+            }
+        });
+
+        parent_contact_no_box.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                parent_contact_no_boxFocusLost(evt);
             }
         });
 
@@ -180,6 +250,11 @@ public class Add_Student extends javax.swing.JFrame {
             }
         });
 
+        address_box.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                address_boxFocusLost(evt);
+            }
+        });
         address_box.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 address_boxActionPerformed(evt);
@@ -236,6 +311,11 @@ public class Add_Student extends javax.swing.JFrame {
             }
         });
 
+        email_box.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                email_boxFocusLost(evt);
+            }
+        });
         email_box.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 email_boxActionPerformed(evt);
@@ -252,6 +332,28 @@ public class Add_Student extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
+
+        student_name_validation_box.setForeground(new java.awt.Color(204, 51, 0));
+
+        birthday_validation_box.setForeground(new java.awt.Color(204, 51, 0));
+
+        school_validation_box.setForeground(new java.awt.Color(204, 51, 0));
+
+        nic_no_validation_box.setForeground(new java.awt.Color(204, 51, 0));
+
+        gender_validation_box.setForeground(new java.awt.Color(204, 51, 0));
+
+        address_validation_box.setForeground(new java.awt.Color(204, 51, 0));
+
+        student_contact_no_validation_box.setForeground(new java.awt.Color(204, 51, 0));
+
+        email_validation_box.setForeground(new java.awt.Color(204, 51, 0));
+
+        parent_name_validation_box.setForeground(new java.awt.Color(204, 51, 0));
+
+        parent_contact_no_validation_box.setForeground(new java.awt.Color(204, 51, 0));
+
+        subject_stream_validation_box.setForeground(new java.awt.Color(204, 51, 0));
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -275,33 +377,45 @@ public class Add_Student extends javax.swing.JFrame {
                             .addComponent(jLabel13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addComponent(male, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(female, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addComponent(maths, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(bio, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(commerce, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(arts, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(tec, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addComponent(parent_name_box)
-                            .addComponent(address_box)
-                            .addComponent(nic_box)
-                            .addComponent(school_box)
-                            .addComponent(birthday_box)
-                            .addComponent(name_box)
-                            .addComponent(student_contact_no_box)
-                            .addComponent(parent_contact_no_box)
-                            .addComponent(email_box, javax.swing.GroupLayout.PREFERRED_SIZE, 530, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(student_name_validation_box)
+                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addGroup(jPanel3Layout.createSequentialGroup()
+                                    .addComponent(male, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(female, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(jPanel3Layout.createSequentialGroup()
+                                    .addComponent(maths, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(bio, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(commerce, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(arts, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(tec, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addComponent(parent_name_box)
+                                .addComponent(address_box)
+                                .addComponent(nic_box)
+                                .addComponent(school_box)
+                                .addComponent(birthday_box)
+                                .addComponent(name_box)
+                                .addComponent(student_contact_no_box)
+                                .addComponent(parent_contact_no_box)
+                                .addComponent(email_box, javax.swing.GroupLayout.PREFERRED_SIZE, 530, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(birthday_validation_box)
+                            .addComponent(school_validation_box)
+                            .addComponent(nic_no_validation_box)
+                            .addComponent(gender_validation_box)
+                            .addComponent(address_validation_box)
+                            .addComponent(student_contact_no_validation_box)
+                            .addComponent(email_validation_box)
+                            .addComponent(parent_name_validation_box)
+                            .addComponent(parent_contact_no_validation_box)
+                            .addComponent(subject_stream_validation_box)))
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(136, 136, 136)
+                        .addGap(142, 142, 142)
                         .addComponent(Insert_button, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(72, Short.MAX_VALUE))
         );
@@ -312,28 +426,40 @@ public class Add_Student extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(name_box, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(student_name_validation_box)
+                .addGap(2, 2, 2)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(birthday_box, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(birthday_validation_box)
+                .addGap(1, 1, 1)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(school_box, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(school_validation_box)
+                .addGap(2, 2, 2)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(nic_box, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addGap(1, 1, 1)
+                .addComponent(nic_no_validation_box)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
                     .addComponent(male)
                     .addComponent(female))
-                .addGap(18, 18, 18)
+                .addGap(3, 3, 3)
+                .addComponent(gender_validation_box)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel10)
                     .addComponent(address_box, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addGap(2, 2, 2)
+                .addComponent(address_validation_box)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel15)
                     .addComponent(jButton1))
@@ -341,19 +467,27 @@ public class Add_Student extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
                     .addComponent(student_contact_no_box, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addGap(1, 1, 1)
+                .addComponent(student_contact_no_validation_box)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel13)
                     .addComponent(email_box, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(email_validation_box)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
                     .addComponent(parent_name_box, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addGap(3, 3, 3)
+                .addComponent(parent_name_validation_box)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
                     .addComponent(parent_contact_no_box, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addGap(5, 5, 5)
+                .addComponent(parent_contact_no_validation_box)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel11)
                     .addComponent(maths)
@@ -361,28 +495,14 @@ public class Add_Student extends javax.swing.JFrame {
                     .addComponent(commerce)
                     .addComponent(arts)
                     .addComponent(tec))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 49, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(subject_stream_validation_box)
+                .addGap(34, 34, 34)
                 .addComponent(Insert_button, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(40, 40, 40))
+                .addContainerGap(163, Short.MAX_VALUE))
         );
 
-        jPanel4.setBackground(new java.awt.Color(11, 45, 114));
-
-        jLabel17.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 24)); // NOI18N
-        jLabel17.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel17.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel17.setText("Add Student");
-
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel17, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-        );
+        jScrollPane1.setViewportView(jPanel3);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -392,8 +512,8 @@ public class Add_Student extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, 0)
-                        .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                     .addComponent(jPanel4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(0, 0, 0))
         );
@@ -402,12 +522,11 @@ public class Add_Student extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 0, 0)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 709, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, 0))))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -421,10 +540,7 @@ public class Add_Student extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -440,15 +556,15 @@ public class Add_Student extends javax.swing.JFrame {
     }//GEN-LAST:event_bioActionPerformed
 
     private void commerceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_commerceActionPerformed
-       
+
     }//GEN-LAST:event_commerceActionPerformed
 
     private void artsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_artsActionPerformed
-        
+
     }//GEN-LAST:event_artsActionPerformed
 
     private void tecActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tecActionPerformed
-        
+
     }//GEN-LAST:event_tecActionPerformed
 
     private void name_boxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_name_boxActionPerformed
@@ -518,12 +634,47 @@ public class Add_Student extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void Insert_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Insert_buttonActionPerformed
-        insert_student();
+        check_validations();
     }//GEN-LAST:event_Insert_buttonActionPerformed
 
+    private void name_boxFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_name_boxFocusLost
+        valid_student_name();
+    }//GEN-LAST:event_name_boxFocusLost
+
+    private void birthday_boxFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_birthday_boxFocusLost
+        valid_birthday();
+    }//GEN-LAST:event_birthday_boxFocusLost
+
+    private void school_boxFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_school_boxFocusLost
+       valid_school();
+    }//GEN-LAST:event_school_boxFocusLost
+
+    private void nic_boxFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_nic_boxFocusLost
+        valid_nic();
+    }//GEN-LAST:event_nic_boxFocusLost
+
+    private void address_boxFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_address_boxFocusLost
+        valid_address();
+    }//GEN-LAST:event_address_boxFocusLost
+
+    private void student_contact_no_boxFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_student_contact_no_boxFocusLost
+        valid_student_contact_no();
+    }//GEN-LAST:event_student_contact_no_boxFocusLost
+
+    private void email_boxFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_email_boxFocusLost
+        valid_mail();
+    }//GEN-LAST:event_email_boxFocusLost
+
+    private void parent_name_boxFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_parent_name_boxFocusLost
+        valid_parent_name();
+    }//GEN-LAST:event_parent_name_boxFocusLost
+
+    private void parent_contact_no_boxFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_parent_contact_no_boxFocusLost
+        valid_parent_contact_no();
+    }//GEN-LAST:event_parent_contact_no_boxFocusLost
 
     public void insert_student() {
-        
+
         String name = name_box.getText();
         String birthday = birthday_box.getText();
         String school = school_box.getText();
@@ -638,6 +789,178 @@ public class Add_Student extends javax.swing.JFrame {
         return bimage;
     }
 
+    //Validations
+    public void check_validations(){
+    
+        if(valid_student_name() && valid_birthday() && valid_school() && valid_nic() && valid_gender()
+                && valid_address() && valid_student_contact_no() && valid_mail() && valid_parent_name()
+                && valid_parent_contact_no() && valid_subject_stream()){
+        
+            insert_student();
+        }else{
+            JOptionPane.showMessageDialog(null, "Check the Validations Please!");
+        }
+        
+    }
+    
+    public boolean valid_student_name() {
+
+        String data = name_box.getText();
+        String method = "^[A-Z][a-z.]*\\s[A-Z][a-z.]*(\\s[A-Z][a-z.]*)*$";
+
+        if (!data.matches(method)) {
+            student_name_validation_box.setText("Validation Failed!");
+            return false;
+        } else {
+            student_name_validation_box.setText("");
+            return true;
+        }
+
+    }
+
+    public boolean valid_birthday() {
+
+        String data = birthday_box.getText();
+        String method = "^(19|20)\\d\\d-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$";
+
+        if (!data.matches(method)) {
+            birthday_validation_box.setText("Validation Failed!");
+            return false;
+        } else {
+            birthday_validation_box.setText("");
+            return true;
+        }
+
+    }
+
+    public boolean valid_school() {
+
+        String data = school_box.getText();
+        String method = "^[a-zA-Z\\s\\.,'\\(\\)\\-]+$";
+
+        if (!data.matches(method)) {
+            school_validation_box.setText("Validation Failed!");
+            return false;
+        } else {
+            school_validation_box.setText("");
+            return true;
+        }
+
+    }
+
+    public boolean valid_nic() {
+
+        String data = nic_box.getText();
+        String method = "^([0-9]{9}[vVxX]|[0-9]{12})$";
+
+        if (!data.matches(method)) {
+            nic_no_validation_box.setText("Validation Failed!");
+            return false;
+        } else {
+            nic_no_validation_box.setText("");
+            return true;
+        }
+
+    }
+
+    public boolean valid_gender() {
+
+        if(buttonGroup1.getSelection() == null){
+            gender_validation_box.setText("Validation Failed!");
+            return false;
+        }else{
+            gender_validation_box.setText("");
+            return true;
+        }
+    }
+
+    public boolean valid_address() {
+
+        String data = address_box.getText();
+        String method = "^[a-zA-Z0-9\\s.,\\-\\/]+$";
+
+        if (!data.matches(method)) {
+            address_validation_box.setText("Validation Failed!");
+            return false;
+        } else {
+            address_validation_box.setText("");
+            return true;
+        }
+
+    }
+
+    public boolean valid_student_contact_no() {
+
+        String data = student_contact_no_box.getText();
+        String method = "^(0|\\\\+94)[0-9]{9}$";
+
+        if (!data.matches(method)) {
+            student_contact_no_validation_box.setText("Validation Failed!");
+            return false;
+        } else {
+            student_contact_no_validation_box.setText("");
+            return true;
+        }
+
+    }
+
+    public boolean valid_mail() {
+
+        String data = email_box.getText();
+        String method = "^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,6}$";
+
+        if (!data.matches(method)) {
+            email_validation_box.setText("Validation Failed!");
+            return false;
+        } else {
+            email_validation_box.setText("");
+            return true;
+        }
+
+    }
+
+    public boolean valid_parent_name() {
+
+        String data = parent_name_box.getText();
+        String method = "^[A-Z][a-z.]*\\s[A-Z][a-z.]*(\\s[A-Z][a-z.]*)*$";
+
+        if (!data.matches(method)) {
+            parent_name_validation_box.setText("Validation Failed!");
+            return false;
+        } else {
+            parent_name_validation_box.setText("");
+            return true;
+        }
+
+    }
+    
+    public boolean valid_parent_contact_no() {
+
+        String data = parent_contact_no_box.getText();
+        String method = "^(0|\\\\+94)[0-9]{9}$";
+
+        if (!data.matches(method)) {
+            parent_contact_no_validation_box.setText("Validation Failed!");
+            return false;
+        } else {
+            parent_contact_no_validation_box.setText("");
+            return true;
+        }
+
+    }
+    
+    public boolean valid_subject_stream() {
+
+        if(buttonGroup2.getSelection() == null){
+            subject_stream_validation_box.setText("Validation Failed!");
+            return false;
+        }else{
+            subject_stream_validation_box.setText("");
+            return true;
+        }
+
+    }
+
     /**
      * @param args the command line arguments
      */
@@ -675,14 +998,18 @@ public class Add_Student extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Insert_button;
     private javax.swing.JTextField address_box;
+    private javax.swing.JLabel address_validation_box;
     private javax.swing.JRadioButton arts;
     private javax.swing.JRadioButton bio;
     private javax.swing.JTextField birthday_box;
+    private javax.swing.JLabel birthday_validation_box;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.JRadioButton commerce;
     private javax.swing.JTextField email_box;
+    private javax.swing.JLabel email_validation_box;
     private javax.swing.JRadioButton female;
+    private javax.swing.JLabel gender_validation_box;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -702,14 +1029,22 @@ public class Add_Student extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JRadioButton male;
     private javax.swing.JRadioButton maths;
     private javax.swing.JTextField name_box;
     private javax.swing.JTextField nic_box;
+    private javax.swing.JLabel nic_no_validation_box;
     private javax.swing.JTextField parent_contact_no_box;
+    private javax.swing.JLabel parent_contact_no_validation_box;
     private javax.swing.JTextField parent_name_box;
+    private javax.swing.JLabel parent_name_validation_box;
     private javax.swing.JTextField school_box;
+    private javax.swing.JLabel school_validation_box;
     private javax.swing.JTextField student_contact_no_box;
+    private javax.swing.JLabel student_contact_no_validation_box;
+    private javax.swing.JLabel student_name_validation_box;
+    private javax.swing.JLabel subject_stream_validation_box;
     private javax.swing.JRadioButton tec;
     // End of variables declaration//GEN-END:variables
 }
