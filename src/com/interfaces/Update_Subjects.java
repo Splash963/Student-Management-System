@@ -7,6 +7,7 @@ package com.interfaces;
 import com.connection.DbConnection;
 import java.sql.*;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -20,18 +21,16 @@ public class Update_Subjects extends javax.swing.JFrame {
 
     Students parentPanel;
 
-    public Update_Subjects(String student_id, String subject_stream, Students aThis) {
+    public Update_Subjects(String student_id, Students aThis) {
         initComponents();
 
         conn = DbConnection.connect();
 
         student_id_box.setText(student_id);
-        subject_stream_box.setText(subject_stream);
 
         this.parentPanel = aThis;
 
         get_subjects();
-        get_classes();
     }
 
     /**
@@ -43,31 +42,18 @@ public class Update_Subjects extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel14 = new javax.swing.JLabel();
-        jLabel12 = new javax.swing.JLabel();
-        subject_box = new javax.swing.JComboBox<>();
-        class_box = new javax.swing.JComboBox<>();
         Insert_button = new javax.swing.JButton();
         student_id_box = new javax.swing.JLabel();
-        subject_stream_box = new javax.swing.JLabel();
-        class_id_box = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        table = new javax.swing.JTable();
+        id_box = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
 
-        jLabel14.setText("Classes");
-
-        jLabel12.setText("Subjects");
-
-        subject_box.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                subject_boxItemStateChanged(evt);
-            }
-        });
-
-        Insert_button.setText("Add Subject");
+        Insert_button.setText("Remove Subject");
         Insert_button.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 Insert_buttonActionPerformed(evt);
@@ -76,16 +62,12 @@ public class Update_Subjects extends javax.swing.JFrame {
 
         student_id_box.setText("jLabel2");
 
-        subject_stream_box.setText("jLabel2");
-
-        class_id_box.setText("jLabel2");
-
         jPanel1.setBackground(new java.awt.Color(11, 45, 114));
 
         jLabel1.setFont(new java.awt.Font("SansSerif", 0, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Add Subjects");
+        jLabel1.setText("Delete Subjects");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -100,163 +82,127 @@ public class Update_Subjects extends javax.swing.JFrame {
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
+        table.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "ID", "Subject", "Student ID", "CLass ID"
+            }
+        ));
+        table.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tableMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(table);
+
+        id_box.setText("jLabel2");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(257, 257, 257)
-                .addComponent(Insert_button, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 285, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel12, javax.swing.GroupLayout.DEFAULT_SIZE, 178, Short.MAX_VALUE)
-                            .addComponent(jLabel14, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(subject_box, 0, 495, Short.MAX_VALUE)
-                            .addComponent(class_box, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(class_id_box, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(subject_stream_box, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(19, 19, 19)
-                        .addComponent(student_id_box, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(43, 43, 43))
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(60, 60, 60)
+                        .addComponent(Insert_button, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 66, Short.MAX_VALUE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 484, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(id_box)
+                        .addGap(18, 18, 18)
+                        .addComponent(student_id_box, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(32, 32, 32)
+                .addGap(26, 26, 26)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(student_id_box)
-                    .addComponent(subject_stream_box)
-                    .addComponent(class_id_box))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(subject_box, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel12))
-                .addGap(47, 47, 47)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(class_box, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel14))
-                .addGap(63, 63, 63)
-                .addComponent(Insert_button, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(49, 49, 49))
+                    .addComponent(id_box))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 368, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(Insert_button, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(194, 194, 194))))
         );
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void subject_boxItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_subject_boxItemStateChanged
-        get_classes();
-    }//GEN-LAST:event_subject_boxItemStateChanged
-
     private void Insert_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Insert_buttonActionPerformed
-        insert_data();
+        int dialog_result = JOptionPane.showConfirmDialog(null, "Are You sure want to delete??", "Warning", JOptionPane.YES_NO_OPTION);
+
+        if (dialog_result == JOptionPane.YES_OPTION) {
+            remove_data();
+        }
     }//GEN-LAST:event_Insert_buttonActionPerformed
+
+    private void tableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableMouseClicked
+        int row = table.getSelectedRow();
+        String id = table.getValueAt(row, 0).toString();
+        id_box.setText(id);
+    }//GEN-LAST:event_tableMouseClicked
 
     public void get_subjects() {
 
-        String[] maths = {"Combined Mathematics", "Physics", "Chemistry", "Information & Communication Technology (ICT)"};
-
-        String[] bio = {"Biology", "Chemistry", "Physics", "Agricultural Science"};
-
-        String[] commerce = {"Accounting", "Business Studies", "Economics", "Information & Communication Technology (ICT)", "Business Statistics"};
-
-        String[] arts = {"Sinhala", "Tamil", "English", "Japanese", "Economics", "Geography", "History (Sri Lankan, Indian, European or Modern)", "Political Science", "Logic and Scientific Method",
-            "Home Economics", "Buddhist Civilization", "Hindu Civilization", "Islam Civilization", "Christian Civilization", "Greek and Roman Civilization",
-            "Mass Media and Communication Studies", "Dancing (Eastern/Western)", "Music (Eastern/Western)", "Drama and Theatre", "Art"};
-
-        String[] tec = {"Engineering Technology (ET)", "Bio-System Technology (BST)", "Science for Technology (SFT)", "Information & Communication Technology (ICT)",
-            "Agricultural Science"};
-
-        if (subject_stream_box.getText().equals("Maths")) {
-            subject_box.removeAll();
-            subject_box.setModel(new javax.swing.DefaultComboBoxModel<>(maths));
-        } else if (subject_stream_box.getText().equals("Bio")) {
-            subject_box.removeAll();
-            subject_box.setModel(new javax.swing.DefaultComboBoxModel<>(bio));
-        } else if (subject_stream_box.getText().equals("Commerce")) {
-            subject_box.removeAll();
-            subject_box.setModel(new javax.swing.DefaultComboBoxModel<>(commerce));
-        } else if (subject_stream_box.getText().equals("Arts")) {
-            subject_box.removeAll();
-            subject_box.setModel(new javax.swing.DefaultComboBoxModel<>(arts));
-        } else if (subject_stream_box.getText().equals("Tec")) {
-            subject_box.removeAll();
-            subject_box.setModel(new javax.swing.DefaultComboBoxModel<>(tec));
-        }
-
-    }
-
-    public void get_classes() {
-
-        String selected_subject = subject_box.getSelectedItem().toString();
-        class_box.removeAllItems();
+        String student_id = student_id_box.getText();
 
         try {
 
-            String query = "SELECT c.class_id, c.day, c.start_time, c.end_time, c.batch, t.name "
-                    + "FROM classes c "
-                    + "JOIN teachers t ON c.epf_no = t.epf_no " // Menna methana space ekak danna
-                    + "WHERE c.subject = ?";
+            String querry = "SELECT * FROM students_classes WHERE student_id LIKE ?";
+            pst = conn.prepareStatement(querry);
 
-            pst = conn.prepareStatement(query);
-            pst.setString(1, selected_subject);
+            pst.setString(1, student_id + "%");
+
             rs = pst.executeQuery();
+
+            DefaultTableModel model = (DefaultTableModel) table.getModel();
+            model.setRowCount(0);
 
             while (rs.next()) {
 
+                String id = rs.getString("id");
+                String subject = rs.getString("subject");
+                String st_id = rs.getString("student_id");
                 String class_id = rs.getString("class_id");
-                String teacher_name = rs.getString("name");
-                String day = rs.getString("day");
-                String start_time = rs.getString("start_time");
-                String end_time = rs.getString("end_time");
-                String batch = rs.getString("batch");
 
-                class_id_box.setText(class_id);
-
-                String values = teacher_name + " | " + batch + " | " + day + " | " + start_time + " " + "To" + " " + end_time;
-
-                class_box.addItem(values);
+                model.addRow(new Object[]{id, subject, st_id, class_id});
 
             }
 
         } catch (Exception e) {
-
-            System.out.println("Error: " + e.getMessage());
-
         }
 
     }
 
-    public void insert_data() {
+    public void remove_data() {
 
-        String subject = subject_box.getSelectedItem().toString();
-        String student_id = student_id_box.getText();
-        String class_id = class_id_box.getText();
+        String id = id_box.getText();
 
         try {
 
-            String query = "INSERT INTO students_classes (subject, student_id, class_id) VALUES (?,?,?)";
+            String query = "DELETE FROM students_classes WHERE id = ?";
 
             pst = conn.prepareStatement(query);
 
-            pst.setString(1, subject);
-            pst.setString(2, student_id);
-            pst.setString(3, class_id);
+            pst.setString(1, id);
 
             pst.execute();
+            
+            get_subjects();
 
-            JOptionPane.showMessageDialog(null, "Student Added Successfully!");
-            clear();
+            JOptionPane.showMessageDialog(null, "Subbject Removed Successfully!");
 
             if (parentPanel != null) {
                 parentPanel.view_data();
@@ -264,14 +210,6 @@ public class Update_Subjects extends javax.swing.JFrame {
 
         } catch (Exception e) {
         }
-
-    }
-
-    public void clear() {
-
-        subject_box.setSelectedIndex(0);
-        class_box.setSelectedIndex(0);
-        class_id_box.setText("");
 
     }
 
@@ -313,14 +251,11 @@ public class Update_Subjects extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Insert_button;
-    private javax.swing.JComboBox<String> class_box;
-    private javax.swing.JLabel class_id_box;
+    private javax.swing.JLabel id_box;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel14;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel student_id_box;
-    private javax.swing.JComboBox<String> subject_box;
-    private javax.swing.JLabel subject_stream_box;
+    private javax.swing.JTable table;
     // End of variables declaration//GEN-END:variables
 }
