@@ -78,8 +78,14 @@ public class Add_Classes extends javax.swing.JFrame {
         epf_no_box = new javax.swing.JLabel();
         start_time_box = new javax.swing.JSpinner();
         end_time_box = new javax.swing.JSpinner();
+        batch_validation_box = new javax.swing.JLabel();
+        subject_validation_box = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
+        start_time_box1 = new javax.swing.JSpinner();
+        end_time_box1 = new javax.swing.JSpinner();
+        jPanel5 = new javax.swing.JPanel();
+        jLabel7 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
@@ -96,7 +102,7 @@ public class Add_Classes extends javax.swing.JFrame {
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 403, Short.MAX_VALUE)
             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 397, Short.MAX_VALUE))
         );
@@ -120,6 +126,11 @@ public class Add_Classes extends javax.swing.JFrame {
                 name_boxCaretUpdate(evt);
             }
         });
+        name_box.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                name_boxFocusLost(evt);
+            }
+        });
         name_box.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 name_boxActionPerformed(evt);
@@ -134,6 +145,11 @@ public class Add_Classes extends javax.swing.JFrame {
             }
         });
 
+        batch_box.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                batch_boxFocusLost(evt);
+            }
+        });
         batch_box.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 batch_boxActionPerformed(evt);
@@ -159,6 +175,10 @@ public class Add_Classes extends javax.swing.JFrame {
         epf_no_box.setText("jLabel7");
         epf_no_box.setVisible(false);
 
+        batch_validation_box.setForeground(new java.awt.Color(204, 51, 0));
+
+        subject_validation_box.setForeground(new java.awt.Color(204, 51, 0));
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -171,6 +191,19 @@ public class Add_Classes extends javax.swing.JFrame {
                             .addComponent(epf_no_box)
                             .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addGroup(jPanel3Layout.createSequentialGroup()
+                                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addGap(31, 31, 31)
+                                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(batch_validation_box)
+                                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(subject_box, 0, 383, Short.MAX_VALUE)
+                                            .addComponent(name_box)
+                                            .addComponent(batch_box))
+                                        .addComponent(subject_validation_box)))
+                                .addGroup(jPanel3Layout.createSequentialGroup()
                                     .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGap(31, 31, 31)
                                     .addComponent(day_box, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -179,17 +212,7 @@ public class Add_Classes extends javax.swing.JFrame {
                                     .addGap(18, 18, 18)
                                     .addComponent(jLabel9)
                                     .addGap(18, 18, 18)
-                                    .addComponent(end_time_box, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(jPanel3Layout.createSequentialGroup()
-                                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                        .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                    .addGap(31, 31, 31)
-                                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(subject_box, 0, 383, Short.MAX_VALUE)
-                                        .addComponent(name_box)
-                                        .addComponent(batch_box))))))
+                                    .addComponent(end_time_box, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(188, 188, 188)
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -198,7 +221,7 @@ public class Add_Classes extends javax.swing.JFrame {
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(49, Short.MAX_VALUE)
+                .addContainerGap(88, Short.MAX_VALUE)
                 .addComponent(epf_no_box)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -208,11 +231,15 @@ public class Add_Classes extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(subject_box, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(subject_validation_box)
+                .addGap(1, 1, 1)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(batch_box, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(batch_validation_box)
+                .addGap(2, 2, 2)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel6)
                     .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -243,6 +270,26 @@ public class Add_Classes extends javax.swing.JFrame {
             .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
         );
 
+        jPanel5.setBackground(new java.awt.Color(11, 45, 114));
+
+        jLabel7.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 24)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel7.setText("Add Classes");
+
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 1113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -261,9 +308,10 @@ public class Add_Classes extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -286,7 +334,7 @@ public class Add_Classes extends javax.swing.JFrame {
     }//GEN-LAST:event_batch_boxActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        insert_class();
+        check_validations();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void name_boxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_name_boxActionPerformed
@@ -318,6 +366,14 @@ public class Add_Classes extends javax.swing.JFrame {
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
        
     }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void batch_boxFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_batch_boxFocusLost
+        valid_batch();
+    }//GEN-LAST:event_batch_boxFocusLost
+
+    private void name_boxFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_name_boxFocusLost
+        valid_subject();
+    }//GEN-LAST:event_name_boxFocusLost
 
     public void get_teacher() {
 
@@ -421,6 +477,79 @@ public class Add_Classes extends javax.swing.JFrame {
         day_box.removeAllItems();
     }
 
+    
+    //Validations
+    public void check_validations(){
+    
+        if(valid_subject() && valid_batch()){
+            insert_class();
+        }else{
+            JOptionPane.showMessageDialog(null, "Check the Validations Please!");
+        }
+        
+    }
+    
+    public boolean valid_subject(){
+    
+        if(subject_box.getSelectedIndex() == -1){
+            subject_validation_box.setText("Validation failed!");
+            return false;
+        }else {
+            subject_validation_box.setText("");
+            return true;
+        }
+        
+    }
+    
+    public boolean valid_batch(){
+    
+        String data = batch_box.getText();
+        String pattern = "^20[0-9]{2}$";
+        
+        if(!data.matches(pattern)){
+            batch_validation_box.setText("Validation Failed!");
+            return false;
+        }else {
+            batch_validation_box.setText("");
+            return true;
+        }
+        
+    }
+    
+//    public boolean valid_day(){
+//    
+//        if(day_box.getSelectedIndex() == -1){
+//            day_validation_box.setText("Validation failed!");
+//            return false;
+//        }else {
+//            day_validation_box.setText("");
+//            return true;
+//        }
+//        
+//    }
+//    public boolean valid_start_time(){
+//    
+//        if(start_time_box.equals(null)){
+//            start_time_validation_box.setText("Validation failed!");
+//            return false;
+//        }else {
+//            start_time_validation_box.setText("");
+//            return true;
+//        }
+//        
+//    }
+//    public boolean valid_end_time(){
+//    
+//        if(end_time_box.equals(null)){
+//            end_time_validation_box.setText("Validation failed!");
+//            return false;
+//        }else {
+//            end_time_validation_box.setText("");
+//            return true;
+//        }
+//        
+//    }
+    
     /**
      * @param args the command line arguments
      */
@@ -463,8 +592,10 @@ public class Add_Classes extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField batch_box;
+    private javax.swing.JLabel batch_validation_box;
     private javax.swing.JComboBox<String> day_box;
     private javax.swing.JSpinner end_time_box;
+    private javax.swing.JSpinner end_time_box1;
     private javax.swing.JLabel epf_no_box;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
@@ -473,13 +604,17 @@ public class Add_Classes extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
     private javax.swing.JTextField name_box;
     private javax.swing.JSpinner start_time_box;
+    private javax.swing.JSpinner start_time_box1;
     private javax.swing.JComboBox<String> subject_box;
+    private javax.swing.JLabel subject_validation_box;
     // End of variables declaration//GEN-END:variables
 }
