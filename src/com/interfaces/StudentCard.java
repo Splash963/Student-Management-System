@@ -92,7 +92,6 @@ public class StudentCard extends javax.swing.JPanel {
         return MatrixToImageWriter.toBufferedImage(bitMatrix);
     }
 
-    
     //Print Student ID
     public void Print_Card() {
         try {
@@ -587,13 +586,24 @@ public class StudentCard extends javax.swing.JPanel {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         String student_id = student_id_box.getText();
         String subject_stream = subject_stream_box.getText();
-        
+
         Add_Subjects m1 = new Add_Subjects(student_id, subject_stream, parentPanel);
         m1.setVisible(true);
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        // TODO add your handling code here:
+        String name = student_name_box.getText();
+        String birth_date = birthday_box.getText();
+        String school = school_box.getText();
+        String nic_no = nic_no_box.getText();
+        String gender = gender_box.getText();
+        String address = address_box.getText();
+        String student_contact_no = student_contact_no_box.getText();
+        String email = email_box.getText();
+        String parent_name = parent_name_box.getText();
+        String parent_contact_no = parent_contact_no_box.getText();
+        String subject_stream = subject_stream_box.getText();
+        
     }//GEN-LAST:event_jButton4ActionPerformed
 
     public void delete_class() {
