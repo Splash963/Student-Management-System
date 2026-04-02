@@ -101,7 +101,6 @@ public class StudentCard extends javax.swing.JPanel {
         return MatrixToImageWriter.toBufferedImage(bitMatrix);
     }
 
-    
     //Print Student ID
     public void Print_Card() {
         try {
@@ -271,6 +270,7 @@ public class StudentCard extends javax.swing.JPanel {
         jButton3 = new javax.swing.JButton();
         profile_image_path = new javax.swing.JLabel();
         jButton4 = new javax.swing.JButton();
+        remove_button = new javax.swing.JButton();
 
         jPanel1.setBackground(new java.awt.Color(191, 201, 209));
         jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -434,6 +434,16 @@ public class StudentCard extends javax.swing.JPanel {
             }
         });
 
+        remove_button.setBackground(new java.awt.Color(245, 242, 242));
+        remove_button.setForeground(new java.awt.Color(0, 0, 0));
+        remove_button.setText("Remove Subjects");
+        remove_button.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        remove_button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                remove_buttonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -456,7 +466,7 @@ public class StudentCard extends javax.swing.JPanel {
                     .addComponent(label26, javax.swing.GroupLayout.DEFAULT_SIZE, 198, Short.MAX_VALUE))
                 .addGap(40, 40, 40)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(birthday_box, javax.swing.GroupLayout.DEFAULT_SIZE, 303, Short.MAX_VALUE)
+                    .addComponent(birthday_box, javax.swing.GroupLayout.DEFAULT_SIZE, 273, Short.MAX_VALUE)
                     .addComponent(school_box, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(nic_no_box, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(gender_box, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -476,7 +486,8 @@ public class StudentCard extends javax.swing.JPanel {
                         .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(remove_button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(18, 18, 18)
                         .addComponent(profile_image_path)))
@@ -544,6 +555,8 @@ public class StudentCard extends javax.swing.JPanel {
                 .addGap(103, 103, 103)
                 .addComponent(jButton3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(remove_button)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton4)
@@ -596,14 +609,39 @@ public class StudentCard extends javax.swing.JPanel {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         String student_id = student_id_box.getText();
         String subject_stream = subject_stream_box.getText();
-        
+
         Add_Subjects m1 = new Add_Subjects(student_id, subject_stream, parentPanel);
         m1.setVisible(true);
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        // TODO add your handling code here:
+        String student_id = student_id_box.getText();
+        String name = student_name_box.getText();
+        String birth_date = birthday_box.getText();
+        String school = school_box.getText();
+        String nic_no = nic_no_box.getText();
+        String gender = gender_box.getText();
+        String address = address_box.getText();
+        String student_contact_no = student_contact_no_box.getText();
+        String email = email_box.getText();
+        String parent_name = parent_name_box.getText();
+        String parent_contact_no = parent_contact_no_box.getText();
+        String subject_stream = subject_stream_box.getText();
+        
+        String profile_picture = profile_image_path.getText();
+        
+        Update_Student m1 = new Update_Student(student_id, name, birth_date, school, nic_no, gender, address, student_contact_no, email, 
+                                                parent_name, parent_contact_no, subject_stream, profile_picture, parentPanel);
+        m1.setVisible(true);
+        
     }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void remove_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_remove_buttonActionPerformed
+        String student_id = student_id_box.getText();
+        
+        Update_Subjects m1 = new Update_Subjects(student_id, parentPanel);
+        m1.setVisible(true);
+    }//GEN-LAST:event_remove_buttonActionPerformed
 
     public void delete_class() {
 
@@ -665,6 +703,7 @@ public class StudentCard extends javax.swing.JPanel {
     private javax.swing.JLabel parent_name_box;
     private javax.swing.JLabel profile_image_path;
     private javax.swing.JLabel qr_code_box;
+    private javax.swing.JButton remove_button;
     private javax.swing.JLabel school_box;
     private javax.swing.JLabel student_contact_no_box;
     private javax.swing.JLabel student_id_box;
