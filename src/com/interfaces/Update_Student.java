@@ -646,7 +646,7 @@ public class Update_Student extends javax.swing.JFrame {
 
             pst.execute();
 
-            JOptionPane.showMessageDialog(null, "Student Added Successfully!");
+            JOptionPane.showMessageDialog(null, "Student Updated Successfully!");
             clear();
 
             if (parentPanel != null) {
@@ -675,6 +675,8 @@ public class Update_Student extends javax.swing.JFrame {
         parent_name_box.setText("");
         parent_contact_no_box.setText("");
         buttonGroup2.clearSelection();
+        profile_image_path_box.setText("");
+        student_id_box.setText("");
 
     }
 

@@ -141,34 +141,32 @@
                                       <EmptySpace max="32767" attributes="0"/>
                                       <Component id="student_id_box" min="-2" max="-2" attributes="0"/>
                                   </Group>
-                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                      <Group type="102" alignment="0" attributes="0">
-                                          <Component id="male" min="-2" pref="100" max="-2" attributes="0"/>
-                                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                          <Component id="female" min="-2" pref="100" max="-2" attributes="0"/>
-                                      </Group>
-                                      <Group type="102" alignment="0" attributes="0">
-                                          <Component id="maths" min="-2" pref="100" max="-2" attributes="0"/>
-                                          <EmptySpace max="-2" attributes="0"/>
-                                          <Component id="bio" min="-2" pref="100" max="-2" attributes="0"/>
-                                          <EmptySpace max="-2" attributes="0"/>
-                                          <Component id="commerce" min="-2" pref="100" max="-2" attributes="0"/>
-                                          <EmptySpace max="-2" attributes="0"/>
-                                          <Component id="arts" min="-2" pref="100" max="-2" attributes="0"/>
-                                          <EmptySpace max="-2" attributes="0"/>
-                                          <Component id="tec" max="32767" attributes="0"/>
-                                      </Group>
-                                      <Component id="parent_name_box" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="address_box" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="nic_box" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="school_box" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="birthday_box" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="name_box" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="student_contact_no_box" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="parent_contact_no_box" max="32767" attributes="0"/>
-                                      <Component id="email_box" alignment="0" min="-2" pref="530" max="-2" attributes="0"/>
-                                      <Component id="jButton1" alignment="0" min="-2" pref="271" max="-2" attributes="0"/>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="male" min="-2" pref="100" max="-2" attributes="0"/>
+                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                      <Component id="female" min="-2" pref="100" max="-2" attributes="0"/>
                                   </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="maths" min="-2" pref="100" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="bio" min="-2" pref="100" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="commerce" min="-2" pref="100" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="arts" min="-2" pref="100" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="tec" max="32767" attributes="0"/>
+                                  </Group>
+                                  <Component id="parent_name_box" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="address_box" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="nic_box" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="school_box" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="birthday_box" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="name_box" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="student_contact_no_box" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="parent_contact_no_box" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="email_box" alignment="0" min="-2" pref="530" max="-2" attributes="0"/>
+                                  <Component id="jButton1" alignment="0" min="-2" pref="271" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
