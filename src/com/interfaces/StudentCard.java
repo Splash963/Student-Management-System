@@ -635,7 +635,10 @@ public class StudentCard extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void remove_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_remove_buttonActionPerformed
-        // TODO add your handling code here:
+        String student_id = student_id_box.getText();
+        
+        Update_Subjects m1 = new Update_Subjects(student_id, parentPanel);
+        m1.setVisible(true);
     }//GEN-LAST:event_remove_buttonActionPerformed
 
     public void delete_class() {
