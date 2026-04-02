@@ -628,8 +628,10 @@ public class StudentCard extends javax.swing.JPanel {
         String parent_contact_no = parent_contact_no_box.getText();
         String subject_stream = subject_stream_box.getText();
         
+        String profile_picture = profile_image_path.getText();
+        
         Update_Student m1 = new Update_Student(student_id, name, birth_date, school, nic_no, gender, address, student_contact_no, email, 
-                                                parent_name, parent_contact_no, subject_stream, parentPanel);
+                                                parent_name, parent_contact_no, subject_stream, profile_picture, parentPanel);
         m1.setVisible(true);
         
     }//GEN-LAST:event_jButton4ActionPerformed
