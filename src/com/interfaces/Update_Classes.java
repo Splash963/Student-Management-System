@@ -13,6 +13,7 @@ import javax.swing.JSpinner;
 import javax.swing.SpinnerDateModel;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
 /**
  *
  * @author theekshana
@@ -26,7 +27,7 @@ public class Update_Classes extends javax.swing.JFrame {
     Classes parentPanel;
 
     public Update_Classes(String epf_no, String class_id, String teacher_name, String subject, String batch, String day, Date startTime, Date endTime, Classes aThis) throws ParseException {
-        initComponents();        
+        initComponents();
 
         SpinnerDateModel model1 = new SpinnerDateModel();
         start_time_box.setModel(model1);
@@ -37,7 +38,7 @@ public class Update_Classes extends javax.swing.JFrame {
         end_time_box.setModel(model2);
         JSpinner.DateEditor editor2 = new JSpinner.DateEditor(end_time_box, "HH:mm:ss");
         end_time_box.setEditor(editor2);
-        
+
         conn = DbConnection.connect();
 
         epf_no_box.setText(epf_no);
@@ -46,15 +47,14 @@ public class Update_Classes extends javax.swing.JFrame {
         subject_box.addItem(subject);
         batch_box.setText(batch);
         day_box.setSelectedItem(day);
-        
+
         start_time_box.setValue(startTime);
         end_time_box.setValue(endTime);
 
-        
         FlatSVGIcon myIcon = new FlatSVGIcon("com/images/Class.svg", 128, 90);
-        
+
         jLabel1.setIcon(myIcon);
-        
+
         this.parentPanel = aThis;
     }
 
@@ -85,6 +85,8 @@ public class Update_Classes extends javax.swing.JFrame {
         epf_no_box = new javax.swing.JLabel();
         start_time_box = new javax.swing.JSpinner();
         end_time_box = new javax.swing.JSpinner();
+        subject_validation_box = new javax.swing.JLabel();
+        batch_validation_box = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
 
@@ -105,7 +107,7 @@ public class Update_Classes extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 0, Short.MAX_VALUE)
             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 406, Short.MAX_VALUE))
+                .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 422, Short.MAX_VALUE))
         );
 
         jPanel3.setBackground(new java.awt.Color(234, 239, 239));
@@ -127,6 +129,11 @@ public class Update_Classes extends javax.swing.JFrame {
                 name_boxCaretUpdate(evt);
             }
         });
+        name_box.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                name_boxFocusLost(evt);
+            }
+        });
         name_box.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 name_boxActionPerformed(evt);
@@ -141,6 +148,11 @@ public class Update_Classes extends javax.swing.JFrame {
             }
         });
 
+        batch_box.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                batch_boxFocusLost(evt);
+            }
+        });
         batch_box.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 batch_boxActionPerformed(evt);
@@ -164,10 +176,15 @@ public class Update_Classes extends javax.swing.JFrame {
         jLabel9.setText("To");
 
         class_id_box.setText("jLabel7");
-        epf_no_box.setVisible(true);
+        epf_no_box.setVisible(false);
 
         epf_no_box.setForeground(new java.awt.Color(0, 0, 0));
         epf_no_box.setText("jLabel7");
+        epf_no_box.setVisible(false);
+
+        subject_validation_box.setForeground(new java.awt.Color(204, 51, 0));
+
+        batch_validation_box.setForeground(new java.awt.Color(204, 51, 0));
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -200,7 +217,9 @@ public class Update_Classes extends javax.swing.JFrame {
                                     .addGap(18, 18, 18)
                                     .addComponent(end_time_box, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addComponent(subject_box, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(name_box, javax.swing.GroupLayout.PREFERRED_SIZE, 409, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addComponent(name_box, javax.swing.GroupLayout.PREFERRED_SIZE, 409, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(subject_validation_box)
+                            .addComponent(batch_validation_box))))
                 .addContainerGap(83, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
@@ -218,11 +237,15 @@ public class Update_Classes extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(subject_box, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addGap(2, 2, 2)
+                .addComponent(subject_validation_box)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(batch_box, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(batch_validation_box)
+                .addGap(1, 1, 1)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(day_box)
                     .addComponent(jLabel6)
@@ -320,8 +343,16 @@ public class Update_Classes extends javax.swing.JFrame {
     }//GEN-LAST:event_batch_boxActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        update_class();
+        check_validations();
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void name_boxFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_name_boxFocusLost
+        valid_subject();
+    }//GEN-LAST:event_name_boxFocusLost
+
+    private void batch_boxFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_batch_boxFocusLost
+        valid_batch();
+    }//GEN-LAST:event_batch_boxFocusLost
 
     public void get_teacher() {
 
@@ -383,7 +414,7 @@ public class Update_Classes extends javax.swing.JFrame {
         String subject = subject_box.getSelectedItem().toString();
         String batch = batch_box.getText();
         String day = day_box.getSelectedItem().toString();
-        
+
         Date start = (Date) start_time_box.getValue();
         Date end = (Date) end_time_box.getValue();
 
@@ -403,7 +434,7 @@ public class Update_Classes extends javax.swing.JFrame {
             pst.setInt(7, class_id);
 
             pst.execute();
-            
+
             JOptionPane.showMessageDialog(null, "Class Updated Successfull!");
 
             if (parentPanel != null) {
@@ -414,6 +445,44 @@ public class Update_Classes extends javax.swing.JFrame {
 
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
+        }
+
+    }
+
+    //Validations
+    public void check_validations() {
+
+        if (valid_subject() && valid_batch()) {
+            update_class();
+        } else {
+            JOptionPane.showMessageDialog(null, "Check the Validations Please!");
+        }
+
+    }
+
+    public boolean valid_subject() {
+
+        if (subject_box.getSelectedIndex() == -1) {
+            subject_validation_box.setText("Validation failed!");
+            return false;
+        } else {
+            subject_validation_box.setText("");
+            return true;
+        }
+
+    }
+
+    public boolean valid_batch() {
+
+        String data = batch_box.getText();
+        String pattern = "^20[0-9]{2}$";
+
+        if (!data.matches(pattern)) {
+            batch_validation_box.setText("Validation Failed!");
+            return false;
+        } else {
+            batch_validation_box.setText("");
+            return true;
         }
 
     }
@@ -455,6 +524,7 @@ public class Update_Classes extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField batch_box;
+    private javax.swing.JLabel batch_validation_box;
     private javax.swing.JLabel class_id_box;
     private javax.swing.JComboBox<String> day_box;
     private javax.swing.JSpinner end_time_box;
@@ -474,5 +544,6 @@ public class Update_Classes extends javax.swing.JFrame {
     private javax.swing.JTextField name_box;
     private javax.swing.JSpinner start_time_box;
     private javax.swing.JComboBox<String> subject_box;
+    private javax.swing.JLabel subject_validation_box;
     // End of variables declaration//GEN-END:variables
 }
