@@ -17,7 +17,7 @@ public class Add_Subjects extends javax.swing.JFrame {
     Connection conn = null;
     PreparedStatement pst = null;
     ResultSet rs = null;
-    
+
     Students parentPanel;
 
     public Add_Subjects(String student_id, String subject_stream, Students aThis) {
@@ -27,9 +27,9 @@ public class Add_Subjects extends javax.swing.JFrame {
 
         student_id_box.setText(student_id);
         subject_stream_box.setText(subject_stream);
-        
+
         this.parentPanel = aThis;
-        
+
         get_subjects();
         get_classes();
     }
@@ -203,7 +203,7 @@ public class Add_Subjects extends javax.swing.JFrame {
 
         try {
 
-            String query = "SELECT c.class_id, c.day_time, c.batch, t.name "
+            String query = "SELECT c.class_id, c.day, c.start_time, c.end_time, c.batch, t.name "
                     + "FROM classes c "
                     + "JOIN teachers t ON c.epf_no = t.epf_no " // Menna methana space ekak danna
                     + "WHERE c.subject = ?";
@@ -216,12 +216,14 @@ public class Add_Subjects extends javax.swing.JFrame {
 
                 String class_id = rs.getString("class_id");
                 String teacher_name = rs.getString("name");
-                String day_time = rs.getString("day_time");
+                String day = rs.getString("day");
+                String start_time = rs.getString("start_time");
+                String end_time = rs.getString("end_time");
                 String batch = rs.getString("batch");
 
                 class_id_box.setText(class_id);
 
-                String values = teacher_name + " | " + batch + " | " + day_time;
+                String values = teacher_name + " | " + batch + " | " + day + " | " + start_time + " " + "To" + " " + end_time;
 
                 class_box.addItem(values);
 
@@ -234,46 +236,45 @@ public class Add_Subjects extends javax.swing.JFrame {
         }
 
     }
-    
-    public void insert_data(){
-        
+
+    public void insert_data() {
+
         String subject = subject_box.getSelectedItem().toString();
         String student_id = student_id_box.getText();
         String class_id = class_id_box.getText();
-        
+
         try {
-            
+
             String query = "INSERT INTO students_classes (subject, student_id, class_id) VALUES (?,?,?)";
-            
+
             pst = conn.prepareStatement(query);
-            
+
             pst.setString(1, subject);
             pst.setString(2, student_id);
             pst.setString(3, class_id);
-            
+
             pst.execute();
-            
+
             JOptionPane.showMessageDialog(null, "Student Added Successfully!");
             clear();
 
             if (parentPanel != null) {
                 parentPanel.view_data();
             }
-            
+
         } catch (Exception e) {
         }
-        
+
     }
 
-    
-    public void clear(){
-    
+    public void clear() {
+
         subject_box.setSelectedIndex(0);
         class_box.setSelectedIndex(0);
         class_id_box.setText("");
-        
+
     }
-    
+
     /**
      * @param args the command line arguments
      */

@@ -32,14 +32,20 @@ public class Students extends javax.swing.JPanel {
     private void initComponents() {
 
         jPanel2 = new javax.swing.JPanel();
-        jTextField1 = new javax.swing.JTextField();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        data_box = new javax.swing.JTextField();
+        value_box = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         mainPanel = new javax.swing.JPanel();
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        data_box.addCaretListener(new javax.swing.event.CaretListener() {
+            public void caretUpdate(javax.swing.event.CaretEvent evt) {
+                data_boxCaretUpdate(evt);
+            }
+        });
+
+        value_box.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Name", "ID", "NIC", "Batch", "Subjects", "Subject Stream" }));
 
         jLabel1.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 24)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -66,9 +72,9 @@ public class Students extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 225, Short.MAX_VALUE)
-                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(value_box, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(data_box, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
             .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
@@ -79,8 +85,8 @@ public class Students extends javax.swing.JPanel {
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(data_box, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(value_box, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
@@ -115,6 +121,10 @@ public class Students extends javax.swing.JPanel {
         m1.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void data_boxCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_data_boxCaretUpdate
+        search_data();
+    }//GEN-LAST:event_data_boxCaretUpdate
+
     public void view_data() {
         try {
             // 1. Mulu student list ekama gannawa
@@ -145,7 +155,7 @@ public class Students extends javax.swing.JPanel {
                 ArrayList<String> subjectList = new ArrayList<>();
 
                 // Me query eken students_classes saha classes table dekama join karanawa
-                String subjectSql = "SELECT c.subject, c.day_time "
+                String subjectSql = "SELECT c.subject, c.day, c.start_time, c.end_time "
                         + "FROM students_classes sc "
                         + "INNER JOIN classes c ON sc.class_id = c.class_id "
                         + "WHERE sc.student_id = ?";
@@ -156,7 +166,7 @@ public class Students extends javax.swing.JPanel {
 
                 while (rsSubjects.next()) {
                     // Subject eka saha welaawa ekata ekathu karala list ekata danawa
-                    String info = rsSubjects.getString("subject") + " (" + rsSubjects.getString("day_time") + ")";
+                    String info = rsSubjects.getString("subject") + " (" + rsSubjects.getString("day") + " | " + " " + rsSubjects.getString("start_time") + " To " + rsSubjects.getString("end_time") + ")";
                     subjectList.add(info);
                 }
 
@@ -186,13 +196,64 @@ public class Students extends javax.swing.JPanel {
         }
     }
 
+    public void search_data() {
+        String value = value_box.getSelectedItem().toString();
+        String data = data_box.getText();
+        String query = null;
+
+        // 1. Query eka define karanna
+        if (value.equals("Name")) {
+            query = "SELECT * FROM students WHERE name LIKE ?";
+        } else if (value.equals("ID")) {
+            query = "SELECT * FROM students WHERE id = ?";
+        }
+
+        try {
+            // 2. Clear previous results (Aluth search ekedi parana card ain karanna ona)
+            mainPanel.removeAll();
+
+            pst = conn.prepareStatement(query);
+
+            if (value.equals("Name")) {
+                pst.setString(1, data + "%");
+            } else {
+                pst.setString(1, data);
+            }
+
+            rs = pst.executeQuery();
+
+            // 3. Loop through result set and create cards
+            while (rs.next()) {
+                // StudentCard class eke constructor ekata ResultSet eka hari values hari yawanna
+                // Oyaage StudentCard class eke hadapu widiyata meka wenas karanna
+                StudentCard card = new StudentCard();
+
+                // Card ekata data set karanna (Oya card eke hadala thiyena methods anuwa)
+                card.setStudentData(
+                        rs.getString("name"),
+                        rs.getString("student_id"),
+                        rs.getString("school") // thawa thiyena field danna
+                );
+
+                mainPanel.add(card); // Card eka panel ekata add karanawa
+            }
+
+            // 4. Refresh the UI
+            mainPanel.revalidate();
+            mainPanel.repaint();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField data_box;
     private javax.swing.JButton jButton1;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JPanel mainPanel;
+    private javax.swing.JComboBox<String> value_box;
     // End of variables declaration//GEN-END:variables
 }

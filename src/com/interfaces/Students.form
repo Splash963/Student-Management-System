@@ -50,9 +50,9 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jButton1" min="-2" pref="125" max="-2" attributes="0"/>
                   <EmptySpace pref="225" max="32767" attributes="0"/>
-                  <Component id="jComboBox1" min="-2" pref="125" max="-2" attributes="0"/>
+                  <Component id="value_box" min="-2" pref="125" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jTextField1" min="-2" pref="193" max="-2" attributes="0"/>
+                  <Component id="data_box" min="-2" pref="193" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
               <Component id="jLabel1" alignment="1" max="32767" attributes="0"/>
@@ -65,8 +65,8 @@
                   <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                   <EmptySpace pref="22" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jTextField1" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jComboBox1" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="data_box" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="value_box" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jButton1" alignment="3" min="-2" pref="38" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
@@ -75,16 +75,21 @@
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="javax.swing.JTextField" name="jTextField1">
+        <Component class="javax.swing.JTextField" name="data_box">
+          <Events>
+            <EventHandler event="caretUpdate" listener="javax.swing.event.CaretListener" parameters="javax.swing.event.CaretEvent" handler="data_boxCaretUpdate"/>
+          </Events>
         </Component>
-        <Component class="javax.swing.JComboBox" name="jComboBox1">
+        <Component class="javax.swing.JComboBox" name="value_box">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="4">
-                <StringItem index="0" value="Item 1"/>
-                <StringItem index="1" value="Item 2"/>
-                <StringItem index="2" value="Item 3"/>
-                <StringItem index="3" value="Item 4"/>
+              <StringArray count="6">
+                <StringItem index="0" value="Name"/>
+                <StringItem index="1" value="ID"/>
+                <StringItem index="2" value="NIC"/>
+                <StringItem index="3" value="Batch"/>
+                <StringItem index="4" value="Subjects"/>
+                <StringItem index="5" value="Subject Stream"/>
               </StringArray>
             </Property>
           </Properties>

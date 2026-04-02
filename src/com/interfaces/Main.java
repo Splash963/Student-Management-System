@@ -4,10 +4,10 @@
  */
 package com.interfaces;
 
+import com.connection.AttendanceServer;
 import com.formdev.flatlaf.FlatLightLaf;
 import com.formdev.flatlaf.extras.FlatSVGIcon;
 import java.awt.Color;
-import static java.awt.Color.WHITE;
 import java.awt.Component;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
@@ -65,6 +65,8 @@ public class Main extends javax.swing.JFrame {
    
     public Main() {
         initComponents();
+        
+        new AttendanceServer().startServer(9090);
 
         Dashboard m1 = new Dashboard();
         border_layout_panel.removeAll();
@@ -99,6 +101,7 @@ public class Main extends javax.swing.JFrame {
         jButton5 = new javax.swing.JButton();
         student_button = new javax.swing.JButton();
         teacher_button = new javax.swing.JButton();
+        attendance_button = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -231,6 +234,35 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
+        attendance_button.setBackground(new java.awt.Color(255, 255, 255));
+        attendance_button.setForeground(new java.awt.Color(0, 0, 0));
+        attendance_button.setText("Manage Attendance");
+        attendance_button.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        attendance_button.setBorder(new RoundedBorder(20));
+        attendance_button.setContentAreaFilled(false);
+        attendance_button.setOpaque(false);
+        attendance_button.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                attendance_buttonFocusGained(evt);
+            }
+        });
+        attendance_button.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                attendance_buttonMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                attendance_buttonMouseExited(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                attendance_buttonMousePressed(evt);
+            }
+        });
+        attendance_button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                attendance_buttonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -246,7 +278,8 @@ public class Main extends javax.swing.JFrame {
                             .addComponent(home_button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jButton3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(student_button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(teacher_button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(teacher_button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(attendance_button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(17, 17, 17))))
         );
         jPanel3Layout.setVerticalGroup(
@@ -256,6 +289,8 @@ public class Main extends javax.swing.JFrame {
                 .addComponent(home_button, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(student_button, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(attendance_button, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(teacher_button, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -447,6 +482,37 @@ public class Main extends javax.swing.JFrame {
         border_layout_panel.revalidate();
     }//GEN-LAST:event_teacher_buttonActionPerformed
 
+    private void attendance_buttonFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_attendance_buttonFocusGained
+        // TODO add your handling code here:
+    }//GEN-LAST:event_attendance_buttonFocusGained
+
+    private void attendance_buttonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_attendance_buttonMouseEntered
+        attendance_button.setBackground(new Color(101, 148, 177));
+        attendance_button.setForeground(Color.WHITE);
+        attendance_button.setText("Manage Attendance");
+        attendance_button.setOpaque(false);
+        attendance_button.setContentAreaFilled(false);
+        attendance_button.setBorder(new RoundedBorder(20));
+    }//GEN-LAST:event_attendance_buttonMouseEntered
+
+    private void attendance_buttonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_attendance_buttonMouseExited
+        attendance_button.setContentAreaFilled(false);
+        attendance_button.setOpaque(false);
+        attendance_button.setBackground(Color.WHITE);
+        attendance_button.setForeground(Color.BLACK);
+    }//GEN-LAST:event_attendance_buttonMouseExited
+
+    private void attendance_buttonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_attendance_buttonMousePressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_attendance_buttonMousePressed
+
+    private void attendance_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_attendance_buttonActionPerformed
+        Attendance m1 = new Attendance();
+        border_layout_panel.removeAll();
+        border_layout_panel.add(m1);
+        border_layout_panel.revalidate();
+    }//GEN-LAST:event_attendance_buttonActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -488,6 +554,7 @@ public class Main extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton attendance_button;
     private javax.swing.JPanel border_layout_panel;
     private javax.swing.JButton home_button;
     private javax.swing.JButton jButton3;

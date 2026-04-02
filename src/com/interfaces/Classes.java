@@ -159,12 +159,14 @@ public class Classes extends javax.swing.JPanel {
                 String epf_no = rs.getString("epf_no");
                 String subject = rs.getString("subject");
                 String batch = rs.getString("batch");
-                String day_time = rs.getString("day_time");
+                String day = rs.getString("day");
+                String start_time = rs.getString("start_time");
+                String end_time = rs.getString("end_time");
                 String teacher_name = rs.getString("name"); // Aluth field eka
 
                 // ClassCard constructor ekata teacher_name ekath pass karanna
                 // Mathaka athuwa ClassCard class eke constructor ekath update karanna me data eka ganna
-                ClassCard card = new ClassCard(class_id, epf_no, teacher_name, subject, batch, day_time, this);
+                ClassCard card = new ClassCard(class_id, epf_no, teacher_name, subject, batch, day, start_time, end_time, this);
 
                 // Main panel ekata card eka add karanna
                 mainPanel.add(card);
