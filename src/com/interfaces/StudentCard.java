@@ -44,6 +44,7 @@ public class StudentCard extends javax.swing.JPanel {
     FlatSVGIcon delete_icon = new FlatSVGIcon("com/images/Delete.svg", 30, 30);
     FlatSVGIcon print_icon = new FlatSVGIcon("com/images/Print.svg", 30, 30);
     FlatSVGIcon add_icon = new FlatSVGIcon("com/images/Add.svg", 30, 30);
+    FlatSVGIcon remove_subject_icon = new FlatSVGIcon("com/images/Remove.svg", 30, 30);
 
     public StudentCard(String student_id, String name, String birthday, String school, String nic_no, String gender, String address, String student_contact_no, String email, String parent_name, String parent_contact_no, String subject_stream, String profile_picture, byte[] qr_code, ArrayList<String> subjectList, Students aThis) {
         initComponents();
@@ -437,6 +438,7 @@ public class StudentCard extends javax.swing.JPanel {
         remove_button.setBackground(new java.awt.Color(245, 242, 242));
         remove_button.setForeground(new java.awt.Color(0, 0, 0));
         remove_button.setText("Remove Subjects");
+        remove_button.setIcon(remove_subject_icon);
         remove_button.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         remove_button.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -466,7 +468,7 @@ public class StudentCard extends javax.swing.JPanel {
                     .addComponent(label26, javax.swing.GroupLayout.DEFAULT_SIZE, 198, Short.MAX_VALUE))
                 .addGap(40, 40, 40)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(birthday_box, javax.swing.GroupLayout.DEFAULT_SIZE, 273, Short.MAX_VALUE)
+                    .addComponent(birthday_box, javax.swing.GroupLayout.DEFAULT_SIZE, 279, Short.MAX_VALUE)
                     .addComponent(school_box, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(nic_no_box, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(gender_box, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -482,16 +484,18 @@ public class StudentCard extends javax.swing.JPanel {
                 .addGap(0, 0, 0)
                 .addComponent(qr_code_box, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(remove_button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(profile_image_path)))
-                .addGap(16, 16, 16))
+                        .addComponent(profile_image_path)
+                        .addGap(114, 114, 114))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(remove_button))
+                        .addContainerGap())))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -550,9 +554,9 @@ public class StudentCard extends javax.swing.JPanel {
                     .addComponent(subjects_box))
                 .addGap(100, 100, 100))
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(131, 131, 131)
+                .addContainerGap()
                 .addComponent(profile_image_path)
-                .addGap(103, 103, 103)
+                .addGap(205, 205, 205)
                 .addComponent(jButton3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(remove_button)

@@ -445,11 +445,17 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="jLabel12"/>
               </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="student_id_box.setVisible(false);"/>
+              </AuxValues>
             </Component>
             <Component class="javax.swing.JLabel" name="profile_image_path_box">
               <Properties>
                 <Property name="text" type="java.lang.String" value="jLabel12"/>
               </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="profile_image_path_box.setVisible(false);"/>
+              </AuxValues>
             </Component>
           </SubComponents>
         </Container>
